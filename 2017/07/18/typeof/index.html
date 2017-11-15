@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="首先要说的，typeof 并不是一个方法，所以没必要写成 typeof() 的形式。typeof 是一个操作符，typeof 操作符返回一个字符串,指示未经计算的操作数的类型。 接下来我要问的是，你知道 typeof 可能的返回值有哪些？例子常规用法// Numbers typeof 37 === &amp;apos;number&amp;apos;; typeof 3.14 === &amp;apos;number&amp;a">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你真的懂 typeof 吗？">
+<meta property="og:url" content="http://www.iwashere.cn/2017/07/18/typeof/index.html">
+<meta property="og:site_name" content="Joe&#39;s Website">
+<meta property="og:description" content="首先要说的，typeof 并不是一个方法，所以没必要写成 typeof() 的形式。typeof 是一个操作符，typeof 操作符返回一个字符串,指示未经计算的操作数的类型。 接下来我要问的是，你知道 typeof 可能的返回值有哪些？例子常规用法// Numbers typeof 37 === &amp;apos;number&amp;apos;; typeof 3.14 === &amp;apos;number&amp;a">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-07T09:36:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你真的懂 typeof 吗？">
+<meta name="twitter:description" content="首先要说的，typeof 并不是一个方法，所以没必要写成 typeof() 的形式。typeof 是一个操作符，typeof 操作符返回一个字符串,指示未经计算的操作数的类型。 接下来我要问的是，你知道 typeof 可能的返回值有哪些？例子常规用法// Numbers typeof 37 === &amp;apos;number&amp;apos;; typeof 3.14 === &amp;apos;number&amp;a">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.iwashere.cn/2017/07/18/typeof/"/>
+
+
+
+
+
+  <title>你真的懂 typeof 吗？ | Joe's Website</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe's Website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/18/typeof/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你真的懂 typeof 吗？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T09:42:21+08:00">
+                2017-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先要说的，<em>typeof</em> 并不是一个方法，所以没必要写成 <em>typeof()</em> 的形式。<br><em>typeof</em> 是一个操作符，<em>typeof</em> 操作符返回一个字符串,指示未经计算的操作数的类型。</p>
+<h2 id="接下来我要问的是，你知道-typeof-可能的返回值有哪些？"><a href="#接下来我要问的是，你知道-typeof-可能的返回值有哪些？" class="headerlink" title="接下来我要问的是，你知道 typeof 可能的返回值有哪些？"></a>接下来我要问的是，你知道 <em>typeof</em> 可能的返回值有哪些？</h2><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><h5 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h5><pre><code>// Numbers
+typeof 37 === &apos;number&apos;;
+typeof 3.14 === &apos;number&apos;;
+typeof Math.LN2 === &apos;number&apos;;
+typeof Infinity === &apos;number&apos;;
+typeof NaN === &apos;number&apos;; // 尽管NaN是&quot;Not-A-Number&quot;的缩写
+typeof Number(1) === &apos;number&apos;; // 但不要使用这种形式!
+
+// Strings
+typeof &quot;&quot; === &apos;string&apos;;
+typeof &quot;bla&quot; === &apos;string&apos;;
+typeof (typeof 1) === &apos;string&apos;; // typeof总是返回一个字符串
+typeof String(&quot;abc&quot;) === &apos;string&apos;; // 但不要使用这种形式!
+
+// Booleans
+typeof true === &apos;boolean&apos;;
+typeof false === &apos;boolean&apos;;
+typeof Boolean(true) === &apos;boolean&apos;; // 但不要使用这种形式!
+
+// Symbols
+typeof Symbol() === &apos;symbol&apos;;
+typeof Symbol(&apos;foo&apos;) === &apos;symbol&apos;;
+typeof Symbol.iterator === &apos;symbol&apos;;
+
+// Undefined
+typeof undefined === &apos;undefined&apos;;
+typeof declaredButUndefinedVariable === &apos;undefined&apos;;
+typeof undeclaredVariable === &apos;undefined&apos;; 
+
+// Objects
+typeof {a:1} === &apos;object&apos;;
+
+// 使用Array.isArray 或者 Object.prototype.toString.call
+// 区分数组,普通对象
+typeof [1, 2, 4] === &apos;object&apos;;
+
+typeof new Date() === &apos;object&apos;;
+
+// 下面的容易令人迷惑，不要使用！
+typeof new Boolean(true) === &apos;object&apos;;
+typeof new Number(1) ==== &apos;object&apos;;
+typeof new String(&quot;abc&quot;) === &apos;object&apos;;
+
+// 函数
+typeof function(){} === &apos;function&apos;;
+typeof Math.sin === &apos;function&apos;;
+</code></pre><h5 id="null"><a href="#null" class="headerlink" title="null"></a>null</h5><pre><code>// 从一开始出现JavaScript就是这样的
+typeof null === &apos;object&apos;;
+</code></pre><p>哈哈，我们都知道 typeof null 返回 ‘object’，但是为什么呢？原来，在 JavaScript 最初的实现中，JavaScript 中的值是由一个表示类型的标签和实际数据值表示的。对象的类型标签是0。由于 null 代表的是空指针(大多数平台下值为0x00)，因此，null的类型标签也成为了0，typeof null就错误的返回了’object’.</p>
+<h5 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h5><pre><code>//对正则表达式字面量的类型判断在某些浏览器中不符合标准：
+typeof /s/ === &apos;function&apos;; // Chrome 1-12 , 不符合 ECMAScript 5.1
+typeof /s/ === &apos;object&apos;; // Firefox 5+ , 符合 ECMAScript 5.1
+
+//我目前版本的Chrome(60.0.3112.90)
+typeof /s/ === &apos;object&apos;;
+</code></pre><h4 id="番外：IE-宿主对象是对象而不是函数"><a href="#番外：IE-宿主对象是对象而不是函数" class="headerlink" title="番外：IE 宿主对象是对象而不是函数"></a>番外：IE 宿主对象是对象而不是函数</h4><pre><code>//在 IE 6, 7 和 8 中，大多数的宿主对象是对象，而不是函数
+typeof alert === &apos;object&apos;
+</code></pre><hr>
+<h3 id="总结-如下表-（-from-MDN-）"><a href="#总结-如下表-（-from-MDN-）" class="headerlink" title="总结 如下表 （ from MDN ）"></a>总结 如下表 （ <em>from MDN</em> ）</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Undefined</td>
+<td>“undefined”</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>“object”</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>“boolean”</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>“number”</td>
+</tr>
+<tr>
+<td>String</td>
+<td>“string”</td>
+</tr>
+<tr>
+<td>Symbol（ECMAScript 6 新增）</td>
+<td>“symbol”</td>
+</tr>
+<tr>
+<td>宿主对象（由JS环境提供）</td>
+<td>Implementation-dependent</td>
+</tr>
+<tr>
+<td>函数对象</td>
+<td>“function”</td>
+</tr>
+<tr>
+<td>任何其他对象</td>
+<td>“object”</td>
+</tr>
+</tbody>
+</table>
+<h6 id="over"><a href="#over" class="headerlink" title="over"></a>over</h6>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/19/this/" rel="next" title="理解Javascript中的this">
+                <i class="fa fa-chevron-left"></i> 理解Javascript中的this
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/27/vue1/" rel="prev" title="《Vue随笔》 （一）使用vue-cli搭建项目">
+                《Vue随笔》 （一）使用vue-cli搭建项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Joseph" />
+            
+              <p class="site-author-name" itemprop="name">Joseph</p>
+              <p class="site-description motion-element" itemprop="description">“为往圣继绝学”</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qiaohongshen" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/94698fea8055" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-book"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#接下来我要问的是，你知道-typeof-可能的返回值有哪些？"><span class="nav-number">1.</span> <span class="nav-text">接下来我要问的是，你知道 typeof 可能的返回值有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">1.0.1.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#常规用法"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">常规用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正则表达式"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#番外：IE-宿主对象是对象而不是函数"><span class="nav-number">1.0.2.</span> <span class="nav-text">番外：IE 宿主对象是对象而不是函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-如下表-（-from-MDN-）"><span class="nav-number">1.1.</span> <span class="nav-text">总结 如下表 （ from MDN ）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#over"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">over</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joseph</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="200" alpha="0.6"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

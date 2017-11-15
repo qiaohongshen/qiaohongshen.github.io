@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,跨域," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. JSONP首先要介绍的跨域方法必然是 JSONP。现在你想要获取其他网站上的 JavaScript 脚本，你非常高兴的使XMLHttpRequest 对象来获取。但是浏览器一点儿也不配合你，无情的弹出了下面的错误信息：  XMLHttpRequest cannot load http://x.com/main.dat. No ‘Access-Control-Allow-Origin’ hea">
+<meta name="keywords" content="JavaScript,跨域">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再谈前端跨域">
+<meta property="og:url" content="http://www.iwashere.cn/2017/08/01/cross-origin-at-front-end/index.html">
+<meta property="og:site_name" content="Joe&#39;s Website">
+<meta property="og:description" content="1. JSONP首先要介绍的跨域方法必然是 JSONP。现在你想要获取其他网站上的 JavaScript 脚本，你非常高兴的使XMLHttpRequest 对象来获取。但是浏览器一点儿也不配合你，无情的弹出了下面的错误信息：  XMLHttpRequest cannot load http://x.com/main.dat. No ‘Access-Control-Allow-Origin’ hea">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-07T09:36:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="再谈前端跨域">
+<meta name="twitter:description" content="1. JSONP首先要介绍的跨域方法必然是 JSONP。现在你想要获取其他网站上的 JavaScript 脚本，你非常高兴的使XMLHttpRequest 对象来获取。但是浏览器一点儿也不配合你，无情的弹出了下面的错误信息：  XMLHttpRequest cannot load http://x.com/main.dat. No ‘Access-Control-Allow-Origin’ hea">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.iwashere.cn/2017/08/01/cross-origin-at-front-end/"/>
+
+
+
+
+
+  <title>再谈前端跨域 | Joe's Website</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe's Website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/08/01/cross-origin-at-front-end/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">再谈前端跨域</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T01:29:45+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-JSONP"><a href="#1-JSONP" class="headerlink" title="1. JSONP"></a>1. JSONP</h4><p>首先要介绍的跨域方法必然是 JSONP。<br>现在你想要获取其他网站上的 JavaScript 脚本，你非常高兴的使XMLHttpRequest 对象来获取。但是浏览器一点儿也不配合你，无情的弹出了下面的错误信息：</p>
+<blockquote>
+<p>XMLHttpRequest cannot load <a href="http://x.com/main.dat" target="_blank" rel="external">http://x.com/main.dat</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://y.com" target="_blank" rel="external">http://y.com</a>‘ is therefore not allowed access.</p>
+</blockquote>
+<p>你心里肯定会想，我难道要用后台做个爬虫来获取这个数据吗？！为了避免这种事情发生，JSONP 就派上用场了。<br><code>&lt;script&gt;</code>标签是不受同源策略的限制的，它可以载入任意地方的 JavaScript 文件，而并不要求同源。所以 JSONP 的理念就是，我和服务端约定好一个函数名，当我请求文件的时候，服务端返回一段 JavaScript。这段 JavaScript 调用了我们约定好的函数，并且将数据当做参数传入。非常巧合的一点（其实并不是），JSON 的数据格式和JavaScript 语言里对象的格式正好相同。所以在我们约定的函数里面可以直接使用这个对象。光说不练假把式，让我们来看一个例子：<br>你需要获取数据的页面 index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">   </span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">getWeather</span>(<span class="params">data</span>) </span>&#123;       </span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://x.y.com/xx.js"</span>&gt;</span><span class="undefined"></span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://x.y.com/xx.js" target="_blank" rel="external">http://x.y.com/xx.js</a> 文件内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getWeather(&#123;</span><br><span class="line">  <span class="string">"城市"</span>: <span class="string">"北京"</span>,</span><br><span class="line">  <span class="string">"天气"</span>: <span class="string">"大雾"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，在我们定义了 getWeather(data)这个函数后，直接载入了 xx.js。在这个脚本中，执行了 getWeather函数，并传入了一个对象。然后我们在这个函数中将这个对象输出到 console 中。</p>
+<h6 id="这就是整个-JSONP-的流程。"><a href="#这就是整个-JSONP-的流程。" class="headerlink" title="这就是整个 JSONP 的流程。"></a>这就是整个 JSONP 的流程。</h6><h4 id="2-document-domain"><a href="#2-document-domain" class="headerlink" title="2. document.domain"></a>2. document.domain</h4><p>使用条件：</p>
+<ol>
+<li>有其他页面 window对象的引用</li>
+<li>二级域名相同</li>
+<li>协议相同</li>
+<li>端口相同</li>
+</ol>
+<p><code>document.domain</code>默认的值是整个域名，所以即使两个域名的二级域名一样，那么他们的 document.domain也不一样。使用方法就是将符合上述条件页面的 <code>document.domain</code>设置为同样的二级域名。这样我们就可以使用其他页面的 window对象引用做我们想做的任何事情了。<br><strong>补充知识：</strong><br>x.one.example.com 和 y.one.example.com 可以将 document.domain设置为 one.example.com，也可以设置为example.com。document.domain只能设置为当前域名的一个后缀，并且包括二级域名或以上（.edu.cn这种整个算顶级域名）。我们直接操刀演示，用两个网站 <a href="http://wenku.baidu.com/" target="_blank" rel="external">http://wenku.baidu.com/</a> 和<a href="http://zhidao.baidu.com/。这两个网站都是" target="_blank" rel="external">http://zhidao.baidu.com/。这两个网站都是</a> http 协议，端口都是 80， 且二级域名都是 baidu.com。打开<a href="http://wenku.baidu.com/，在" target="_blank" rel="external">http://wenku.baidu.com/，在</a> console 中输入代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain = <span class="string">'baidu.com'</span>;</span><br><span class="line"><span class="keyword">var</span> otherWindow = <span class="built_in">window</span>.open(<span class="string">'http://zhidao.baidu.com/'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>我们现在已经发现百度知道的网页已经打开了，在百度知道网页的 console 中输入以下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain = <span class="string">'baidu.com'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>现在回到百度文库的网页，我们就可以使用百度知道网页的 window对象来操作百度知道的网页了。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> divs = otherWindow.document.getElementsByTagName(<span class="string">'div'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>上面这个例子的使用方法并不常见，但是非常详细的说明了这种方法的原理。这种方法主要用在控制 <code>&lt;iframe&gt;</code>的情况中。<br>比如我的页面(<a href="http://one.example.com/index.html)中内嵌了一个" target="_blank" rel="external">http://one.example.com/index.html)中内嵌了一个</a> <code>&lt;iframe&gt;</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"iframe"</span> <span class="attr">src</span>=<span class="string">"http://two.example.com/iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们在 iframe.html 中使用 JavaScript 将 document.domain设置好，也就是 example.com。在 index.html 执行以下脚本：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframe'</span>);</span><br><span class="line"><span class="built_in">document</span>.domain = <span class="string">'example.com'</span>;</span><br><span class="line">iframe.contentDocument; <span class="comment">// iframe的 document 对象</span></span><br><span class="line">iframe.contentWindow; <span class="comment">// iframe的 window 对象</span></span><br></pre></td></tr></table></figure></p>
+<p>这样，我们就可以获得对iframe的完全控制权了。</p>
+<p><strong>补充知识：</strong><br>当两个页面不做任何处理，但是使用了iframe或者 window.open() 得到了某个页面的 window 对象的引用，我们可以直接访问的属性有哪些？</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>window.blur</td>
+</tr>
+<tr>
+<td>window.close</td>
+</tr>
+<tr>
+<td>window.focus</td>
+</tr>
+<tr>
+<td>window.postMessage</td>
+</tr>
+<tr>
+<td>window.location.replace</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>权限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>window.closed</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.frames</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.length</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.location.href</td>
+<td>只写</td>
+</tr>
+<tr>
+<td>window.opener</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.parent</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.self</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.top</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.window</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-window-name"><a href="#3-window-name" class="headerlink" title="3. window.name"></a>3. window.name</h4><p>我们来看以下一个场景：<br>随意打开一个页面，输入以下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"My window's name"</span>;</span><br><span class="line">location.href = <span class="string">"http://www.qq.com/"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>再检测 window.name :<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name; <span class="comment">// My window's name</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到，如果在一个标签里面跳转网页的话，我们的 window.name是不会改变的。基于这个思想，我们可以在某个页面设置好 window.name的值，然后跳转到另外一个页面。在这个页面中就可以获取到我们刚刚设置的 window.name了。由于安全原因，浏览器始终会保持 window.name 是 string类型。这个方法也可以应用到与 <code>&lt;iframe&gt;</code> 的交互上来。我的页面(<a href="http://one.example.com/index.html)中内嵌了一个" target="_blank" rel="external">http://one.example.com/index.html)中内嵌了一个</a> <code>&lt;iframe&gt;</code>：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"iframe"</span> <span class="attr">src</span>=<span class="string">"http://omg.com/iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在 iframe.html 中设置好了 window.name为我们要传递的字符串。我们在 index.html 中写了下面的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframe'</span>);</span><br><span class="line"><span class="keyword">var</span> data = <span class="string">''</span>;</span><br><span class="line">iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">  data = iframe.contentWindow.name;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>定睛一看，为毛线报错？细心的读者们肯定已经发现了，两个页面完全不同源啊！由于 window.name 不随着 URL 的跳转而改变，所以我们使用一个暗黑技术来解决这个问题：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframe'</span>);</span><br><span class="line"><span class="keyword">var</span> data = <span class="string">''</span>;</span><br><span class="line">iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    </span><br><span class="line">  iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;        </span><br><span class="line">    data = iframe.contentWindow.name;    </span><br><span class="line">  &#125;   </span><br><span class="line">   iframe.src = <span class="string">'about:blank'</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>或者将里面的 about:blank 替换成某个同源页面（最好是空页面，减少加载时间）。<br><strong>补充知识：</strong><br>about:blank，javascript: 和 data:中的内容，继承了载入他们的页面的源。<br>这种方法与 document.domain方法相比，放宽了域名后缀要相同的限制，可以从任意页面获取 string类型的数据。</p>
+<h4 id="4-HTML5-postMessage"><a href="#4-HTML5-postMessage" class="headerlink" title="4. [HTML5] postMessage"></a>4. [HTML5] postMessage</h4><p>在 HTML5 中， window 对象增加了一个非常有用的方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windowObj.postMessage(message, targetOrigin);</span><br></pre></td></tr></table></figure></p>
+<p>windowObj: 接受消息的 Window 对象。<br>message: 在最新的浏览器中可以是对象。<br>targetOrigin: 目标的源，* 表示任意。</p>
+<p>这个方法非常强大，无视协议，端口，域名的不同。<br>下面是烤熟的栗子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowObj = <span class="built_in">window</span>; <span class="comment">// 可以是其他的 Window 对象的引用</span></span><br><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line">addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;   </span><br><span class="line">  <span class="keyword">if</span>(e.origin == <span class="string">'http://qiaohongshen.github.io/foo'</span>) &#123;      </span><br><span class="line">    data = e.data;</span><br><span class="line">    e.source.postMessage(<span class="string">'Got it!'</span>, <span class="string">'*'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>message事件就是用来接收 postMessage发送过来的请求的。函数参数的属性有以下几个：<br>origin: 发送消息的 window的源。<br>data: 数据。<br>source: 发送消息的 Window对象。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/跨域/" rel="tag"># 跨域</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/29/vue2/" rel="next" title="《Vue随笔》 （二）组件之间的数据传递">
+                <i class="fa fa-chevron-left"></i> 《Vue随笔》 （二）组件之间的数据传递
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/24/cross-origin-at-server/" rel="prev" title="服务端跨域">
+                服务端跨域 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Joseph" />
+            
+              <p class="site-author-name" itemprop="name">Joseph</p>
+              <p class="site-description motion-element" itemprop="description">“为往圣继绝学”</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qiaohongshen" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/94698fea8055" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-book"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-JSONP"><span class="nav-number">1.</span> <span class="nav-text">1. JSONP</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#这就是整个-JSONP-的流程。"><span class="nav-number">1.0.1.</span> <span class="nav-text">这就是整个 JSONP 的流程。</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-document-domain"><span class="nav-number">2.</span> <span class="nav-text">2. document.domain</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-window-name"><span class="nav-number">3.</span> <span class="nav-text">3. window.name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-HTML5-postMessage"><span class="nav-number">4.</span> <span class="nav-text">4. [HTML5] postMessage</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joseph</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="200" alpha="0.6"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

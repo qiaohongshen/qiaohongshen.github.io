@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,性能优化," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 定义局部变量当一个变量被引用的时候，JavaScript将在作用域链中的不同成员中查找这个变量。作用域链指的是当前作用于下可用变量的集合，它在各种主流浏览器中至少包含两个部分：局部变量的集合和全局变量的集合。 简单地说，如果JavaScript引擎在作用域链中搜索的深度越大，那么操作也就会消耗更多的时间。引擎首先从 this 开始查找局部变量，然后是函数参数、本地定义的变量，最后遍历所有的全">
+<meta name="keywords" content="JavaScript,性能优化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10个提升JavaScript性能的技巧">
+<meta property="og:url" content="http://www.iwashere.cn/2017/05/22/some_js_skills/index.html">
+<meta property="og:site_name" content="Joe&#39;s Website">
+<meta property="og:description" content="1. 定义局部变量当一个变量被引用的时候，JavaScript将在作用域链中的不同成员中查找这个变量。作用域链指的是当前作用于下可用变量的集合，它在各种主流浏览器中至少包含两个部分：局部变量的集合和全局变量的集合。 简单地说，如果JavaScript引擎在作用域链中搜索的深度越大，那么操作也就会消耗更多的时间。引擎首先从 this 开始查找局部变量，然后是函数参数、本地定义的变量，最后遍历所有的全">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-07T09:36:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10个提升JavaScript性能的技巧">
+<meta name="twitter:description" content="1. 定义局部变量当一个变量被引用的时候，JavaScript将在作用域链中的不同成员中查找这个变量。作用域链指的是当前作用于下可用变量的集合，它在各种主流浏览器中至少包含两个部分：局部变量的集合和全局变量的集合。 简单地说，如果JavaScript引擎在作用域链中搜索的深度越大，那么操作也就会消耗更多的时间。引擎首先从 this 开始查找局部变量，然后是函数参数、本地定义的变量，最后遍历所有的全">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.iwashere.cn/2017/05/22/some_js_skills/"/>
+
+
+
+
+
+  <title>10个提升JavaScript性能的技巧 | Joe's Website</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe's Website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/05/22/some_js_skills/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">10个提升JavaScript性能的技巧</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T12:53:21+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-定义局部变量"><a href="#1-定义局部变量" class="headerlink" title="1. 定义局部变量"></a>1. 定义局部变量</h3><p>当一个变量被引用的时候，JavaScript将在作用域链中的不同成员中查找这个变量。作用域链指的是当前作用于下可用变量的集合，它在各种主流浏览器中至少包含两个部分：局部变量的集合和全局变量的集合。</p>
+<p>简单地说，如果JavaScript引擎在作用域链中搜索的深度越大，那么操作也就会消耗更多的时间。引擎首先从 this 开始查找局部变量，然后是函数参数、本地定义的变量，最后遍历所有的全局变量。</p>
+<p>因为局部变量在这条链的起端，所以查找局部变量总是比查找全局变量要块。所以当你想要不止一次地使用一个全局变量的时候，你应该将它定义成局部变量，就像这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blah = <span class="built_in">document</span>.getElementById(<span class="string">'myID'</span>)，</span><br><span class="line">blah2 = <span class="built_in">document</span>.getElementById(<span class="string">'myID2'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>改写成<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doc = <span class="built_in">document</span>，</span><br><span class="line">blah = doc.getElementById(<span class="string">'myID'</span>)，</span><br><span class="line">blah2 = doc.getElementById(<span class="string">'myID2'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-不要使用-with-语句"><a href="#2-不要使用-with-语句" class="headerlink" title="2. 不要使用 with() 语句"></a>2. 不要使用 with() 语句</h3><p>这是因为 <code>with()</code> 语句将会在作用域链的开始添加额外的变量。额外的变量意味着，当任何变量需要被访问的时候，JavaScript引擎都需要先扫描<code>with()</code>语句产生的变量，然后才是局部变量，最后是全局变量。 So with() essentially gives local variables all the performance drawbacks of global ones, and in turn derails Javascript optimization. 因此with()语句同时给局部变量和全局变量的性能带来负面影响，最终使我们优化JavaScript性能的计划破产。</p>
+<h3 id="3-小心使用闭包"><a href="#3-小心使用闭包" class="headerlink" title="3. 小心使用闭包"></a>3. 小心使用闭包</h3><p>虽然你可能还不知道“闭包”，但你可能在不经意间经常使用这项技术。闭包基本上被认为是JavaScript中的new，当我们定义一个即时函数的时候，我们就使用了闭包，比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'foo'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123; &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>闭包的问题在于：根据定义，在它们的作用域链中至少有三个对象：闭包变量、局部变量和全局变量。这些额外的对象将会导致第1和第2个建议中提到的性能问题。</p>
+<p>但是我认为Nicholas并不是要我们因噎废食，闭包对于提高代码可读性等方面还是非常有用的，只是不要滥用它们（尤其在循环中）。</p>
+<h3 id="4-对象属性和数组元素的速度都比变量慢"><a href="#4-对象属性和数组元素的速度都比变量慢" class="headerlink" title="4. 对象属性和数组元素的速度都比变量慢"></a>4. 对象属性和数组元素的速度都比变量慢</h3><p>谈到JavaScript的数据，一般来说有4种访问方式：数值、变量、对象属性和数组元素。在考虑优化时，数值和变量的性能差不多，并且速度显著优于对象属性和数组元素。</p>
+<p>因此当你多次引用一个对象属性或者数组元素的时候，你可以通过定义一个变量来获得性能提升。（这一条在读、写数据时都有效）</p>
+<p>虽然这条规则在绝大多数情况下是正确的，但是Firefox在优化数组索引上做了一些有意思的工作，能够让它的实际性能优于变量。但是考虑到数组元素在其他浏览器上的性能弊端，还是应该尽量避免数组查找，除非你真的只针对于火狐浏览器的性能而进行开发。</p>
+<h3 id="5-不要在数组中挖得太深"><a href="#5-不要在数组中挖得太深" class="headerlink" title="5. 不要在数组中挖得太深"></a>5. 不要在数组中挖得太深</h3><p>另外，程序员应该避免在数组中挖得太深，因为进入的层数越多，操作速度就越慢。</p>
+<p>简单地说，在嵌套很多层的数组中操作很慢是因为数组元素的查找速度很慢。试想如果操作嵌套三层的数组元素，就要执行三次数组元素查找，而不是一次。</p>
+<p>因此如果你不断地引用 foo.bar， 你可以通过定义 var bar = foo.bar 来提高性能。</p>
+<h3 id="6-避免-for-in-循环（和基于函数的迭代）"><a href="#6-避免-for-in-循环（和基于函数的迭代）" class="headerlink" title="6. 避免 for-in 循环（和基于函数的迭代）"></a>6. 避免 for-in 循环（和基于函数的迭代）</h3><p>这是另一条非常教条的建议：不要使用for-in循环。</p>
+<p>这背后的逻辑非常直接：要遍历一个集合内的元素，你可以使用诸如for循环、或者do-while循环来替代for-in循环，for-in循环不仅仅可能需要遍历额外的数组项，还需要更多的时间。</p>
+<p>为了遍历这些元素，JavaScript需要为每一个元素建立一个函数，这种基于函数的迭代带来了一系列性能问题：额外的函数引入了函数对象被创建和销毁的上下文，将会在作用域链的顶端增加额外的元素。</p>
+<h3 id="7-在循环时将控制条件和控制变量合并起来"><a href="#7-在循环时将控制条件和控制变量合并起来" class="headerlink" title="7. 在循环时将控制条件和控制变量合并起来"></a>7. 在循环时将控制条件和控制变量合并起来</h3><p>提到性能，在循环中需要避免的工作一直是个热门话题，因为循环会被重复执行很多次。所以如果有性能优化的需求，先对循环开刀有可能会获得最明显的性能提升。</p>
+<p>一种优化循环的方法是在定义循环的时候，将控制条件和控制变量合并起来，下面是一个没有将他们合并起来的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++ ) &#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>当我们要添加什么东西到这个循环之前，我们发现有几个操作在每次迭代都会出现。JavaScript引擎需要：</p>
+<h6 id="1：检查-x-是否存在"><a href="#1：检查-x-是否存在" class="headerlink" title="1：检查 x 是否存在"></a>1：检查 x 是否存在</h6><h6 id="2：检查-x-是否小于-0-（译者注：我猜这里是作者的笔误）"><a href="#2：检查-x-是否小于-0-（译者注：我猜这里是作者的笔误）" class="headerlink" title="2：检查 x 是否小于 0 （译者注：我猜这里是作者的笔误）"></a>2：检查 x 是否小于 0 <span style="color: #888888;">（译者注：我猜这里是作者的笔误）</span></h6><h6 id="3：使-x-增加-1"><a href="#3：使-x-增加-1" class="headerlink" title="3：使 x 增加 1"></a>3：使 x 增加 1</h6><p>然而如果你只是迭代元素中的一些元素，那么你可以使用while循环进行轮转来替代上面这种操作：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">do</span> &#123; &#125; <span class="keyword">while</span>( x-- );</span><br></pre></td></tr></table></figure></p>
+<p>如果你想更深入地了解循环的性能，Zakas提供了一种高级的循环优化技巧，使用异步进行循环（相当可以！）</p>
+<h3 id="8-为HTML集合对象定义数组"><a href="#8-为HTML集合对象定义数组" class="headerlink" title="8. 为HTML集合对象定义数组"></a>8. 为HTML集合对象定义数组</h3><p>JavaScript使用了大量的HTML集合对象，比如 document.forms，document.images 等等。通常他们被诸如 getElementsByTagName、getElementByClassName 等方法调用。</p>
+<p>由于大量的DOM selection操作，HTML集合对象相当的慢，而且还会带来很多额外的问题。正如DOM标准中所定义的那样：“HTML集合是一个虚拟存在，意味着当底层文档被改变时，它们将自动更新。”这太可怕了！</p>
+<p>尽管集合对象看起来跟数组很像，他们在某些地方却区别很大，比如对于特定查询的结果。当对象被访问进行读写时，查询需要重新执行来更新所有与对象相关的组分，比如 length。</p>
+<p>HTML集合对象也非常的慢，Nicholas说好像在看球的时候对一个小动作进行60倍速慢放。另外，集合对象也有可能造成死循环，比如下面的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> divs = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; divs.length; i++ ) &#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>); </span><br><span class="line">    <span class="built_in">document</span>.appendChild(div);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 这段代码造成了死循环，因为 divs 表示一个实时的HTML集合，并不是你所期望的数组。这种实时的集合在添加 <div> 标签时被更新，所以i &lt; div.length 永远都不会结束。</div></p>
+<p>解决这个问题的方法是将这些元素定义成数组，相比只设置 var divs = document.getElementsByTagName(‘div’) 稍微有点麻烦，下面是Zakas提供的强制使用数组的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">array</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.concat.call(items);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>,</span><br><span class="line">            len = items.length,</span><br><span class="line">            result = <span class="built_in">Array</span>(len);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">            result[i] = items[i];</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> divs = array( <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>) );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>l i &lt; divs.length; i++ ) &#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>); </span><br><span class="line">    <span class="built_in">document</span>.appendChild(div);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="9-不要碰DOM！"><a href="#9-不要碰DOM！" class="headerlink" title="9. 不要碰DOM！"></a>9. 不要碰DOM！</h3><p>不使用DOM是JavaScript优化中另一个很大的话题。经典的例子是添加一系列的列表项：如果你把每个列表项分别加到DOM中，肯定会比一次性加入所有列表项到DOM中要慢。这是因为DOM操作开销很大。</p>
+<p>Zakas对这个进行了细致的讲解，解释了由于回流（reflow）的存在，DOM操作是非常消耗资源的。回流通常被理解为浏览器重新选渲染DOM树的处理过程。比如说，如果你用JavaScript语句改变了一个div的宽度，浏览器需要重绘页面来适应变化。</p>
+<p>任何时候只要有元素被添加到DOM树或者从DOM树移除，都会引发回流。使用一个非常方便的JavaScript对象可以解决这个问题——documentFragment，我并没有使用过，但是在Steve Souders也表示同意这种做法之后我感觉更加肯定了。 </p>
+<p>DocumentFragment 基本上是一种浏览器以非可视方式实现的类似文档的片段，非可视化的表现形式带来了很多优点，最主要的是你可以在 documentFragment 中添加任何结点而不会引起浏览器回流。</p>
+<h3 id="10-修改CSS类，而不是样式"><a href="#10-修改CSS类，而不是样式" class="headerlink" title="10. 修改CSS类，而不是样式"></a>10. 修改CSS类，而不是样式</h3><p>你也许听说过：修改CSS类必直接修改样式会更高效。这归结于回流带来的另一个问题：当布局样式发生改变时，会引发回流。</p>
+<p>布局样式意味着任何影响改变布局的变化都会强制引起浏览器回流。比如宽度、高度、字号、浮动等。</p>
+<p>但是别误会我的意思，CSS类并不会避免回流，但是可以将它的影响最小化。相比每次修改样式都会引起回流，使用CSS类一次修改多个样式，只需要承担一次回流带来的消耗。</p>
+<p>因此在修改多个布局样式的时候，使用CSS类来优化性能是明智的选择。另外如果你需要在运行时定义很多歌CSS类，在DOM上添加样式结点也是不错的选择。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/20/lazy_load_js/" rel="next" title="如何延迟加载JS">
+                <i class="fa fa-chevron-left"></i> 如何延迟加载JS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/19/this/" rel="prev" title="理解Javascript中的this">
+                理解Javascript中的this <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Joseph" />
+            
+              <p class="site-author-name" itemprop="name">Joseph</p>
+              <p class="site-description motion-element" itemprop="description">“为往圣继绝学”</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qiaohongshen" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/94698fea8055" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-book"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-定义局部变量"><span class="nav-number">1.</span> <span class="nav-text">1. 定义局部变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-不要使用-with-语句"><span class="nav-number">2.</span> <span class="nav-text">2. 不要使用 with() 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-小心使用闭包"><span class="nav-number">3.</span> <span class="nav-text">3. 小心使用闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-对象属性和数组元素的速度都比变量慢"><span class="nav-number">4.</span> <span class="nav-text">4. 对象属性和数组元素的速度都比变量慢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-不要在数组中挖得太深"><span class="nav-number">5.</span> <span class="nav-text">5. 不要在数组中挖得太深</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-避免-for-in-循环（和基于函数的迭代）"><span class="nav-number">6.</span> <span class="nav-text">6. 避免 for-in 循环（和基于函数的迭代）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-在循环时将控制条件和控制变量合并起来"><span class="nav-number">7.</span> <span class="nav-text">7. 在循环时将控制条件和控制变量合并起来</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1：检查-x-是否存在"><span class="nav-number">7.0.0.1.</span> <span class="nav-text">1：检查 x 是否存在</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2：检查-x-是否小于-0-（译者注：我猜这里是作者的笔误）"><span class="nav-number">7.0.0.2.</span> <span class="nav-text">2：检查 x 是否小于 0 （译者注：我猜这里是作者的笔误）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3：使-x-增加-1"><span class="nav-number">7.0.0.3.</span> <span class="nav-text">3：使 x 增加 1</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-为HTML集合对象定义数组"><span class="nav-number">8.</span> <span class="nav-text">8. 为HTML集合对象定义数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-不要碰DOM！"><span class="nav-number">9.</span> <span class="nav-text">9. 不要碰DOM！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-修改CSS类，而不是样式"><span class="nav-number">10.</span> <span class="nav-text">10. 修改CSS类，而不是样式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joseph</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="200" alpha="0.6"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接引用父组件的数据。必须使用特定的方法才能实现组件之间的数据传递。 首先用 vue-cli 创建一个项目，其中 App.vue 是父组件，components 文件夹下都是子组件。 一、父组件向子组件传递数据在 Vue 中，可以使用props向子组件传递数据。 子组件部分： 这是 header.vue 的 HTML 部分，logo 是在 da">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Vue随笔》 （二）组件之间的数据传递">
+<meta property="og:url" content="http://www.iwashere.cn/2017/07/29/vue2/index.html">
+<meta property="og:site_name" content="Joe&#39;s Website">
+<meta property="og:description" content="Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接引用父组件的数据。必须使用特定的方法才能实现组件之间的数据传递。 首先用 vue-cli 创建一个项目，其中 App.vue 是父组件，components 文件夹下都是子组件。 一、父组件向子组件传递数据在 Vue 中，可以使用props向子组件传递数据。 子组件部分： 这是 header.vue 的 HTML 部分，logo 是在 da">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-cf72f7519c353e42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-cc801dc4ecd19e58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-8be2da0f269a35fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-2abe089fb159740e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-93cc0135a3ae1872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-68e1276f01d214e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-794ef5254e0fb50a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-6e295b68c26f7d8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2048384-9b96cdc9d7400681.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-09T07:00:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Vue随笔》 （二）组件之间的数据传递">
+<meta name="twitter:description" content="Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接引用父组件的数据。必须使用特定的方法才能实现组件之间的数据传递。 首先用 vue-cli 创建一个项目，其中 App.vue 是父组件，components 文件夹下都是子组件。 一、父组件向子组件传递数据在 Vue 中，可以使用props向子组件传递数据。 子组件部分： 这是 header.vue 的 HTML 部分，logo 是在 da">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2048384-cf72f7519c353e42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.iwashere.cn/2017/07/29/vue2/"/>
+
+
+
+
+
+  <title>《Vue随笔》 （二）组件之间的数据传递 | Joe's Website</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe's Website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/29/vue2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《Vue随笔》 （二）组件之间的数据传递</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-29T15:57:19+08:00">
+                2017-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接引用父组件的数据。必须使用特定的方法才能实现组件之间的数据传递。</p>
+<p>首先用 vue-cli 创建一个项目，其中 App.vue 是父组件，components 文件夹下都是子组件。<br><img src="http://upload-images.jianshu.io/upload_images/2048384-cf72f7519c353e42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="project tree"></p>
+<h3 id="一、父组件向子组件传递数据"><a href="#一、父组件向子组件传递数据" class="headerlink" title="一、父组件向子组件传递数据"></a>一、父组件向子组件传递数据</h3><p>在 Vue 中，可以使用props向子组件传递数据。</p>
+<h4 id="子组件部分："><a href="#子组件部分：" class="headerlink" title="子组件部分："></a>子组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-cc801dc4ecd19e58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="child component"></p>
+<p>这是 header.vue 的 HTML 部分，logo 是在 data 中定义的变量。</p>
+<p>如果需要从父组件获取 logo 的值，就需要使用props: [‘logo’]<br><img src="http://upload-images.jianshu.io/upload_images/2048384-8be2da0f269a35fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="c com"></p>
+<p>在 props 中添加了元素之后，就不需要在 data 中再添加变量了</p>
+<h4 id="父组件部分："><a href="#父组件部分：" class="headerlink" title="父组件部分："></a>父组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-2abe089fb159740e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f coms"></p>
+<p>在调用组件的时候，使用 <code>v-bind</code> 将 logo 的值绑定为 App.vue 中定义的变量 logoMsg<br><img src="http://upload-images.jianshu.io/upload_images/2048384-93cc0135a3ae1872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="app com"></p>
+<p>然后就能将App.vue中 logoMsg 的值传给 header.vue 了。</p>
+<h3 id="二、子组件向父组件传递数据"><a href="#二、子组件向父组件传递数据" class="headerlink" title="二、子组件向父组件传递数据"></a>二、子组件向父组件传递数据</h3><p>子组件主要通过事件传递数据给父组件</p>
+<h4 id="子组件部分：-1"><a href="#子组件部分：-1" class="headerlink" title="子组件部分："></a>子组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-68e1276f01d214e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="c com"></p>
+<p>这是 login.vue 的 HTML 部分，当<code>&lt;input&gt;</code>的值发生变化的时候，将 username 传递给 App.vue</p>
+<p>首先声明一个了方法setUser，用 keyup 事件来调用 setUser<br><img src="http://upload-images.jianshu.io/upload_images/2048384-794ef5254e0fb50a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="c com"></p>
+<p>在 setUser 中，使用了$emit来遍历transferUser事件，并返回 this.username</p>
+<p>其中transferUser是一个自定义的事件，功能类似于一个中转，this.username将通过这个事件传递给父组件</p>
+<h4 id="父组件部分：-1"><a href="#父组件部分：-1" class="headerlink" title="父组件部分："></a>父组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-6e295b68c26f7d8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f com"></p>
+<p>在父组件 App.vue 中，声明了一个方法 getUser，用 transferUser 事件调用 getUser 方法，获取到从子组件传递过来的参数 username<br><img src="http://upload-images.jianshu.io/upload_images/2048384-9b96cdc9d7400681.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="app com"></p>
+<p>getUser 方法中的参数 msg 就是从子组件传递过来的参数 username</p>
+<h3 id="三、子组件向子组件传递数据"><a href="#三、子组件向子组件传递数据" class="headerlink" title="三、子组件向子组件传递数据"></a>三、子组件向子组件传递数据</h3><p>Vue 没有直接子对子传参的方法，建议将需要传递数据的子组件，都合并为一个组件。如果一定需要子对子传参，可以先从传到父组件，再传到子组件。</p>
+<p>为了便于开发，Vue 推出了一个状态管理工具 <em>Vuex</em> ，可以很方便实现组件之间的参数传递。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/27/vue1/" rel="next" title="《Vue随笔》 （一）使用vue-cli搭建项目">
+                <i class="fa fa-chevron-left"></i> 《Vue随笔》 （一）使用vue-cli搭建项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/01/cross-origin-at-front-end/" rel="prev" title="再谈前端跨域">
+                再谈前端跨域 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Joseph" />
+            
+              <p class="site-author-name" itemprop="name">Joseph</p>
+              <p class="site-description motion-element" itemprop="description">“为往圣继绝学”</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qiaohongshen" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/94698fea8055" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-book"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、父组件向子组件传递数据"><span class="nav-number">1.</span> <span class="nav-text">一、父组件向子组件传递数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子组件部分："><span class="nav-number">1.1.</span> <span class="nav-text">子组件部分：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#父组件部分："><span class="nav-number">1.2.</span> <span class="nav-text">父组件部分：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、子组件向父组件传递数据"><span class="nav-number">2.</span> <span class="nav-text">二、子组件向父组件传递数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#子组件部分：-1"><span class="nav-number">2.1.</span> <span class="nav-text">子组件部分：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#父组件部分：-1"><span class="nav-number">2.2.</span> <span class="nav-text">父组件部分：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、子组件向子组件传递数据"><span class="nav-number">3.</span> <span class="nav-text">三、子组件向子组件传递数据</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joseph</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="200" alpha="0.6"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

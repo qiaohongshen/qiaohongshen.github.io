@@ -1,0 +1,2433 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="web, font-end" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="“为往圣继绝学”">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Joe&#39;s Website">
+<meta property="og:url" content="http://www.iwashere.cn/index.html">
+<meta property="og:site_name" content="Joe&#39;s Website">
+<meta property="og:description" content="“为往圣继绝学”">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Joe&#39;s Website">
+<meta name="twitter:description" content="“为往圣继绝学”">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.iwashere.cn/"/>
+
+
+
+
+
+  <title>Joe's Website</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe's Website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/11/10/other_git_account/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/10/other_git_account/" itemprop="url">如何在同一客户端部署多个git帐号(多账户下设置ssh keys)？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T14:55:03+08:00">
+                2017-11-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>有些事情总是无法避免的，要是你没有遇到过这个问题，你可能不知道我在说什么。就比如说我自己的一些开源项目放在github上，然而公司的项目是部署在gitlab上。我们使用git进行版本管理即与远程服务器做到同步,但是问题来了：默认情况下每个账户生成的秘钥位置和名称都是相同的，这样后生成的秘钥就会覆盖前面的秘钥导致其失效。解决的办法就是在生成后一个秘钥的时候对其重新命名，以避免冲突，同时将不同的秘钥配置到相对应的Host上面，这样在访问不同的远程仓库时调用不同的key,冲突也就解决了。</p>
+</blockquote>
+<h2 id="Mac环境为例"><a href="#Mac环境为例" class="headerlink" title="Mac环境为例"></a>Mac环境为例</h2><h3 id="生成gitlab密钥"><a href="#生成gitlab密钥" class="headerlink" title="生成gitlab密钥"></a>生成gitlab密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;注册gitlab的邮箱&quot; -b 4096</span><br></pre></td></tr></table></figure>
+<p>使用默认名称，然后不设置密码，回车直接跳过。<br>查看 <code>.ssh</code> 目录，可以看到生成的公钥和私钥，名称分别为 <code>id_rsa.pub</code> 和 <code>id_rsa</code></p>
+<p>使用命令 <code>cat ~/.ssh/id_rsa.pub</code> 可以查看公钥内容，这个就是gitlab下ssh keys下需要添加的内容。</p>
+<h3 id="生成github密钥"><a href="#生成github密钥" class="headerlink" title="生成github密钥"></a>生成github密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;注册github的邮箱&quot; -b 4096</span><br></pre></td></tr></table></figure>
+<p>这次不使用默认名称，要对生成定的秘钥进行重命名，这里重命名为 <code>id_rsa_github</code> , 同样不设置密码。<br>查看 <code>.ssh</code> 目录，可以看到生成的公钥和私钥，名称分别为 <code>id_rsa_github.pub</code> 和 <code>id_rsa_github</code></p>
+<p>使用命令<code>cat ~/.ssh/id_rsa_github.pub</code>可以查看公钥内容，这个就是github下ssh keys下需要添加的内容。</p>
+<h3 id="配置config文件"><a href="#配置config文件" class="headerlink" title="配置config文件"></a>配置config文件</h3><p>在 <code>.ssh/</code> 目录下新建config文件：<code>touch config</code>，通过vim进行如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># gitlab</span><br><span class="line">Host gitlab</span><br><span class="line">    HostName gitlab.foo.com</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"># github</span><br><span class="line">Host github</span><br><span class="line">    HostName github.com</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa_github</span><br></pre></td></tr></table></figure></p>
+<p>然后<code>:wq</code> (vim命令，保存退出)</p>
+<p><code>Host</code>对应的名称是一个别名，命名可以随意，用来进行远程连接。<code>HostName</code>和<code>IdentityFile</code>是各自主机名称以及对应的秘钥文件。</p>
+<hr>
+<p>配置完毕。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/09/25/caller&callee/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/25/caller&callee/" itemprop="url">还有人在问你caller和callee的区别?</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T15:18:21+08:00">
+                2017-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>很搞笑，首先我不知道面试官还会问这种问题，意义何在？let me give him a fu… lesson?</p>
+<h3 id="Function-caller"><a href="#Function-caller" class="headerlink" title="Function.caller"></a>Function.caller</h3><p>返回调用指定函数的函数。<br>如果一个函数f是在全局作用域内被调用的,则f.caller为null,相反,如果一个函数是在另外一个函数作用域内被调用的,则f.caller指向调用它的那个函数。<br>该属性的常用形式<code>arguments.callee.caller</code>替代了被废弃的 <code>arguments.caller</code><br>什么？ 被废弃了？<br>是的，废弃的 <code>arguments.caller</code> 属性原先用在函数执行的时候调用自身。本属性已被移除且不再有用。<br><code>arguments.caller</code> 已经不可使用了，但是你还可以使用 <code>Function.caller</code>，但是该特性也是非标准的，尽量不要在生产环境中使用它！</p>
+<p>下例演示了arguments.caller属性的作用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">whoCalled</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">arguments</span>.caller == <span class="literal">null</span>)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'该函数在全局作用域内被调用.'</span>);</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.caller + <span class="string">'调用了我!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下例用来得出一个函数是被谁调用的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (myFunc.caller == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> (<span class="string">"该函数在全局作用域内被调用!"</span>);</span><br><span class="line">   &#125; <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> (<span class="string">"调用我的是函数是"</span> + myFunc.caller);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="arguments-callee"><a href="#arguments-callee" class="headerlink" title="arguments.callee"></a>arguments.callee</h3><p>不用鸡冻，这个东西也好不到哪儿去，<br>callee 是 arguments 对象的一个属性。它可以用于引用该函数的函数体内当前正在执行的函数。这在函数的名称是未知时很有用，例如在没有名称的函数表达式 (也称为“匿名函数”)内。<br>但是，看这个警告：</p>
+<blockquote>
+<p>在严格模式下，第5版 ECMAScript (<strong>ES5</strong>) 禁止使用 arguments.callee()。<br>当一个函数必须调用自身的时候, 避免使用 arguments.callee(), 通过要么给函数表达式一个名字,要么使用一个函数声明。</p>
+</blockquote>
+<h5 id="为什么-arguments-callee-从ES5严格模式中删除了？"><a href="#为什么-arguments-callee-从ES5严格模式中删除了？" class="headerlink" title="为什么 arguments.callee 从ES5严格模式中删除了？"></a>为什么 arguments.callee 从ES5严格模式中删除了？</h5><p>早期版本的 JavaScript不允许使用命名函数表达式，出于这样的原因, 你不能创建一个递归函数表达式。<br>例如，下边这个语法就是行的通的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : factorial(n - <span class="number">1</span>) * n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(factorial);</span><br></pre></td></tr></table></figure></p>
+<p>但是:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(<span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : <span class="comment">/* 这里写什么? */</span> (n - <span class="number">1</span>) * n;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这个不行。为了解决这个问题， arguments.callee 添加进来了。然后你可以这么做<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(<span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : <span class="built_in">arguments</span>.callee(n - <span class="number">1</span>) * n;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>然而，这实际上是一个非常糟糕的解决方案，因为这 (以及其它的 arguments, callee, 和 caller 问题) 使得在通常的情况（你可以通过调试一些个别例子去实现它，但即使最好的代码是最理想的，你也没必要去检查调试它）不可能实现内联和尾递归。另外一个主要原因是递归调用会获取到一个不同的 this 值，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> global = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sillyFunction = <span class="function"><span class="keyword">function</span> (<span class="params">recursed</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!recursed) &#123; <span class="keyword">return</span> <span class="built_in">arguments</span>.callee(<span class="literal">true</span>); &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> !== global) &#123;</span><br><span class="line">        alert(<span class="string">"This is: "</span> + <span class="keyword">this</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        alert(<span class="string">"This is the global"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sillyFunction();</span><br></pre></td></tr></table></figure></p>
+<p>ECMAScript 3（es3?哈哈） 通过允许命名函数表达式解决这些问题。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(<span class="function"><span class="keyword">function</span> <span class="title">factorial</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : factorial(n<span class="number">-1</span>)*n;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这有很多好处：</p>
+<ul>
+<li>该函数可以像代码内部的任何其他函数一样被调用</li>
+<li>它不会在外部作用域中创建一个变量 (除了 IE 8 及以下)</li>
+<li>它具有比访问arguments对象更好的性能</li>
+</ul>
+<p>另外一个被废弃的特性是 arguments.callee.caller，具体点说则是 Function.caller。为什么? 额，在任何一个时间点，你能在堆栈中找到任何函数的最深层的调用者，也正如我在上面提到的，在调用堆栈有一个单一重大影响：不可能做大量的优化，或者有更多更多的困难。比如，如果你不能保证一个函数 f 不会调用一个未知函数，它就绝不可能是内联函数 f。基本上这意味着内联代码中积累了大量防卫代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params">a, b, c, d, e</span>) </span>&#123; <span class="keyword">return</span> a ? b * c : d * e; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果 JavaScript 解释器不能保证所有提供的参数数量在被调用的时候都存在，那么它需要在行内代码插入检查，或者不能内联这个函数。现在在这个特殊例子里一个智能的解释器应该能重排检查而更优，并检查任何将不用到的值。然而在许多的情况里那是不可能的，也因此它不能够内联。</p>
+<h5 id="番外："><a href="#番外：" class="headerlink" title="番外："></a>番外：</h5><h6 id="在匿名递归函数中使用-arguments-callee"><a href="#在匿名递归函数中使用-arguments-callee" class="headerlink" title="在匿名递归函数中使用 arguments.callee"></a>在匿名递归函数中使用 arguments.callee</h6><p>递归函数必须能够引用它本身。很典型的，函数通过自己的名字调用自己。然而，匿名函数 (通过 函数表达式 或者 函数构造器 创建) 没有名称。因此如果没有可访问的变量指向该函数，唯一能引用它的方式就是通过 arguments.callee。</p>
+<p>下面的例子定义了一个函数，按流程，定义并返回了一个阶乘函数。该例并不是很实用，并且几乎都能够用命名函数表达式实现同样结果的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (n &lt;= <span class="number">1</span>)</span><br><span class="line">         <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">return</span> n * <span class="built_in">arguments</span>.callee(n - <span class="number">1</span>);</span><br><span class="line">   &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = create()(<span class="number">5</span>); <span class="comment">// 返回120 (5 * 4 * 3 * 2 * 1)</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="没有替代方案的-arguments-callee"><a href="#没有替代方案的-arguments-callee" class="headerlink" title="没有替代方案的 arguments.callee"></a>没有替代方案的 arguments.callee</h6><p>下面的例子是没有可以替代 arguments.callee的方案的，因此弃用它时会产生一个BUG (参看 <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=725398" target="_blank" rel="external">bug 725398</a>):<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span> (<span class="params">sIdentity</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oPerson = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"alert(arguments.callee.identity);"</span>);</span><br><span class="line">    oPerson.identity = sIdentity;</span><br><span class="line">    <span class="keyword">return</span> oPerson;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> joe = createPerson(<span class="string">"Joseph"</span>);</span><br><span class="line"></span><br><span class="line">joe();</span><br></pre></td></tr></table></figure></p>
+<p>利用命名函数表达式也可以实现上述例子的同样效果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span> (<span class="params">identity</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(Person.identity);</span><br><span class="line">    &#125;</span><br><span class="line">    Person.identity = identity;</span><br><span class="line">    <span class="keyword">return</span> Person;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> joe = createPerson(<span class="string">"Joseph"</span>);</span><br><span class="line"></span><br><span class="line">joe(); <span class="comment">//Joseph</span></span><br></pre></td></tr></table></figure></p>
+<p>Over.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/08/24/cross-origin-at-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/24/cross-origin-at-server/" itemprop="url">服务端跨域</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-24T18:49:30+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="一、反向代理服务器"><a href="#一、反向代理服务器" class="headerlink" title="一、反向代理服务器"></a>一、反向代理服务器</h2><p>基础思想很简单，将你的服务器配置成 <strong>需要跨域获取的资源的</strong> 反向代理服务器。<br>也就是说，将其他域名的资源映射到你自己的域名之下，这样浏览器就认为他们是同源的。<br>用大家钟爱的 Apache2 来举个例子：<br>首先启用两个模块 proxy 和 proxy_http 来开启代理功能：</p>
+<blockquote>
+<p>sudo a2enmod proxysudo a2enmod proxy_http</p>
+</blockquote>
+<p>然后在配置文件里面写入：</p>
+<blockquote>
+<p>ProxyPass “/foo” “<a href="http://foo.example.com/bar&quot;ProxyPassReverse" target="_blank" rel="external">http://foo.example.com/bar&quot;ProxyPassReverse</a> “/foo” “<a href="http://foo.example.com/bar" target="_blank" rel="external">http://foo.example.com/bar</a>“</p>
+</blockquote>
+<p>ProxyPass: 远程服务器在本地服务器的映射。（上面的例子将 <a href="http://foo.example.com/bar映射为" target="_blank" rel="external">http://foo.example.com/bar映射为</a> /foo）</p>
+<p>ProxyPassReverse: 配置 Apache2 在 HTTP 跳转时调整 Location, Content-Location 和 URI headers的值，防止反向代理被绕开。</p>
+<p>重启 Apache2：</p>
+<blockquote>
+<p>sudo service apache2 restart</p>
+</blockquote>
+<p>大功告成，这样我们请求 /foo就会得到 <a href="http://foo.example.com/bar的内容了。" target="_blank" rel="external">http://foo.example.com/bar的内容了。</a><br>这种方法其实不太常用，机智的读者就会发现，每一个资源都要到自己的服务器配置，每次配置都还要重启。</p>
+<h2 id="二、CORS"><a href="#二、CORS" class="headerlink" title="二、CORS"></a>二、CORS</h2><p>Cross-Origin Resource Sharing 是 W3C 推出的一种跨站资源获取的机制。</p>
+<h6 id="首先我们来看一下浏览器的支持情况："><a href="#首先我们来看一下浏览器的支持情况：" class="headerlink" title="首先我们来看一下浏览器的支持情况："></a>首先我们来看一下浏览器的支持情况：</h6><table>
+<thead>
+<tr>
+<th>Chrome</th>
+<th>Firefox (Gecko)</th>
+<th>Internet Explorer</th>
+<th>Opera</th>
+<th>Safari</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4</td>
+<td>3.5</td>
+<td>8 &amp; 9, 10</td>
+<td>12</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>移动端的浏览器对这种方法的支持比较完善。现在我们看到了，如果不需要兼容 IE6、7的话，就可以使用这种方法。<br>这种跨域方案主要的思想是：服务器 <strong>在响应头中设置相应的选项</strong>，浏览器如果支持这种方法的话就会将这种跨站资源请求视为合法，进而获取资源。<br>可以设置的响应头信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin</span><br><span class="line">Access-Control-Allow-Origin: &lt;origin&gt; | *</span><br></pre></td></tr></table></figure></p>
+<p>origin: 被允许跨域访问这个资源的网站，* 代表全部网站。浏览器会检测这个参数，如果符合要求，才会去获取资源。<br>举个例子，允许 <a href="http://qiaohongshen.github.io/foo来跨域访问这个资源：" target="_blank" rel="external">http://qiaohongshen.github.io/foo来跨域访问这个资源：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://jasonkid.github.io/fezone</span><br><span class="line">Access-Control-Allow-Credentials</span><br><span class="line">Access-Control-Allow-Credentials: true | false</span><br></pre></td></tr></table></figure></p>
+<p>表示是否允许浏览器携带 Cookie 来访问这个资源。这个属性要和 XMLHttpRequest 的 withCredentials属性来配合使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://foo.other/resources/credentialed-content/'</span>;</span><br><span class="line"><span class="keyword">if</span>(xhr) &#123;</span><br><span class="line">  xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">  xhr.withCredentials = <span class="literal">true</span>; <span class="comment">// 设置带有 Cookie 的资源请求</span></span><br><span class="line">  xhr.onreadystatechange = handler;</span><br><span class="line">  xhr.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>能够成功使用带有 Cookie 的资源请求需要满足以下几个条件：</p>
+<ol>
+<li>XMLHttpRequest</li>
+<li>对象中指定了 withCredentials = true</li>
+<li>服务器响应头中 Access-Control-Allow-Credentials: true</li>
+<li>服务器响应头中 Access-Control-Allow-Origin不能为 *</li>
+</ol>
+<p>以下选项主要是安全性配置的问题，主要是服务器的配置问题了，就不展开介绍了：</p>
+<ul>
+<li>Access-Control-Expose-Headers</li>
+<li>Access-Control-Allow-Methods</li>
+<li>Access-Control-Allow-Headers</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/08/01/cross-origin-at-front-end/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/01/cross-origin-at-front-end/" itemprop="url">再谈前端跨域</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T01:29:45+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="1-JSONP"><a href="#1-JSONP" class="headerlink" title="1. JSONP"></a>1. JSONP</h4><p>首先要介绍的跨域方法必然是 JSONP。<br>现在你想要获取其他网站上的 JavaScript 脚本，你非常高兴的使XMLHttpRequest 对象来获取。但是浏览器一点儿也不配合你，无情的弹出了下面的错误信息：</p>
+<blockquote>
+<p>XMLHttpRequest cannot load <a href="http://x.com/main.dat" target="_blank" rel="external">http://x.com/main.dat</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://y.com" target="_blank" rel="external">http://y.com</a>‘ is therefore not allowed access.</p>
+</blockquote>
+<p>你心里肯定会想，我难道要用后台做个爬虫来获取这个数据吗？！为了避免这种事情发生，JSONP 就派上用场了。<br><code>&lt;script&gt;</code>标签是不受同源策略的限制的，它可以载入任意地方的 JavaScript 文件，而并不要求同源。所以 JSONP 的理念就是，我和服务端约定好一个函数名，当我请求文件的时候，服务端返回一段 JavaScript。这段 JavaScript 调用了我们约定好的函数，并且将数据当做参数传入。非常巧合的一点（其实并不是），JSON 的数据格式和JavaScript 语言里对象的格式正好相同。所以在我们约定的函数里面可以直接使用这个对象。光说不练假把式，让我们来看一个例子：<br>你需要获取数据的页面 index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">   </span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">getWeather</span>(<span class="params">data</span>) </span>&#123;       </span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://x.y.com/xx.js"</span>&gt;</span><span class="undefined"></span></span><br></pre></td></tr></table></figure></p>
+<p><a href="http://x.y.com/xx.js" target="_blank" rel="external">http://x.y.com/xx.js</a> 文件内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getWeather(&#123;</span><br><span class="line">  <span class="string">"城市"</span>: <span class="string">"北京"</span>,</span><br><span class="line">  <span class="string">"天气"</span>: <span class="string">"大雾"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，在我们定义了 getWeather(data)这个函数后，直接载入了 xx.js。在这个脚本中，执行了 getWeather函数，并传入了一个对象。然后我们在这个函数中将这个对象输出到 console 中。</p>
+<h6 id="这就是整个-JSONP-的流程。"><a href="#这就是整个-JSONP-的流程。" class="headerlink" title="这就是整个 JSONP 的流程。"></a>这就是整个 JSONP 的流程。</h6><h4 id="2-document-domain"><a href="#2-document-domain" class="headerlink" title="2. document.domain"></a>2. document.domain</h4><p>使用条件：</p>
+<ol>
+<li>有其他页面 window对象的引用</li>
+<li>二级域名相同</li>
+<li>协议相同</li>
+<li>端口相同</li>
+</ol>
+<p><code>document.domain</code>默认的值是整个域名，所以即使两个域名的二级域名一样，那么他们的 document.domain也不一样。使用方法就是将符合上述条件页面的 <code>document.domain</code>设置为同样的二级域名。这样我们就可以使用其他页面的 window对象引用做我们想做的任何事情了。<br><strong>补充知识：</strong><br>x.one.example.com 和 y.one.example.com 可以将 document.domain设置为 one.example.com，也可以设置为example.com。document.domain只能设置为当前域名的一个后缀，并且包括二级域名或以上（.edu.cn这种整个算顶级域名）。我们直接操刀演示，用两个网站 <a href="http://wenku.baidu.com/" target="_blank" rel="external">http://wenku.baidu.com/</a> 和<a href="http://zhidao.baidu.com/。这两个网站都是" target="_blank" rel="external">http://zhidao.baidu.com/。这两个网站都是</a> http 协议，端口都是 80， 且二级域名都是 baidu.com。打开<a href="http://wenku.baidu.com/，在" target="_blank" rel="external">http://wenku.baidu.com/，在</a> console 中输入代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain = <span class="string">'baidu.com'</span>;</span><br><span class="line"><span class="keyword">var</span> otherWindow = <span class="built_in">window</span>.open(<span class="string">'http://zhidao.baidu.com/'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>我们现在已经发现百度知道的网页已经打开了，在百度知道网页的 console 中输入以下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.domain = <span class="string">'baidu.com'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>现在回到百度文库的网页，我们就可以使用百度知道网页的 window对象来操作百度知道的网页了。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> divs = otherWindow.document.getElementsByTagName(<span class="string">'div'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>上面这个例子的使用方法并不常见，但是非常详细的说明了这种方法的原理。这种方法主要用在控制 <code>&lt;iframe&gt;</code>的情况中。<br>比如我的页面(<a href="http://one.example.com/index.html)中内嵌了一个" target="_blank" rel="external">http://one.example.com/index.html)中内嵌了一个</a> <code>&lt;iframe&gt;</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"iframe"</span> <span class="attr">src</span>=<span class="string">"http://two.example.com/iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我们在 iframe.html 中使用 JavaScript 将 document.domain设置好，也就是 example.com。在 index.html 执行以下脚本：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframe'</span>);</span><br><span class="line"><span class="built_in">document</span>.domain = <span class="string">'example.com'</span>;</span><br><span class="line">iframe.contentDocument; <span class="comment">// iframe的 document 对象</span></span><br><span class="line">iframe.contentWindow; <span class="comment">// iframe的 window 对象</span></span><br></pre></td></tr></table></figure></p>
+<p>这样，我们就可以获得对iframe的完全控制权了。</p>
+<p><strong>补充知识：</strong><br>当两个页面不做任何处理，但是使用了iframe或者 window.open() 得到了某个页面的 window 对象的引用，我们可以直接访问的属性有哪些？</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>window.blur</td>
+</tr>
+<tr>
+<td>window.close</td>
+</tr>
+<tr>
+<td>window.focus</td>
+</tr>
+<tr>
+<td>window.postMessage</td>
+</tr>
+<tr>
+<td>window.location.replace</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>权限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>window.closed</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.frames</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.length</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.location.href</td>
+<td>只写</td>
+</tr>
+<tr>
+<td>window.opener</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.parent</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.self</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.top</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>window.window</td>
+<td>只读</td>
+</tr>
+</tbody>
+</table>
+<h4 id="3-window-name"><a href="#3-window-name" class="headerlink" title="3. window.name"></a>3. window.name</h4><p>我们来看以下一个场景：<br>随意打开一个页面，输入以下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"My window's name"</span>;</span><br><span class="line">location.href = <span class="string">"http://www.qq.com/"</span>;</span><br></pre></td></tr></table></figure></p>
+<p>再检测 window.name :<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name; <span class="comment">// My window's name</span></span><br></pre></td></tr></table></figure></p>
+<p>可以看到，如果在一个标签里面跳转网页的话，我们的 window.name是不会改变的。基于这个思想，我们可以在某个页面设置好 window.name的值，然后跳转到另外一个页面。在这个页面中就可以获取到我们刚刚设置的 window.name了。由于安全原因，浏览器始终会保持 window.name 是 string类型。这个方法也可以应用到与 <code>&lt;iframe&gt;</code> 的交互上来。我的页面(<a href="http://one.example.com/index.html)中内嵌了一个" target="_blank" rel="external">http://one.example.com/index.html)中内嵌了一个</a> <code>&lt;iframe&gt;</code>：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">id</span>=<span class="string">"iframe"</span> <span class="attr">src</span>=<span class="string">"http://omg.com/iframe.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在 iframe.html 中设置好了 window.name为我们要传递的字符串。我们在 index.html 中写了下面的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframe'</span>);</span><br><span class="line"><span class="keyword">var</span> data = <span class="string">''</span>;</span><br><span class="line">iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">  data = iframe.contentWindow.name;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>定睛一看，为毛线报错？细心的读者们肯定已经发现了，两个页面完全不同源啊！由于 window.name 不随着 URL 的跳转而改变，所以我们使用一个暗黑技术来解决这个问题：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframe'</span>);</span><br><span class="line"><span class="keyword">var</span> data = <span class="string">''</span>;</span><br><span class="line">iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    </span><br><span class="line">  iframe.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;        </span><br><span class="line">    data = iframe.contentWindow.name;    </span><br><span class="line">  &#125;   </span><br><span class="line">   iframe.src = <span class="string">'about:blank'</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>或者将里面的 about:blank 替换成某个同源页面（最好是空页面，减少加载时间）。<br><strong>补充知识：</strong><br>about:blank，javascript: 和 data:中的内容，继承了载入他们的页面的源。<br>这种方法与 document.domain方法相比，放宽了域名后缀要相同的限制，可以从任意页面获取 string类型的数据。</p>
+<h4 id="4-HTML5-postMessage"><a href="#4-HTML5-postMessage" class="headerlink" title="4. [HTML5] postMessage"></a>4. [HTML5] postMessage</h4><p>在 HTML5 中， window 对象增加了一个非常有用的方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windowObj.postMessage(message, targetOrigin);</span><br></pre></td></tr></table></figure></p>
+<p>windowObj: 接受消息的 Window 对象。<br>message: 在最新的浏览器中可以是对象。<br>targetOrigin: 目标的源，* 表示任意。</p>
+<p>这个方法非常强大，无视协议，端口，域名的不同。<br>下面是烤熟的栗子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> windowObj = <span class="built_in">window</span>; <span class="comment">// 可以是其他的 Window 对象的引用</span></span><br><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line">addEventListener(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;   </span><br><span class="line">  <span class="keyword">if</span>(e.origin == <span class="string">'http://qiaohongshen.github.io/foo'</span>) &#123;      </span><br><span class="line">    data = e.data;</span><br><span class="line">    e.source.postMessage(<span class="string">'Got it!'</span>, <span class="string">'*'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>message事件就是用来接收 postMessage发送过来的请求的。函数参数的属性有以下几个：<br>origin: 发送消息的 window的源。<br>data: 数据。<br>source: 发送消息的 Window对象。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/29/vue2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/29/vue2/" itemprop="url">《Vue随笔》 （二）组件之间的数据传递</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-29T15:57:19+08:00">
+                2017-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Vue 的组件作用域都是孤立的，不允许在子组件的模板内直接引用父组件的数据。必须使用特定的方法才能实现组件之间的数据传递。</p>
+<p>首先用 vue-cli 创建一个项目，其中 App.vue 是父组件，components 文件夹下都是子组件。<br><img src="http://upload-images.jianshu.io/upload_images/2048384-cf72f7519c353e42.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="project tree"></p>
+<h3 id="一、父组件向子组件传递数据"><a href="#一、父组件向子组件传递数据" class="headerlink" title="一、父组件向子组件传递数据"></a>一、父组件向子组件传递数据</h3><p>在 Vue 中，可以使用props向子组件传递数据。</p>
+<h4 id="子组件部分："><a href="#子组件部分：" class="headerlink" title="子组件部分："></a>子组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-cc801dc4ecd19e58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="child component"></p>
+<p>这是 header.vue 的 HTML 部分，logo 是在 data 中定义的变量。</p>
+<p>如果需要从父组件获取 logo 的值，就需要使用props: [‘logo’]<br><img src="http://upload-images.jianshu.io/upload_images/2048384-8be2da0f269a35fc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="c com"></p>
+<p>在 props 中添加了元素之后，就不需要在 data 中再添加变量了</p>
+<h4 id="父组件部分："><a href="#父组件部分：" class="headerlink" title="父组件部分："></a>父组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-2abe089fb159740e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f coms"></p>
+<p>在调用组件的时候，使用 <code>v-bind</code> 将 logo 的值绑定为 App.vue 中定义的变量 logoMsg<br><img src="http://upload-images.jianshu.io/upload_images/2048384-93cc0135a3ae1872.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="app com"></p>
+<p>然后就能将App.vue中 logoMsg 的值传给 header.vue 了。</p>
+<h3 id="二、子组件向父组件传递数据"><a href="#二、子组件向父组件传递数据" class="headerlink" title="二、子组件向父组件传递数据"></a>二、子组件向父组件传递数据</h3><p>子组件主要通过事件传递数据给父组件</p>
+<h4 id="子组件部分：-1"><a href="#子组件部分：-1" class="headerlink" title="子组件部分："></a>子组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-68e1276f01d214e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="c com"></p>
+<p>这是 login.vue 的 HTML 部分，当<code>&lt;input&gt;</code>的值发生变化的时候，将 username 传递给 App.vue</p>
+<p>首先声明一个了方法setUser，用 keyup 事件来调用 setUser<br><img src="http://upload-images.jianshu.io/upload_images/2048384-794ef5254e0fb50a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="c com"></p>
+<p>在 setUser 中，使用了$emit来遍历transferUser事件，并返回 this.username</p>
+<p>其中transferUser是一个自定义的事件，功能类似于一个中转，this.username将通过这个事件传递给父组件</p>
+<h4 id="父组件部分：-1"><a href="#父组件部分：-1" class="headerlink" title="父组件部分："></a>父组件部分：</h4><p><img src="http://upload-images.jianshu.io/upload_images/2048384-6e295b68c26f7d8e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="f com"></p>
+<p>在父组件 App.vue 中，声明了一个方法 getUser，用 transferUser 事件调用 getUser 方法，获取到从子组件传递过来的参数 username<br><img src="http://upload-images.jianshu.io/upload_images/2048384-9b96cdc9d7400681.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="app com"></p>
+<p>getUser 方法中的参数 msg 就是从子组件传递过来的参数 username</p>
+<h3 id="三、子组件向子组件传递数据"><a href="#三、子组件向子组件传递数据" class="headerlink" title="三、子组件向子组件传递数据"></a>三、子组件向子组件传递数据</h3><p>Vue 没有直接子对子传参的方法，建议将需要传递数据的子组件，都合并为一个组件。如果一定需要子对子传参，可以先从传到父组件，再传到子组件。</p>
+<p>为了便于开发，Vue 推出了一个状态管理工具 <em>Vuex</em> ，可以很方便实现组件之间的参数传递。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/27/vue1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/27/vue1/" itemprop="url">《Vue随笔》 （一）使用vue-cli搭建项目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T16:50:11+08:00">
+                2017-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>vue-cli 是一个官方发布 vue.js 项目脚手架，使用 vue-cli 可以快速创建 vue 项目，GitHub地址是: <a href="https://github.com/vuejs/vue-cli" target="_blank" rel="external">https://github.com/vuejs/vue-cli</a></p>
+<h3 id="一、-安装-node"><a href="#一、-安装-node" class="headerlink" title="一、 安装 node"></a>一、 安装 node</h3><p>首先需要安装node环境，可以直接到官网<a href="https://nodejs.org/en/" target="_blank" rel="external">https://nodejs.org/en/</a>下载安装包。</p>
+<p>（中文官网<a href="http://nodejs.cn/" target="_blank" rel="external">http://nodejs.cn/</a>）</p>
+<p>安装完成后，可以命令行工具中输入<code>node -v</code>和<code>npm -v</code>，如果能显示出版本号，就说明安装成功。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2048384-4df0ecfffc293186.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="install node"></p>
+<h3 id="二、安装-vue-cli"><a href="#二、安装-vue-cli" class="headerlink" title="二、安装 vue-cli"></a>二、安装 vue-cli</h3><p>安装好了 node，我们可以直接全局安装 vue-cli：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g vue-cli</span><br></pre></td></tr></table></figure></p>
+<p>但是这种安装方式比较慢，推荐使用国内镜像来安装，所以我们先设置 cnpm：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
+<p>如果安装失败，可以使用<code>npm cache clean</code>清理缓存，然后再重新安装。后面的安装过程中，如有安装失败的情况，也需要先清理缓存</p>
+<p>同样可以使用<code>cnpm -v</code>查看是否安装成功</p>
+<p>然后使用 cnpm 安装 vue-cli 和 webpack<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g vue-cli</span><br></pre></td></tr></table></figure></p>
+<p>最新的 vue 项目模板中，都带有 webpack 插件，所以这里可以不安装 webpack</p>
+<p>安装完成后，可以使用<code>vue -V</code>（注意 V 大写）查看是否安装成功。</p>
+<p>如果提示“无法识别 ‘vue’ ” ，有可能是 npm 版本过低，可以使用 <code>npm install -g npm</code> 来更新版本</p>
+<h3 id="三、生成项目"><a href="#三、生成项目" class="headerlink" title="三、生成项目"></a>三、生成项目</h3><p>首先需要在命令行中进入到项目目录，然后输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack vue_project</span><br></pre></td></tr></table></figure></p>
+<p>其中 webpack 是模板名称，可以到 vue.js 的 GitHub 上查看更多的模板<a href="https://github.com/vuejs-templates" target="_blank" rel="external">https://github.com/vuejs-templates</a></p>
+<p>vue_project是自定义的项目名称，命令执行之后，会在当前目录生成一个以该名称命名的项目文件夹<br><img src="http://upload-images.jianshu.io/upload_images/2048384-9713fb1cdcc1595a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="generate project"></p>
+<p>配置完成后，可以看到目录下多出了一个项目文件夹，里面就是 vue-cli 创建的一个基于 webpack 的 vue.js 项目</p>
+<p>然后进入项目目录（cd vue_project），使用 cnpm 安装依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install</span><br></pre></td></tr></table></figure></p>
+<p>然后启动项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
+<p>如果浏览器打开之后，没有加载出页面，有可能是本地的 8080 端口被占用，需要修改一下配置文件<code>config&gt;index.js</code><br><img src="http://upload-images.jianshu.io/upload_images/2048384-fce2e05adee67495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="config"></p>
+<p>建议将端口号改为不常用的端口。另外我还将 <code>build</code> 的路径前缀修改为 ‘ ./ ‘（原本为 ‘ / ‘），是因为打包之后，外部引入 js 和 css 文件时，如果路径以 ‘ / ‘ 开头，在本地是无法找到对应文件的（服务器上没问题）。所以如果需要在本地打开打包后的文件，就得修改文件路径。</p>
+<h3 id="四、打包上线"><a href="#四、打包上线" class="headerlink" title="四、打包上线"></a>四、打包上线</h3><p>自己的项目文件都需要放到 <code>src</code> 文件夹下</p>
+<p>项目开发完成之后，可以输入 <code>npm run build</code> 来进行打包工作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure></p>
+<p>打包完成后，会生成 <code>dist</code> 文件夹，如果已经修改了文件路径，可以直接打开本地文件查看</p>
+<p>项目上线时，只需要将 <code>dist</code> 文件夹放到服务器就行了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/18/typeof/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/18/typeof/" itemprop="url">你真的懂 typeof 吗？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T09:42:21+08:00">
+                2017-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先要说的，<em>typeof</em> 并不是一个方法，所以没必要写成 <em>typeof()</em> 的形式。<br><em>typeof</em> 是一个操作符，<em>typeof</em> 操作符返回一个字符串,指示未经计算的操作数的类型。</p>
+<h2 id="接下来我要问的是，你知道-typeof-可能的返回值有哪些？"><a href="#接下来我要问的是，你知道-typeof-可能的返回值有哪些？" class="headerlink" title="接下来我要问的是，你知道 typeof 可能的返回值有哪些？"></a>接下来我要问的是，你知道 <em>typeof</em> 可能的返回值有哪些？</h2><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><h5 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h5><pre><code>// Numbers
+typeof 37 === &apos;number&apos;;
+typeof 3.14 === &apos;number&apos;;
+typeof Math.LN2 === &apos;number&apos;;
+typeof Infinity === &apos;number&apos;;
+typeof NaN === &apos;number&apos;; // 尽管NaN是&quot;Not-A-Number&quot;的缩写
+typeof Number(1) === &apos;number&apos;; // 但不要使用这种形式!
+
+// Strings
+typeof &quot;&quot; === &apos;string&apos;;
+typeof &quot;bla&quot; === &apos;string&apos;;
+typeof (typeof 1) === &apos;string&apos;; // typeof总是返回一个字符串
+typeof String(&quot;abc&quot;) === &apos;string&apos;; // 但不要使用这种形式!
+
+// Booleans
+typeof true === &apos;boolean&apos;;
+typeof false === &apos;boolean&apos;;
+typeof Boolean(true) === &apos;boolean&apos;; // 但不要使用这种形式!
+
+// Symbols
+typeof Symbol() === &apos;symbol&apos;;
+typeof Symbol(&apos;foo&apos;) === &apos;symbol&apos;;
+typeof Symbol.iterator === &apos;symbol&apos;;
+
+// Undefined
+typeof undefined === &apos;undefined&apos;;
+typeof declaredButUndefinedVariable === &apos;undefined&apos;;
+typeof undeclaredVariable === &apos;undefined&apos;; 
+
+// Objects
+typeof {a:1} === &apos;object&apos;;
+
+// 使用Array.isArray 或者 Object.prototype.toString.call
+// 区分数组,普通对象
+typeof [1, 2, 4] === &apos;object&apos;;
+
+typeof new Date() === &apos;object&apos;;
+
+// 下面的容易令人迷惑，不要使用！
+typeof new Boolean(true) === &apos;object&apos;;
+typeof new Number(1) ==== &apos;object&apos;;
+typeof new String(&quot;abc&quot;) === &apos;object&apos;;
+
+// 函数
+typeof function(){} === &apos;function&apos;;
+typeof Math.sin === &apos;function&apos;;
+</code></pre><h5 id="null"><a href="#null" class="headerlink" title="null"></a>null</h5><pre><code>// 从一开始出现JavaScript就是这样的
+typeof null === &apos;object&apos;;
+</code></pre><p>哈哈，我们都知道 typeof null 返回 ‘object’，但是为什么呢？原来，在 JavaScript 最初的实现中，JavaScript 中的值是由一个表示类型的标签和实际数据值表示的。对象的类型标签是0。由于 null 代表的是空指针(大多数平台下值为0x00)，因此，null的类型标签也成为了0，typeof null就错误的返回了’object’.</p>
+<h5 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h5><pre><code>//对正则表达式字面量的类型判断在某些浏览器中不符合标准：
+typeof /s/ === &apos;function&apos;; // Chrome 1-12 , 不符合 ECMAScript 5.1
+typeof /s/ === &apos;object&apos;; // Firefox 5+ , 符合 ECMAScript 5.1
+
+//我目前版本的Chrome(60.0.3112.90)
+typeof /s/ === &apos;object&apos;;
+</code></pre><h4 id="番外：IE-宿主对象是对象而不是函数"><a href="#番外：IE-宿主对象是对象而不是函数" class="headerlink" title="番外：IE 宿主对象是对象而不是函数"></a>番外：IE 宿主对象是对象而不是函数</h4><pre><code>//在 IE 6, 7 和 8 中，大多数的宿主对象是对象，而不是函数
+typeof alert === &apos;object&apos;
+</code></pre><hr>
+<h3 id="总结-如下表-（-from-MDN-）"><a href="#总结-如下表-（-from-MDN-）" class="headerlink" title="总结 如下表 （ from MDN ）"></a>总结 如下表 （ <em>from MDN</em> ）</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Undefined</td>
+<td>“undefined”</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>“object”</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>“boolean”</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>“number”</td>
+</tr>
+<tr>
+<td>String</td>
+<td>“string”</td>
+</tr>
+<tr>
+<td>Symbol（ECMAScript 6 新增）</td>
+<td>“symbol”</td>
+</tr>
+<tr>
+<td>宿主对象（由JS环境提供）</td>
+<td>Implementation-dependent</td>
+</tr>
+<tr>
+<td>函数对象</td>
+<td>“function”</td>
+</tr>
+<tr>
+<td>任何其他对象</td>
+<td>“object”</td>
+</tr>
+</tbody>
+</table>
+<h6 id="over"><a href="#over" class="headerlink" title="over"></a>over</h6>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/06/19/this/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/19/this/" itemprop="url">理解Javascript中的this</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T15:18:21+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先必须要说的是，this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象（这句话有些问题，后面会解释为什么会有问题，虽然网上大部分的文章都是这样说的，虽然在很多情况下那样去理解不会出什么问题，但是实际上那样理解是不准确的，所以在你理解this的时候会有种琢磨不透的感觉），那么接下来我会深入的探讨这个问题。</p>
+<p>为什么要学习this？如果你学过函数式编程，面向对象编程，那你肯定知道干什么用的，如果你没有学过，那么暂时可以不用看这篇文章，当然如果你有兴趣也可以看看，毕竟这是js中必须要掌握的东西。</p>
+<p>例子1：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> user = <span class="string">"马里奥"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">//undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+<p>按照我们上面说的this最终指向的是调用它的对象，这里的函数a实际是被Window对象所点出来的，下面的代码就可以证明。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> user = <span class="string">"马里奥"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">//undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);      <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.a();</span><br></pre></td></tr></table></figure>
+<p>和上面代码一样吧，其实alert也是window的一个属性，也是window点出来的。</p>
+<p>例子2：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  user: <span class="string">"马里奥"</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">// 马里奥</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.fn();</span><br></pre></td></tr></table></figure>
+<p>这里的this指向的是对象o，因为你调用这个fn是通过o.fn()执行的，那自然指向就是对象o，这里再次强调一点，this的指向在函数创建的时候是决定不了的，在调用的时候才能决定，谁调用的就指向谁，一定要搞清楚这个。</p>
+<p>其实例子1和例子2说的并不够准确，下面这个例子就可以推翻上面的理论。</p>
+<p>如果要彻底的搞懂this必须看接下来的几个例子</p>
+<p>例子3：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  user: <span class="string">"马里奥"</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">// 马里奥</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.o.fn();</span><br></pre></td></tr></table></figure>
+<p>这段代码和上面的那段代码几乎是一样的，但是这里的this为什么不是指向window，如果按照上面的理论，最终this指向的是调用它的对象，这里先说个题外话，window是js中的全局对象，我们创建的变量实际上是给window添加属性，所以这里可以用window点o对象。</p>
+<p>这里先不解释为什么上面的那段代码this为什么没有指向window，我们再来看一段代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">// 12</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn();</span><br></pre></td></tr></table></figure>
+<p>这里同样也是对象o点出来的，但是同样this并没有执行它，那你肯定会说我一开始说的那些不就都是错误的吗？其实也不是，只是一开始说的不准确，接下来我将补充一句话，我相信你就可以彻底的理解this的指向的问题。</p>
+<p>情况1：如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window，这里需要说明的是在js的严格版中this指向的不是window，但是我们这里不探讨严格版的问题，你想了解可以自行上网查找。</p>
+<p>情况2：如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
+<p>情况3：如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象，例子3可以证明，如果不相信，那么接下来我们继续看几个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    <span class="comment">// a: 12,</span></span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">//undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn();</span><br></pre></td></tr></table></figure>
+<p>尽管对象b中没有属性a，这个this指向的也是对象b，因为this只会指向它的上一级对象，不管这个对象中有没有this要的东西。</p>
+<p>还有一种比较特殊的情况，例子4：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">// undefined</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">// window</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> j = o.b.fn;</span><br><span class="line">j();</span><br></pre></td></tr></table></figure>
+<p>这里this指向的是window，是不是有些蒙了？其实是因为你没有理解一句话，这句话同样至关重要。</p>
+<p>this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的，例子4中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window，这和例子3是不一样的，例子3是直接执行了fn。</p>
+<p>this讲来讲去其实就是那么一回事，只不过在不同的情况下指向的会有些不同，上面的总结每个地方都有些小错误，也不能说是错误，而是在不同环境下情况就会有不同，所以我也没有办法一次解释清楚，只能你慢慢地的去体会。</p>
+<p>构造函数版this：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">"马里奥"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">// 马里奥</span></span><br></pre></td></tr></table></figure>
+<p>这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a，为什么我说a是对象，因为用了new关键字就是创建一个对象实例，理解这句话可以想想我们的例子3，我们这里用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象Fn中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
+<p>除了上面的这些以外，我们还可以自行改变this的指向，关于自行改变this的指向请参考JavaScript中的call,apply,bind方法。</p>
+<p>更新一个小问题当this碰到return时</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>再看一个</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>再来</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//马里奥</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//马里奥</span></span><br></pre></td></tr></table></figure>
+<p>什么意思呢？</p>
+<p>如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// fn &#123;user: "马里奥"&#125;</span></span><br></pre></td></tr></table></figure>
+<p>还有一点就是虽然null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">// 马里奥</span></span><br></pre></td></tr></table></figure>
+<p>知识点补充：</p>
+<ol>
+<li>在严格版中的默认的this不再是window，而是undefined。</li>
+<li>new操作符会改变函数this的指向问题，虽然我们上面讲解过了，但是并没有深入的讨论这个问题，网上也很少说，所以在这里有必要说一下。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.num = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.num);  <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+<p>为什么this会指向a？首先new关键字会创建一个空的对象，然后会自动调用一个函数apply方法，将this指向这个空对象，这样的话函数内部的this就会被这个空的对象替代。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/05/22/some_js_skills/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/22/some_js_skills/" itemprop="url">10个提升JavaScript性能的技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T12:53:21+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="1-定义局部变量"><a href="#1-定义局部变量" class="headerlink" title="1. 定义局部变量"></a>1. 定义局部变量</h3><p>当一个变量被引用的时候，JavaScript将在作用域链中的不同成员中查找这个变量。作用域链指的是当前作用于下可用变量的集合，它在各种主流浏览器中至少包含两个部分：局部变量的集合和全局变量的集合。</p>
+<p>简单地说，如果JavaScript引擎在作用域链中搜索的深度越大，那么操作也就会消耗更多的时间。引擎首先从 this 开始查找局部变量，然后是函数参数、本地定义的变量，最后遍历所有的全局变量。</p>
+<p>因为局部变量在这条链的起端，所以查找局部变量总是比查找全局变量要块。所以当你想要不止一次地使用一个全局变量的时候，你应该将它定义成局部变量，就像这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blah = <span class="built_in">document</span>.getElementById(<span class="string">'myID'</span>)，</span><br><span class="line">blah2 = <span class="built_in">document</span>.getElementById(<span class="string">'myID2'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>改写成<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doc = <span class="built_in">document</span>，</span><br><span class="line">blah = doc.getElementById(<span class="string">'myID'</span>)，</span><br><span class="line">blah2 = doc.getElementById(<span class="string">'myID2'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-不要使用-with-语句"><a href="#2-不要使用-with-语句" class="headerlink" title="2. 不要使用 with() 语句"></a>2. 不要使用 with() 语句</h3><p>这是因为 <code>with()</code> 语句将会在作用域链的开始添加额外的变量。额外的变量意味着，当任何变量需要被访问的时候，JavaScript引擎都需要先扫描<code>with()</code>语句产生的变量，然后才是局部变量，最后是全局变量。 So with() essentially gives local variables all the performance drawbacks of global ones, and in turn derails Javascript optimization. 因此with()语句同时给局部变量和全局变量的性能带来负面影响，最终使我们优化JavaScript性能的计划破产。</p>
+<h3 id="3-小心使用闭包"><a href="#3-小心使用闭包" class="headerlink" title="3. 小心使用闭包"></a>3. 小心使用闭包</h3><p>虽然你可能还不知道“闭包”，但你可能在不经意间经常使用这项技术。闭包基本上被认为是JavaScript中的new，当我们定义一个即时函数的时候，我们就使用了闭包，比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'foo'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123; &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>闭包的问题在于：根据定义，在它们的作用域链中至少有三个对象：闭包变量、局部变量和全局变量。这些额外的对象将会导致第1和第2个建议中提到的性能问题。</p>
+<p>但是我认为Nicholas并不是要我们因噎废食，闭包对于提高代码可读性等方面还是非常有用的，只是不要滥用它们（尤其在循环中）。</p>
+<h3 id="4-对象属性和数组元素的速度都比变量慢"><a href="#4-对象属性和数组元素的速度都比变量慢" class="headerlink" title="4. 对象属性和数组元素的速度都比变量慢"></a>4. 对象属性和数组元素的速度都比变量慢</h3><p>谈到JavaScript的数据，一般来说有4种访问方式：数值、变量、对象属性和数组元素。在考虑优化时，数值和变量的性能差不多，并且速度显著优于对象属性和数组元素。</p>
+<p>因此当你多次引用一个对象属性或者数组元素的时候，你可以通过定义一个变量来获得性能提升。（这一条在读、写数据时都有效）</p>
+<p>虽然这条规则在绝大多数情况下是正确的，但是Firefox在优化数组索引上做了一些有意思的工作，能够让它的实际性能优于变量。但是考虑到数组元素在其他浏览器上的性能弊端，还是应该尽量避免数组查找，除非你真的只针对于火狐浏览器的性能而进行开发。</p>
+<h3 id="5-不要在数组中挖得太深"><a href="#5-不要在数组中挖得太深" class="headerlink" title="5. 不要在数组中挖得太深"></a>5. 不要在数组中挖得太深</h3><p>另外，程序员应该避免在数组中挖得太深，因为进入的层数越多，操作速度就越慢。</p>
+<p>简单地说，在嵌套很多层的数组中操作很慢是因为数组元素的查找速度很慢。试想如果操作嵌套三层的数组元素，就要执行三次数组元素查找，而不是一次。</p>
+<p>因此如果你不断地引用 foo.bar， 你可以通过定义 var bar = foo.bar 来提高性能。</p>
+<h3 id="6-避免-for-in-循环（和基于函数的迭代）"><a href="#6-避免-for-in-循环（和基于函数的迭代）" class="headerlink" title="6. 避免 for-in 循环（和基于函数的迭代）"></a>6. 避免 for-in 循环（和基于函数的迭代）</h3><p>这是另一条非常教条的建议：不要使用for-in循环。</p>
+<p>这背后的逻辑非常直接：要遍历一个集合内的元素，你可以使用诸如for循环、或者do-while循环来替代for-in循环，for-in循环不仅仅可能需要遍历额外的数组项，还需要更多的时间。</p>
+<p>为了遍历这些元素，JavaScript需要为每一个元素建立一个函数，这种基于函数的迭代带来了一系列性能问题：额外的函数引入了函数对象被创建和销毁的上下文，将会在作用域链的顶端增加额外的元素。</p>
+<h3 id="7-在循环时将控制条件和控制变量合并起来"><a href="#7-在循环时将控制条件和控制变量合并起来" class="headerlink" title="7. 在循环时将控制条件和控制变量合并起来"></a>7. 在循环时将控制条件和控制变量合并起来</h3><p>提到性能，在循环中需要避免的工作一直是个热门话题，因为循环会被重复执行很多次。所以如果有性能优化的需求，先对循环开刀有可能会获得最明显的性能提升。</p>
+<p>一种优化循环的方法是在定义循环的时候，将控制条件和控制变量合并起来，下面是一个没有将他们合并起来的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++ ) &#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>当我们要添加什么东西到这个循环之前，我们发现有几个操作在每次迭代都会出现。JavaScript引擎需要：</p>
+<h6 id="1：检查-x-是否存在"><a href="#1：检查-x-是否存在" class="headerlink" title="1：检查 x 是否存在"></a>1：检查 x 是否存在</h6><h6 id="2：检查-x-是否小于-0-（译者注：我猜这里是作者的笔误）"><a href="#2：检查-x-是否小于-0-（译者注：我猜这里是作者的笔误）" class="headerlink" title="2：检查 x 是否小于 0 （译者注：我猜这里是作者的笔误）"></a>2：检查 x 是否小于 0 <span style="color: #888888;">（译者注：我猜这里是作者的笔误）</span></h6><h6 id="3：使-x-增加-1"><a href="#3：使-x-增加-1" class="headerlink" title="3：使 x 增加 1"></a>3：使 x 增加 1</h6><p>然而如果你只是迭代元素中的一些元素，那么你可以使用while循环进行轮转来替代上面这种操作：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">do</span> &#123; &#125; <span class="keyword">while</span>( x-- );</span><br></pre></td></tr></table></figure></p>
+<p>如果你想更深入地了解循环的性能，Zakas提供了一种高级的循环优化技巧，使用异步进行循环（相当可以！）</p>
+<h3 id="8-为HTML集合对象定义数组"><a href="#8-为HTML集合对象定义数组" class="headerlink" title="8. 为HTML集合对象定义数组"></a>8. 为HTML集合对象定义数组</h3><p>JavaScript使用了大量的HTML集合对象，比如 document.forms，document.images 等等。通常他们被诸如 getElementsByTagName、getElementByClassName 等方法调用。</p>
+<p>由于大量的DOM selection操作，HTML集合对象相当的慢，而且还会带来很多额外的问题。正如DOM标准中所定义的那样：“HTML集合是一个虚拟存在，意味着当底层文档被改变时，它们将自动更新。”这太可怕了！</p>
+<p>尽管集合对象看起来跟数组很像，他们在某些地方却区别很大，比如对于特定查询的结果。当对象被访问进行读写时，查询需要重新执行来更新所有与对象相关的组分，比如 length。</p>
+<p>HTML集合对象也非常的慢，Nicholas说好像在看球的时候对一个小动作进行60倍速慢放。另外，集合对象也有可能造成死循环，比如下面的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> divs = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; divs.length; i++ ) &#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>); </span><br><span class="line">    <span class="built_in">document</span>.appendChild(div);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p> 这段代码造成了死循环，因为 divs 表示一个实时的HTML集合，并不是你所期望的数组。这种实时的集合在添加 <div> 标签时被更新，所以i &lt; div.length 永远都不会结束。</div></p>
+<p>解决这个问题的方法是将这些元素定义成数组，相比只设置 var divs = document.getElementsByTagName(‘div’) 稍微有点麻烦，下面是Zakas提供的强制使用数组的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">array</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.concat.call(items);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>,</span><br><span class="line">            len = items.length,</span><br><span class="line">            result = <span class="built_in">Array</span>(len);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">            result[i] = items[i];</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> divs = array( <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>) );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>l i &lt; divs.length; i++ ) &#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>); </span><br><span class="line">    <span class="built_in">document</span>.appendChild(div);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="9-不要碰DOM！"><a href="#9-不要碰DOM！" class="headerlink" title="9. 不要碰DOM！"></a>9. 不要碰DOM！</h3><p>不使用DOM是JavaScript优化中另一个很大的话题。经典的例子是添加一系列的列表项：如果你把每个列表项分别加到DOM中，肯定会比一次性加入所有列表项到DOM中要慢。这是因为DOM操作开销很大。</p>
+<p>Zakas对这个进行了细致的讲解，解释了由于回流（reflow）的存在，DOM操作是非常消耗资源的。回流通常被理解为浏览器重新选渲染DOM树的处理过程。比如说，如果你用JavaScript语句改变了一个div的宽度，浏览器需要重绘页面来适应变化。</p>
+<p>任何时候只要有元素被添加到DOM树或者从DOM树移除，都会引发回流。使用一个非常方便的JavaScript对象可以解决这个问题——documentFragment，我并没有使用过，但是在Steve Souders也表示同意这种做法之后我感觉更加肯定了。 </p>
+<p>DocumentFragment 基本上是一种浏览器以非可视方式实现的类似文档的片段，非可视化的表现形式带来了很多优点，最主要的是你可以在 documentFragment 中添加任何结点而不会引起浏览器回流。</p>
+<h3 id="10-修改CSS类，而不是样式"><a href="#10-修改CSS类，而不是样式" class="headerlink" title="10. 修改CSS类，而不是样式"></a>10. 修改CSS类，而不是样式</h3><p>你也许听说过：修改CSS类必直接修改样式会更高效。这归结于回流带来的另一个问题：当布局样式发生改变时，会引发回流。</p>
+<p>布局样式意味着任何影响改变布局的变化都会强制引起浏览器回流。比如宽度、高度、字号、浮动等。</p>
+<p>但是别误会我的意思，CSS类并不会避免回流，但是可以将它的影响最小化。相比每次修改样式都会引起回流，使用CSS类一次修改多个样式，只需要承担一次回流带来的消耗。</p>
+<p>因此在修改多个布局样式的时候，使用CSS类来优化性能是明智的选择。另外如果你需要在运行时定义很多歌CSS类，在DOM上添加样式结点也是不错的选择。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/04/20/lazy_load_js/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/20/lazy_load_js/" itemprop="url">如何延迟加载JS</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T13:00:45+08:00">
+                2017-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>JavaScript的延迟加载是那些在web上，能让你想抓狂地去寻找解决方案的问题之一。</p>
+<p>很多人说那就用”defer”或”async”，甚至有些人说“那就将你的javascript代码放在页面代码底部”。</p>
+<p>上述方法都不能解决在web页面完全加载后，再加载外部js的问题。上述方法也会偶尔让你收到Google页面速度测试工具的“延迟加载javascript”警告。所以这里的解决方案将是来自Google帮助页面的推荐方案。</p>
+<p>如何延迟加载JavaScript</p>
+<p>下面是Google推荐的代码。这些代码应被放置在<code>&lt;/body&gt;</code>标签前(接近HTML文件底部)。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">downloadJSAtOnload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">      element.src = <span class="string">"defer.js"</span>;</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(element);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">window</span>.addEventListener) &#123;</span><br><span class="line">      <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, downloadJSAtOnload, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent) &#123;</span><br><span class="line">      <span class="built_in">window</span>.attachEvent(<span class="string">"onload"</span>, downloadJSAtOnload);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">window</span>.onload = downloadJSAtOnload;</span><br><span class="line">  &#125; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="这里做了什么？"><a href="#这里做了什么？" class="headerlink" title="这里做了什么？"></a>这里做了什么？</h3><p>这段代码意思是等到整个文档加载完后，再加载外部文件“defer.js”。</p>
+<h3 id="具体说明"><a href="#具体说明" class="headerlink" title="具体说明"></a>具体说明</h3><ol>
+<li><p>复制上面代码</p>
+</li>
+<li><p>粘贴代码到HTML的标签前 (靠近HTML文件底部)</p>
+</li>
+<li><p>修改“defer.js”为你的外部JS文件名</p>
+</li>
+<li><p>确保你文件路径是正确的。例如：如果你仅输入“defer.js”，那么“defer.js”文件一定与HTML文件在同一文件夹下。</p>
+</li>
+</ol>
+<h3 id="这段代码能用在哪里-和哪里不能用"><a href="#这段代码能用在哪里-和哪里不能用" class="headerlink" title="这段代码能用在哪里(和哪里不能用)"></a>这段代码能用在哪里(和哪里不能用)</h3><p>这段代码直到文档加载完才会加载指定的外部JS文件。因此，不应该把那些页面正常加载需要依赖的javascript代码放在这里。而应该将JavaScript代码分成两组。一组是因页面需要而立即加载的javascript代码，另外一组是在页面加载后进行操作的javascript代码(例如添加click事件或其他东西)。这些需等到页面加载后再执行的JavaScript代码，应放在一个外部文件，然后再引进来。</p>
+<p>例如，在这页面我使用上述文件进行延迟加载 - Google analytics，Viglink (我怎么赚钱)，和显示在底部的Google+徽章(我的社交媒体)。这对于我来说，没有理由在初始页面加载时加载这些文件，因为初始阶段都没必要加载上述无关紧要的内容。也许在你的页面中也有同样性质的文件。那你难道想让用户在看到网页内容之前，还要等待这些文件加载吗？</p>
+<h3 id="为什么不使用其它方法呢？"><a href="#为什么不使用其它方法呢？" class="headerlink" title="为什么不使用其它方法呢？"></a>为什么不使用其它方法呢？</h3><p>直接插入代码、将脚本放置在底部和使用“defer”或“async”，这几种方法都不能达到先加载页面后加载JS的目的，而且它们肯定不能在各个浏览器上表现一致。</p>
+<h3 id="它为什么重要？"><a href="#它为什么重要？" class="headerlink" title="它为什么重要？"></a>它为什么重要？</h3><p>它的重要性是由于Google将页面速度作为排名因素之一而且用户也希望能快速加载页面。另外对于移动搜索引擎优化也是非常重要的。Google根据页面最初加载时间来衡量页面速度。这意味着你必须尽可能快地得到页面的load事件。页面最初加载时间是Google用来评价你的web页面质量(而且别忘记用户在等待页面的加载)。Google积极推进和推荐将上述的无关紧要的内容按重要性排列，让所有资源(js,css,images等)脱离关键的渲染路径，而且这样做是值得去努力的。如果这样能取悦用户，且让Google开心，你很应该这样做。</p>
+<h3 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h3><p>压倒一切的首要任务应该是尽可能快地交付内容给用户。而我们一直没想着如何对待我们的javascript代码。但用户不应该为一些无关紧要的脚本，而被迫地为内容而作出等待。无论你的页脚多酷，都没理由让一个可能从不滚动到页脚的用户，去加载那些让页脚变酷的javascript文件。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Joseph" />
+            
+              <p class="site-author-name" itemprop="name">Joseph</p>
+              <p class="site-description motion-element" itemprop="description">“为往圣继绝学”</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qiaohongshen" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/94698fea8055" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-book"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joseph</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="200" alpha="0.6"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="很搞笑，首先我不知道面试官还会问这种问题，意义何在？let me give him a fu… lesson? Function.caller返回调用指定函数的函数。如果一个函数f是在全局作用域内被调用的,则f.caller为null,相反,如果一个函数是在另外一个函数作用域内被调用的,则f.caller指向调用它的那个函数。该属性的常用形式arguments.callee.caller替代了被废">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="还有人在问你caller和callee的区别?">
+<meta property="og:url" content="http://www.iwashere.cn/2017/09/25/caller&callee/index.html">
+<meta property="og:site_name" content="Joe&#39;s Website">
+<meta property="og:description" content="很搞笑，首先我不知道面试官还会问这种问题，意义何在？let me give him a fu… lesson? Function.caller返回调用指定函数的函数。如果一个函数f是在全局作用域内被调用的,则f.caller为null,相反,如果一个函数是在另外一个函数作用域内被调用的,则f.caller指向调用它的那个函数。该属性的常用形式arguments.callee.caller替代了被废">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-07T09:34:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="还有人在问你caller和callee的区别?">
+<meta name="twitter:description" content="很搞笑，首先我不知道面试官还会问这种问题，意义何在？let me give him a fu… lesson? Function.caller返回调用指定函数的函数。如果一个函数f是在全局作用域内被调用的,则f.caller为null,相反,如果一个函数是在另外一个函数作用域内被调用的,则f.caller指向调用它的那个函数。该属性的常用形式arguments.callee.caller替代了被废">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.iwashere.cn/2017/09/25/caller&callee/"/>
+
+
+
+
+
+  <title>还有人在问你caller和callee的区别? | Joe's Website</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Joe's Website</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/09/25/caller&callee/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">还有人在问你caller和callee的区别?</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T15:18:21+08:00">
+                2017-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>很搞笑，首先我不知道面试官还会问这种问题，意义何在？let me give him a fu… lesson?</p>
+<h3 id="Function-caller"><a href="#Function-caller" class="headerlink" title="Function.caller"></a>Function.caller</h3><p>返回调用指定函数的函数。<br>如果一个函数f是在全局作用域内被调用的,则f.caller为null,相反,如果一个函数是在另外一个函数作用域内被调用的,则f.caller指向调用它的那个函数。<br>该属性的常用形式<code>arguments.callee.caller</code>替代了被废弃的 <code>arguments.caller</code><br>什么？ 被废弃了？<br>是的，废弃的 <code>arguments.caller</code> 属性原先用在函数执行的时候调用自身。本属性已被移除且不再有用。<br><code>arguments.caller</code> 已经不可使用了，但是你还可以使用 <code>Function.caller</code>，但是该特性也是非标准的，尽量不要在生产环境中使用它！</p>
+<p>下例演示了arguments.caller属性的作用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">whoCalled</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">arguments</span>.caller == <span class="literal">null</span>)</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'该函数在全局作用域内被调用.'</span>);</span><br><span class="line">   <span class="keyword">else</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.caller + <span class="string">'调用了我!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>下例用来得出一个函数是被谁调用的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (myFunc.caller == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> (<span class="string">"该函数在全局作用域内被调用!"</span>);</span><br><span class="line">   &#125; <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> (<span class="string">"调用我的是函数是"</span> + myFunc.caller);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="arguments-callee"><a href="#arguments-callee" class="headerlink" title="arguments.callee"></a>arguments.callee</h3><p>不用鸡冻，这个东西也好不到哪儿去，<br>callee 是 arguments 对象的一个属性。它可以用于引用该函数的函数体内当前正在执行的函数。这在函数的名称是未知时很有用，例如在没有名称的函数表达式 (也称为“匿名函数”)内。<br>但是，看这个警告：</p>
+<blockquote>
+<p>在严格模式下，第5版 ECMAScript (<strong>ES5</strong>) 禁止使用 arguments.callee()。<br>当一个函数必须调用自身的时候, 避免使用 arguments.callee(), 通过要么给函数表达式一个名字,要么使用一个函数声明。</p>
+</blockquote>
+<h5 id="为什么-arguments-callee-从ES5严格模式中删除了？"><a href="#为什么-arguments-callee-从ES5严格模式中删除了？" class="headerlink" title="为什么 arguments.callee 从ES5严格模式中删除了？"></a>为什么 arguments.callee 从ES5严格模式中删除了？</h5><p>早期版本的 JavaScript不允许使用命名函数表达式，出于这样的原因, 你不能创建一个递归函数表达式。<br>例如，下边这个语法就是行的通的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factorial</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : factorial(n - <span class="number">1</span>) * n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(factorial);</span><br></pre></td></tr></table></figure></p>
+<p>但是:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(<span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : <span class="comment">/* 这里写什么? */</span> (n - <span class="number">1</span>) * n;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这个不行。为了解决这个问题， arguments.callee 添加进来了。然后你可以这么做<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(<span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : <span class="built_in">arguments</span>.callee(n - <span class="number">1</span>) * n;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>然而，这实际上是一个非常糟糕的解决方案，因为这 (以及其它的 arguments, callee, 和 caller 问题) 使得在通常的情况（你可以通过调试一些个别例子去实现它，但即使最好的代码是最理想的，你也没必要去检查调试它）不可能实现内联和尾递归。另外一个主要原因是递归调用会获取到一个不同的 this 值，例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> global = <span class="keyword">this</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> sillyFunction = <span class="function"><span class="keyword">function</span> (<span class="params">recursed</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!recursed) &#123; <span class="keyword">return</span> <span class="built_in">arguments</span>.callee(<span class="literal">true</span>); &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> !== global) &#123;</span><br><span class="line">        alert(<span class="string">"This is: "</span> + <span class="keyword">this</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        alert(<span class="string">"This is the global"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sillyFunction();</span><br></pre></td></tr></table></figure></p>
+<p>ECMAScript 3（es3?哈哈） 通过允许命名函数表达式解决这些问题。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>].map(<span class="function"><span class="keyword">function</span> <span class="title">factorial</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> !(n &gt; <span class="number">1</span>) ? <span class="number">1</span> : factorial(n<span class="number">-1</span>)*n;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这有很多好处：</p>
+<ul>
+<li>该函数可以像代码内部的任何其他函数一样被调用</li>
+<li>它不会在外部作用域中创建一个变量 (除了 IE 8 及以下)</li>
+<li>它具有比访问arguments对象更好的性能</li>
+</ul>
+<p>另外一个被废弃的特性是 arguments.callee.caller，具体点说则是 Function.caller。为什么? 额，在任何一个时间点，你能在堆栈中找到任何函数的最深层的调用者，也正如我在上面提到的，在调用堆栈有一个单一重大影响：不可能做大量的优化，或者有更多更多的困难。比如，如果你不能保证一个函数 f 不会调用一个未知函数，它就绝不可能是内联函数 f。基本上这意味着内联代码中积累了大量防卫代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params">a, b, c, d, e</span>) </span>&#123; <span class="keyword">return</span> a ? b * c : d * e; &#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果 JavaScript 解释器不能保证所有提供的参数数量在被调用的时候都存在，那么它需要在行内代码插入检查，或者不能内联这个函数。现在在这个特殊例子里一个智能的解释器应该能重排检查而更优，并检查任何将不用到的值。然而在许多的情况里那是不可能的，也因此它不能够内联。</p>
+<h5 id="番外："><a href="#番外：" class="headerlink" title="番外："></a>番外：</h5><h6 id="在匿名递归函数中使用-arguments-callee"><a href="#在匿名递归函数中使用-arguments-callee" class="headerlink" title="在匿名递归函数中使用 arguments.callee"></a>在匿名递归函数中使用 arguments.callee</h6><p>递归函数必须能够引用它本身。很典型的，函数通过自己的名字调用自己。然而，匿名函数 (通过 函数表达式 或者 函数构造器 创建) 没有名称。因此如果没有可访问的变量指向该函数，唯一能引用它的方式就是通过 arguments.callee。</p>
+<p>下面的例子定义了一个函数，按流程，定义并返回了一个阶乘函数。该例并不是很实用，并且几乎都能够用命名函数表达式实现同样结果的例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (n &lt;= <span class="number">1</span>)</span><br><span class="line">         <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">      <span class="keyword">return</span> n * <span class="built_in">arguments</span>.callee(n - <span class="number">1</span>);</span><br><span class="line">   &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = create()(<span class="number">5</span>); <span class="comment">// 返回120 (5 * 4 * 3 * 2 * 1)</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="没有替代方案的-arguments-callee"><a href="#没有替代方案的-arguments-callee" class="headerlink" title="没有替代方案的 arguments.callee"></a>没有替代方案的 arguments.callee</h6><p>下面的例子是没有可以替代 arguments.callee的方案的，因此弃用它时会产生一个BUG (参看 <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=725398" target="_blank" rel="external">bug 725398</a>):<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span> (<span class="params">sIdentity</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oPerson = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"alert(arguments.callee.identity);"</span>);</span><br><span class="line">    oPerson.identity = sIdentity;</span><br><span class="line">    <span class="keyword">return</span> oPerson;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> joe = createPerson(<span class="string">"Joseph"</span>);</span><br><span class="line"></span><br><span class="line">joe();</span><br></pre></td></tr></table></figure></p>
+<p>利用命名函数表达式也可以实现上述例子的同样效果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span> (<span class="params">identity</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(Person.identity);</span><br><span class="line">    &#125;</span><br><span class="line">    Person.identity = identity;</span><br><span class="line">    <span class="keyword">return</span> Person;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> joe = createPerson(<span class="string">"Joseph"</span>);</span><br><span class="line"></span><br><span class="line">joe(); <span class="comment">//Joseph</span></span><br></pre></td></tr></table></figure></p>
+<p>Over.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/24/cross-origin-at-server/" rel="next" title="服务端跨域">
+                <i class="fa fa-chevron-left"></i> 服务端跨域
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/10/other_git_account/" rel="prev" title="如何在同一客户端部署多个git帐号(多账户下设置ssh keys)？">
+                如何在同一客户端部署多个git帐号(多账户下设置ssh keys)？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.jpg"
+                alt="Joseph" />
+            
+              <p class="site-author-name" itemprop="name">Joseph</p>
+              <p class="site-description motion-element" itemprop="description">“为往圣继绝学”</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qiaohongshen" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.jianshu.com/u/94698fea8055" target="_blank" title="简书">
+                    
+                      <i class="fa fa-fw fa-book"></i>简书</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Function-caller"><span class="nav-number">1.</span> <span class="nav-text">Function.caller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments-callee"><span class="nav-number">2.</span> <span class="nav-text">arguments.callee</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么-arguments-callee-从ES5严格模式中删除了？"><span class="nav-number">2.0.1.</span> <span class="nav-text">为什么 arguments.callee 从ES5严格模式中删除了？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#番外："><span class="nav-number">2.0.2.</span> <span class="nav-text">番外：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#在匿名递归函数中使用-arguments-callee"><span class="nav-number">2.0.2.1.</span> <span class="nav-text">在匿名递归函数中使用 arguments.callee</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#没有替代方案的-arguments-callee"><span class="nav-number">2.0.2.2.</span> <span class="nav-text">没有替代方案的 arguments.callee</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Joseph</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="200" alpha="0.6"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
