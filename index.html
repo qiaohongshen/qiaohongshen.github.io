@@ -262,6 +262,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/11/22/null&undefined/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/22/null&undefined/" itemprop="url">JavaScript中null和undefined的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-22T17:09:09+08:00">
+                2017-11-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。</p>
+<h2 id="一、等价性"><a href="#一、等价性" class="headerlink" title="一、等价性"></a>一、等价性</h2><p>在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> bar = <span class="literal">undefined</span>;</span><br></pre></td></tr></table></figure>
+<p>null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="literal">null</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'null is false'</span>); <span class="comment">// null is false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="literal">undefined</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'undefined is false'</span>); <span class="comment">// undefined is false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、历史原因"><a href="#二、历史原因" class="headerlink" title="二、历史原因"></a>二、历史原因</h2><p>1995年JavaScript诞生时，最初像Java一样，只设置了null作为表示”无”的值。<br>根据C语言的传统，null被设计成可以自动转为0。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span> + <span class="literal">null</span></span><br><span class="line"><span class="comment">// 5</span></span><br></pre></td></tr></table></figure></p>
+<p>但是，JavaScript的设计者Brendan Eich，觉得这样做还不够，有两个原因。<br>首先，null像在Java里一样，被当成一个对象。但是，JavaScript的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich觉得表示”无”的值最好不是对象。<br>其次，JavaScript的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich觉得，如果null自动转为0，很不容易发现错误。<br>因此，Brendan Eich又设计了一个undefined。</p>
+<h2 id="三、设计之初"><a href="#三、设计之初" class="headerlink" title="三、设计之初"></a>三、设计之初</h2><p>JavaScript的最初版本是这样区分的：null是一个表示”无”的对象，转为数值时为0；undefined是一个表示”无”的原始值，转为数值时为NaN。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>)</span><br><span class="line"><span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span> + <span class="literal">undefined</span></span><br><span class="line"><span class="comment">// NaN</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="四、用法"><a href="#四、用法" class="headerlink" title="四、用法"></a>四、用法</h2><p>上面这样的区分，在实践中很快就被证明不可行。目前，null和undefined基本是同义的，只有一些细微的差别。</p>
+<h4 id="null"><a href="#null" class="headerlink" title="null"></a>null</h4><p>null表示”没有对象”，即该处不应该有值。典型用法是：</p>
+<blockquote>
+<p>（1） 作为函数的参数，表示该函数的参数不是对象。<br>（2） 作为对象原型链的终点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="built_in">Object</span>.prototype)</span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h4><p>undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是：</p>
+<blockquote>
+<p>（1）变量被声明了，但没有赋值时，就等于undefined。<br>（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。<br>（3）对象没有赋值的属性，该属性的值为undefined。<br>（4）函数没有返回值时，默认返回undefined。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i;</span><br><span class="line">i <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x)&#125;</span><br><span class="line">f() <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span>  o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">o.p <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = f();</span><br><span class="line">x <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Over.</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/11/10/other_git_account/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -874,7 +1035,7 @@
 <blockquote>
 <p>XMLHttpRequest cannot load <a href="http://x.com/main.dat" target="_blank" rel="external">http://x.com/main.dat</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://y.com" target="_blank" rel="external">http://y.com</a>‘ is therefore not allowed access.</p>
 </blockquote>
-<p>你心里肯定会想，我难道要用后台做个爬虫来获取这个数据吗？！为了避免这种事情发生，JSONP 就派上用场了。<br><code>&lt;script&gt;</code>标签是不受同源策略的限制的，它可以载入任意地方的 JavaScript 文件，而并不要求同源。所以 JSONP 的理念就是，我和服务端约定好一个函数名，当我请求文件的时候，服务端返回一段 JavaScript。这段 JavaScript 调用了我们约定好的函数，并且将数据当做参数传入。非常巧合的一点（其实并不是），JSON 的数据格式和JavaScript 语言里对象的格式正好相同。所以在我们约定的函数里面可以直接使用这个对象。光说不练假把式，让我们来看一个例子：<br>你需要获取数据的页面 index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">   </span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">getWeather</span>(<span class="params">data</span>) </span>&#123;       </span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://x.y.com/xx.js"</span>&gt;</span><span class="undefined"></span></span><br></pre></td></tr></table></figure></p>
+<p>你心里肯定会想，我难道要用后台做个爬虫来获取这个数据吗？！为了避免这种事情发生，JSONP 就派上用场了。<br><code>&lt;script&gt;</code>标签是不受同源策略的限制的，它可以载入任意地方的 JavaScript 文件，而并不要求同源。所以 JSONP 的理念就是，我和服务端约定好一个函数名，当我请求文件的时候，服务端返回一段 JavaScript。这段 JavaScript 调用了我们约定好的函数，并且将数据当做参数传入。非常巧合的一点（其实并不是），JSON 的数据格式和JavaScript 语言里对象的格式正好相同。所以在我们约定的函数里面可以直接使用这个对象。光说不练假把式，让我们来看一个例子：<br>你需要获取数据的页面 index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">   </span></span><br><span class="line"><span class="undefined">  function getWeather(data) &#123;       </span></span><br><span class="line"><span class="undefined">    console.log(data);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://x.y.com/xx.js"</span>&gt;</span><span class="undefined"></span></span><br></pre></td></tr></table></figure></p>
 <p><a href="http://x.y.com/xx.js" target="_blank" rel="external">http://x.y.com/xx.js</a> 文件内容：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getWeather(&#123;</span><br><span class="line">  <span class="string">"城市"</span>: <span class="string">"北京"</span>,</span><br><span class="line">  <span class="string">"天气"</span>: <span class="string">"大雾"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>我们可以看到，在我们定义了 getWeather(data)这个函数后，直接载入了 xx.js。在这个脚本中，执行了 getWeather函数，并传入了一个对象。然后我们在这个函数中将这个对象输出到 console 中。</p>
@@ -1950,169 +2111,6 @@ typeof alert === &apos;object&apos;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/04/20/lazy_load_js/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joseph">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joe's Website">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/04/20/lazy_load_js/" itemprop="url">如何延迟加载JS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T13:00:45+08:00">
-                2017-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>JavaScript的延迟加载是那些在web上，能让你想抓狂地去寻找解决方案的问题之一。</p>
-<p>很多人说那就用”defer”或”async”，甚至有些人说“那就将你的javascript代码放在页面代码底部”。</p>
-<p>上述方法都不能解决在web页面完全加载后，再加载外部js的问题。上述方法也会偶尔让你收到Google页面速度测试工具的“延迟加载javascript”警告。所以这里的解决方案将是来自Google帮助页面的推荐方案。</p>
-<p>如何延迟加载JavaScript</p>
-<p>下面是Google推荐的代码。这些代码应被放置在<code>&lt;/body&gt;</code>标签前(接近HTML文件底部)。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">downloadJSAtOnload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">      element.src = <span class="string">"defer.js"</span>;</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(element);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">window</span>.addEventListener) &#123;</span><br><span class="line">      <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, downloadJSAtOnload, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent) &#123;</span><br><span class="line">      <span class="built_in">window</span>.attachEvent(<span class="string">"onload"</span>, downloadJSAtOnload);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">window</span>.onload = downloadJSAtOnload;</span><br><span class="line">  &#125; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="这里做了什么？"><a href="#这里做了什么？" class="headerlink" title="这里做了什么？"></a>这里做了什么？</h3><p>这段代码意思是等到整个文档加载完后，再加载外部文件“defer.js”。</p>
-<h3 id="具体说明"><a href="#具体说明" class="headerlink" title="具体说明"></a>具体说明</h3><ol>
-<li><p>复制上面代码</p>
-</li>
-<li><p>粘贴代码到HTML的标签前 (靠近HTML文件底部)</p>
-</li>
-<li><p>修改“defer.js”为你的外部JS文件名</p>
-</li>
-<li><p>确保你文件路径是正确的。例如：如果你仅输入“defer.js”，那么“defer.js”文件一定与HTML文件在同一文件夹下。</p>
-</li>
-</ol>
-<h3 id="这段代码能用在哪里-和哪里不能用"><a href="#这段代码能用在哪里-和哪里不能用" class="headerlink" title="这段代码能用在哪里(和哪里不能用)"></a>这段代码能用在哪里(和哪里不能用)</h3><p>这段代码直到文档加载完才会加载指定的外部JS文件。因此，不应该把那些页面正常加载需要依赖的javascript代码放在这里。而应该将JavaScript代码分成两组。一组是因页面需要而立即加载的javascript代码，另外一组是在页面加载后进行操作的javascript代码(例如添加click事件或其他东西)。这些需等到页面加载后再执行的JavaScript代码，应放在一个外部文件，然后再引进来。</p>
-<p>例如，在这页面我使用上述文件进行延迟加载 - Google analytics，Viglink (我怎么赚钱)，和显示在底部的Google+徽章(我的社交媒体)。这对于我来说，没有理由在初始页面加载时加载这些文件，因为初始阶段都没必要加载上述无关紧要的内容。也许在你的页面中也有同样性质的文件。那你难道想让用户在看到网页内容之前，还要等待这些文件加载吗？</p>
-<h3 id="为什么不使用其它方法呢？"><a href="#为什么不使用其它方法呢？" class="headerlink" title="为什么不使用其它方法呢？"></a>为什么不使用其它方法呢？</h3><p>直接插入代码、将脚本放置在底部和使用“defer”或“async”，这几种方法都不能达到先加载页面后加载JS的目的，而且它们肯定不能在各个浏览器上表现一致。</p>
-<h3 id="它为什么重要？"><a href="#它为什么重要？" class="headerlink" title="它为什么重要？"></a>它为什么重要？</h3><p>它的重要性是由于Google将页面速度作为排名因素之一而且用户也希望能快速加载页面。另外对于移动搜索引擎优化也是非常重要的。Google根据页面最初加载时间来衡量页面速度。这意味着你必须尽可能快地得到页面的load事件。页面最初加载时间是Google用来评价你的web页面质量(而且别忘记用户在等待页面的加载)。Google积极推进和推荐将上述的无关紧要的内容按重要性排列，让所有资源(js,css,images等)脱离关键的渲染路径，而且这样做是值得去努力的。如果这样能取悦用户，且让Google开心，你很应该这样做。</p>
-<h3 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h3><p>压倒一切的首要任务应该是尽可能快地交付内容给用户。而我们一直没想着如何对待我们的javascript代码。但用户不应该为一些无关紧要的脚本，而被迫地为内容而作出等待。无论你的页脚多酷，都没理由让一个可能从不滚动到页脚的用户，去加载那些让页脚变酷的javascript文件。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2167,7 +2165,7 @@ typeof alert === &apos;object&apos;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

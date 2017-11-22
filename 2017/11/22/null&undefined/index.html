@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,性能优化," />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="JavaScript的延迟加载是那些在web上，能让你想抓狂地去寻找解决方案的问题之一。 很多人说那就用”defer”或”async”，甚至有些人说“那就将你的javascript代码放在页面代码底部”。 上述方法都不能解决在web页面完全加载后，再加载外部js的问题。上述方法也会偶尔让你收到Google页面速度测试工具的“延迟加载javascript”警告。所以这里的解决方案将是来自Google">
-<meta name="keywords" content="JavaScript,性能优化">
+<meta name="description" content="很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何延迟加载JS">
-<meta property="og:url" content="http://www.iwashere.cn/2017/04/20/lazy_load_js/index.html">
+<meta property="og:title" content="JavaScript中null和undefined的区别">
+<meta property="og:url" content="http://www.iwashere.cn/2017/11/22/null&undefined/index.html">
 <meta property="og:site_name" content="Joe&#39;s Website">
-<meta property="og:description" content="JavaScript的延迟加载是那些在web上，能让你想抓狂地去寻找解决方案的问题之一。 很多人说那就用”defer”或”async”，甚至有些人说“那就将你的javascript代码放在页面代码底部”。 上述方法都不能解决在web页面完全加载后，再加载外部js的问题。上述方法也会偶尔让你收到Google页面速度测试工具的“延迟加载javascript”警告。所以这里的解决方案将是来自Google">
+<meta property="og:description" content="很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T09:36:12.000Z">
+<meta property="og:updated_time" content="2017-11-22T10:01:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何延迟加载JS">
-<meta name="twitter:description" content="JavaScript的延迟加载是那些在web上，能让你想抓狂地去寻找解决方案的问题之一。 很多人说那就用”defer”或”async”，甚至有些人说“那就将你的javascript代码放在页面代码底部”。 上述方法都不能解决在web页面完全加载后，再加载外部js的问题。上述方法也会偶尔让你收到Google页面速度测试工具的“延迟加载javascript”警告。所以这里的解决方案将是来自Google">
+<meta name="twitter:title" content="JavaScript中null和undefined的区别">
+<meta name="twitter:description" content="很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.iwashere.cn/2017/04/20/lazy_load_js/"/>
+  <link rel="canonical" href="http://www.iwashere.cn/2017/11/22/null&undefined/"/>
 
 
 
 
 
-  <title>如何延迟加载JS | Joe's Website</title>
+  <title>JavaScript中null和undefined的区别 | Joe's Website</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/04/20/lazy_load_js/">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/11/22/null&undefined/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joseph">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">如何延迟加载JS</h1>
+          <h1 class="post-title" itemprop="name headline">JavaScript中null和undefined的区别</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-20T13:00:45+08:00">
-                2017-04-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-22T17:09:09+08:00">
+                2017-11-22
               </time>
             
 
@@ -352,28 +352,26 @@
       
 
       
-        <p>JavaScript的延迟加载是那些在web上，能让你想抓狂地去寻找解决方案的问题之一。</p>
-<p>很多人说那就用”defer”或”async”，甚至有些人说“那就将你的javascript代码放在页面代码底部”。</p>
-<p>上述方法都不能解决在web页面完全加载后，再加载外部js的问题。上述方法也会偶尔让你收到Google页面速度测试工具的“延迟加载javascript”警告。所以这里的解决方案将是来自Google帮助页面的推荐方案。</p>
-<p>如何延迟加载JavaScript</p>
-<p>下面是Google推荐的代码。这些代码应被放置在<code>&lt;/body&gt;</code>标签前(接近HTML文件底部)。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">downloadJSAtOnload</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"script"</span>);</span><br><span class="line">      element.src = <span class="string">"defer.js"</span>;</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(element);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">window</span>.addEventListener) &#123;</span><br><span class="line">      <span class="built_in">window</span>.addEventListener(<span class="string">"load"</span>, downloadJSAtOnload, <span class="literal">false</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent) &#123;</span><br><span class="line">      <span class="built_in">window</span>.attachEvent(<span class="string">"onload"</span>, downloadJSAtOnload);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">window</span>.onload = downloadJSAtOnload;</span><br><span class="line">  &#125; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="这里做了什么？"><a href="#这里做了什么？" class="headerlink" title="这里做了什么？"></a>这里做了什么？</h3><p>这段代码意思是等到整个文档加载完后，再加载外部文件“defer.js”。</p>
-<h3 id="具体说明"><a href="#具体说明" class="headerlink" title="具体说明"></a>具体说明</h3><ol>
-<li><p>复制上面代码</p>
-</li>
-<li><p>粘贴代码到HTML的标签前 (靠近HTML文件底部)</p>
-</li>
-<li><p>修改“defer.js”为你的外部JS文件名</p>
-</li>
-<li><p>确保你文件路径是正确的。例如：如果你仅输入“defer.js”，那么“defer.js”文件一定与HTML文件在同一文件夹下。</p>
-</li>
-</ol>
-<h3 id="这段代码能用在哪里-和哪里不能用"><a href="#这段代码能用在哪里-和哪里不能用" class="headerlink" title="这段代码能用在哪里(和哪里不能用)"></a>这段代码能用在哪里(和哪里不能用)</h3><p>这段代码直到文档加载完才会加载指定的外部JS文件。因此，不应该把那些页面正常加载需要依赖的javascript代码放在这里。而应该将JavaScript代码分成两组。一组是因页面需要而立即加载的javascript代码，另外一组是在页面加载后进行操作的javascript代码(例如添加click事件或其他东西)。这些需等到页面加载后再执行的JavaScript代码，应放在一个外部文件，然后再引进来。</p>
-<p>例如，在这页面我使用上述文件进行延迟加载 - Google analytics，Viglink (我怎么赚钱)，和显示在底部的Google+徽章(我的社交媒体)。这对于我来说，没有理由在初始页面加载时加载这些文件，因为初始阶段都没必要加载上述无关紧要的内容。也许在你的页面中也有同样性质的文件。那你难道想让用户在看到网页内容之前，还要等待这些文件加载吗？</p>
-<h3 id="为什么不使用其它方法呢？"><a href="#为什么不使用其它方法呢？" class="headerlink" title="为什么不使用其它方法呢？"></a>为什么不使用其它方法呢？</h3><p>直接插入代码、将脚本放置在底部和使用“defer”或“async”，这几种方法都不能达到先加载页面后加载JS的目的，而且它们肯定不能在各个浏览器上表现一致。</p>
-<h3 id="它为什么重要？"><a href="#它为什么重要？" class="headerlink" title="它为什么重要？"></a>它为什么重要？</h3><p>它的重要性是由于Google将页面速度作为排名因素之一而且用户也希望能快速加载页面。另外对于移动搜索引擎优化也是非常重要的。Google根据页面最初加载时间来衡量页面速度。这意味着你必须尽可能快地得到页面的load事件。页面最初加载时间是Google用来评价你的web页面质量(而且别忘记用户在等待页面的加载)。Google积极推进和推荐将上述的无关紧要的内容按重要性排列，让所有资源(js,css,images等)脱离关键的渲染路径，而且这样做是值得去努力的。如果这样能取悦用户，且让Google开心，你很应该这样做。</p>
-<h3 id="关键点"><a href="#关键点" class="headerlink" title="关键点"></a>关键点</h3><p>压倒一切的首要任务应该是尽可能快地交付内容给用户。而我们一直没想着如何对待我们的javascript代码。但用户不应该为一些无关紧要的脚本，而被迫地为内容而作出等待。无论你的页脚多酷，都没理由让一个可能从不滚动到页脚的用户，去加载那些让页脚变酷的javascript文件。</p>
+        <p>很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。</p>
+<h2 id="一、等价性"><a href="#一、等价性" class="headerlink" title="一、等价性"></a>一、等价性</h2><p>在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> bar = <span class="literal">undefined</span>;</span><br></pre></td></tr></table></figure>
+<p>null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="literal">null</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'null is false'</span>); <span class="comment">// null is false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="literal">undefined</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'undefined is false'</span>); <span class="comment">// undefined is false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、历史原因"><a href="#二、历史原因" class="headerlink" title="二、历史原因"></a>二、历史原因</h2><p>1995年JavaScript诞生时，最初像Java一样，只设置了null作为表示”无”的值。<br>根据C语言的传统，null被设计成可以自动转为0。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span> + <span class="literal">null</span></span><br><span class="line"><span class="comment">// 5</span></span><br></pre></td></tr></table></figure></p>
+<p>但是，JavaScript的设计者Brendan Eich，觉得这样做还不够，有两个原因。<br>首先，null像在Java里一样，被当成一个对象。但是，JavaScript的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich觉得表示”无”的值最好不是对象。<br>其次，JavaScript的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich觉得，如果null自动转为0，很不容易发现错误。<br>因此，Brendan Eich又设计了一个undefined。</p>
+<h2 id="三、设计之初"><a href="#三、设计之初" class="headerlink" title="三、设计之初"></a>三、设计之初</h2><p>JavaScript的最初版本是这样区分的：null是一个表示”无”的对象，转为数值时为0；undefined是一个表示”无”的原始值，转为数值时为NaN。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>)</span><br><span class="line"><span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span> + <span class="literal">undefined</span></span><br><span class="line"><span class="comment">// NaN</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="四、用法"><a href="#四、用法" class="headerlink" title="四、用法"></a>四、用法</h2><p>上面这样的区分，在实践中很快就被证明不可行。目前，null和undefined基本是同义的，只有一些细微的差别。</p>
+<h4 id="null"><a href="#null" class="headerlink" title="null"></a>null</h4><p>null表示”没有对象”，即该处不应该有值。典型用法是：</p>
+<blockquote>
+<p>（1） 作为函数的参数，表示该函数的参数不是对象。<br>（2） 作为对象原型链的终点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="built_in">Object</span>.prototype)</span><br><span class="line"><span class="comment">// null</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="undefined"><a href="#undefined" class="headerlink" title="undefined"></a>undefined</h4><p>undefined表示”缺少值”，就是此处应该有一个值，但是还没有定义。典型用法是：</p>
+<blockquote>
+<p>（1）变量被声明了，但没有赋值时，就等于undefined。<br>（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。<br>（3）对象没有赋值的属性，该属性的值为undefined。<br>（4）函数没有返回值时，默认返回undefined。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i;</span><br><span class="line">i <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;<span class="built_in">console</span>.log(x)&#125;</span><br><span class="line">f() <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span>  o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">o.p <span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> x = f();</span><br><span class="line">x <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>Over.</p>
 
       
     </div>
@@ -393,8 +391,6 @@
           
             <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-            <a href="/tags/性能优化/" rel="tag"># 性能优化</a>
-          
         </div>
       
 
@@ -406,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/03/js&css_better/" rel="next" title="Web性能优化最佳实践:JavaScript&CSS篇">
-                <i class="fa fa-chevron-left"></i> Web性能优化最佳实践:JavaScript&CSS篇
+              <a href="/2017/11/10/other_git_account/" rel="next" title="如何在同一客户端部署多个git帐号(多账户下设置ssh keys)？">
+                <i class="fa fa-chevron-left"></i> 如何在同一客户端部署多个git帐号(多账户下设置ssh keys)？
               </a>
             
           </div>
@@ -415,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/22/some_js_skills/" rel="prev" title="10个提升JavaScript性能的技巧">
-                10个提升JavaScript性能的技巧 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -570,7 +562,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#这里做了什么？"><span class="nav-number">1.</span> <span class="nav-text">这里做了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体说明"><span class="nav-number">2.</span> <span class="nav-text">具体说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这段代码能用在哪里-和哪里不能用"><span class="nav-number">3.</span> <span class="nav-text">这段代码能用在哪里(和哪里不能用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么不使用其它方法呢？"><span class="nav-number">4.</span> <span class="nav-text">为什么不使用其它方法呢？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#它为什么重要？"><span class="nav-number">5.</span> <span class="nav-text">它为什么重要？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键点"><span class="nav-number">6.</span> <span class="nav-text">关键点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、等价性"><span class="nav-number">1.</span> <span class="nav-text">一、等价性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、历史原因"><span class="nav-number">2.</span> <span class="nav-text">二、历史原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、设计之初"><span class="nav-number">3.</span> <span class="nav-text">三、设计之初</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、用法"><span class="nav-number">4.</span> <span class="nav-text">四、用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">4.0.1.</span> <span class="nav-text">null</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#undefined"><span class="nav-number">4.0.2.</span> <span class="nav-text">undefined</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
