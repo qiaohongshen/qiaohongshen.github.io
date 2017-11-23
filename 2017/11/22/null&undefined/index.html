@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
+<meta name="description" content="很多人都喜欢问这个问题，然而问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript中null和undefined的区别">
 <meta property="og:url" content="http://www.iwashere.cn/2017/11/22/null&undefined/index.html">
 <meta property="og:site_name" content="Joe&#39;s Website">
-<meta property="og:description" content="很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
+<meta property="og:description" content="很多人都喜欢问这个问题，然而问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-22T10:01:14.000Z">
+<meta property="og:updated_time" content="2017-11-23T01:31:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中null和undefined的区别">
-<meta name="twitter:description" content="很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
+<meta name="twitter:description" content="很多人都喜欢问这个问题，然而问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。 一、等价性在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。 12var foo = null;var bar = undefined; null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。 1234567if (!null)">
 
 
 
@@ -352,7 +352,7 @@
       
 
       
-        <p>很多人都喜欢问这个问题，然后问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。</p>
+        <p>很多人都喜欢问这个问题，然而问这个问题的人本身也不太懂，所以今天拿出来剖析一下这个事情。</p>
 <h2 id="一、等价性"><a href="#一、等价性" class="headerlink" title="一、等价性"></a>一、等价性</h2><p>在JavaScript中，将一个变量赋值为null或undefined，几乎没区别。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> bar = <span class="literal">undefined</span>;</span><br></pre></td></tr></table></figure>
 <p>null和undefined在if语句中，都会被自动转为false，相等运算符结果是两者相等。</p>
