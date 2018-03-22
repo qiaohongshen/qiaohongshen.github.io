@@ -262,6 +262,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2018/01/19/jQuery&Vue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/19/jQuery&Vue/" itemprop="url">关于jQuery和Vue两者技术架构的比较分析报告</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-19T12:25:11+08:00">
+                2018-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="关于jQuery和Vue两者技术架构的比较分析报告"><a href="#关于jQuery和Vue两者技术架构的比较分析报告" class="headerlink" title="关于jQuery和Vue两者技术架构的比较分析报告"></a>关于jQuery和Vue两者技术架构的比较分析报告</h1><h2 id="jQuery"><a href="#jQuery" class="headerlink" title="jQuery"></a>jQuery</h2><blockquote>
+<p>jQuery已经过时了。略做点补充：Zepto也是过时货了。还有Underscore/Lodash等，也是过时了。但是过时不代表你就一定不可以再用，或者要从现有项目中清除抛弃掉。项目维护和管理本身是另一回事情，并不是完全由技术因素决定的。看一下前两点，1. 新的DOM标准（借鉴jQuery）加入了许多新的方法，覆盖了绝大部分use cases；2. 目前主流浏览器的兼容性已经大幅提高，且因为都是Evergreen browsers了，所以以后也不太会出现严重的兼容性问题了；此外新标准比以往要更详尽清晰，出现不一致和bug的机率也小了；实际上这前两点也不是一蹴而就的，而是一直在改进。比如原生querySelector API普及之后，才出现了Zepto。只不过这两年发展加速，以至于Zepto还没取代jQuery，就要一起过时了。（贺师俊hax）</p>
+</blockquote>
+<h3 id="jQuery的核心价值"><a href="#jQuery的核心价值" class="headerlink" title="jQuery的核心价值"></a>jQuery的核心价值</h3><ol>
+<li>发扬光大了$和CSS选择器的天才idea（尽管都不是发明者）</li>
+<li>处理浏览器的兼容性问题和各种bug</li>
+<li>链式调用为核心的DSL（此为jQuery独创）</li>
+<li>基于jQuery的生态（大量插件，各种工具如IDE也对其有良好支持）</li>
+</ol>
+<h3 id="jQuery的劣势"><a href="#jQuery的劣势" class="headerlink" title="jQuery的劣势"></a>jQuery的劣势</h3><ol>
+<li>完整的jQuery体积太大。对于一些比较小的项目确实可以做到快速开发，但是现在的jQuery太臃肿了，有很多用不到的功能。所以现在有了很多精简jQuery的项目。另外就是全DOM操作，钩子往往会依赖标签，如果依赖jQuery来搭建页面的话（比如后台输出json，然后jQuery loop一个列表出来），维护上会有困难。如果一改页面结构，很多依赖标签的选择器，一改起来js那块就得跟着大改。还有就是jQuery的代码改起来不容易，如果真有项目特殊需求，要改一下jQuery代码来用就显得很麻烦。</li>
+<li>不能向后兼容。每一个新版本不能兼容早期的版本。举例来说，有些新版本不再支持某些selector，新版jQuery却没有保留对它们的支持，而只是简单的将其移除。这可能会影响到开发者已经编写好的代码或插件。</li>
+<li>对数据的处理有很多不便利的地方，容易导致高耦合度。</li>
+</ol>
+<h3 id="jQuery的适用场景"><a href="#jQuery的适用场景" class="headerlink" title="jQuery的适用场景"></a>jQuery的适用场景</h3><p>在过去的前端开发中，jQuery几乎会出现在任何大大小小的项目中，不论是类MS，还是电商，还是各类门户网站，都少不了jQuery的身影，可以说在之前的前端开发中，jQuery更是一种“标准”。</p>
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><blockquote>
+<p>讲Vue之前就讲MVVM吧（Vue的架构模式就是MVVM）</p>
+</blockquote>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>2008年，V8 引擎随 Chrome 浏览器横空出世，JavaScript 这门通用的 Web 脚本语言的执行效率得到质的提升。 V8 引擎的出现，注定是 JavaScript 发展史上一个光辉的里程碑。它的出现，让当时研究高性能服务器开发、长时间一筹莫展的 <a href="http://tinyclouds.org/" target="_blank" rel="external">Ryan Dahl</a> 有了新的、合适的选择，不久，在2009年的柏林的 JSConf 大会上，基于 JavaScript 的服务端项目 Node.js 正式对外发布。Node.js 的发布，不仅为开发者带来了一个高性能的服务器，还很大程度上推动了前端的工程化，带来了前端的大繁荣。与此同时，因为 JavaScript 执行效率的巨大提升，越来越多的业务逻辑开始在浏览器端实现，前端逻辑越来越重，前端架构随之提上日程。于是，我们谈论的主角，MVVM 模式，走进了 Web 前端的架构设计中。</p>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><p>MVVM 模式，顾名思义即 Model-View-ViewModel 模式。它萌芽于2005年微软推出的基于 Windows 的用户界面框架 WPF ，前端最早的 MVVM 框架 knockout在2010年发布。当前最流行了MVVM 框架 Vue 的2.0版本在2016年5月发布。</p>
+<p>一句话总结 Web 前端 MVVM：操作数据，就是操作视图，就是操作 DOM（所以无须操作 DOM ）。</p>
+<p>无须操作 DOM ！借助 MVVM 框架，开发者只需完成包含 <strong>声明绑定</strong> 的视图模板，编写 ViewModel 中业务数据变更逻辑，View 层则完全实现了自动化。这将极大的降低前端应用的操作复杂度、极大提升应用的开发效率。MVVM 最标志性的特性就是 <strong>数据绑定</strong> ，MVVM 的核心理念就是通过 <strong>声明式的数据绑定</strong> 来实现 View 层和其他层的分离。完全解耦 View 层这种理念，也使得 Web 前端的单元测试用例编写变得更容易。</p>
+<p>MVVM，说到底还是一种分层架构。它的分层如下：</p>
+<ul>
+<li>Model: 域模型，用于持久化</li>
+<li>View: 作为视图模板存在</li>
+<li>ViewModel: 作为视图的模型，为视图服务</li>
+</ul>
+<h4 id="Model-层"><a href="#Model-层" class="headerlink" title="Model 层"></a>Model 层</h4><p>Model 层，对应数据层的域模型，它主要做<code>域模型的同步</code>。通过 Ajax/fetch 等 API 完成客户端和服务端业务 Model 的同步。在层间关系里，它主要用于抽象出 ViewModel 中视图的 Model。</p>
+<h4 id="View-层"><a href="#View-层" class="headerlink" title="View 层"></a>View 层</h4><p>View 层，作为视图模板存在，在 MVVM 里，整个 View 是一个动态模板。除了定义结构、布局外，它展示的是 ViewModel 层的数据和状态。View 层不负责处理状态，View 层做的是 <strong>数据绑定的声明</strong>、 <strong>指令的声明</strong>、 <strong>事件绑定的声明</strong>。</p>
+<h4 id="ViewModel-层"><a href="#ViewModel-层" class="headerlink" title="ViewModel 层"></a>ViewModel 层</h4><p>ViewModel 层把 View 需要的层数据暴露，并对 View 层的 <strong>数据绑定声明</strong>、 <strong>指令声明</strong>、 <strong>事件绑定声明</strong> 负责，也就是处理 View 层的具体业务逻辑。ViewModel 底层会做好绑定属性的监听。当 ViewModel 中数据变化，View 层会得到更新；而当 View 中声明了数据的双向绑定（通常是表单元素），框架也会监听 View 层（表单）值的变化。一旦值变化，View 层绑定的 ViewModel 中的数据也会得到自动更新。</p>
+<h4 id="前端-MVVM-图示"><a href="#前端-MVVM-图示" class="headerlink" title="前端 MVVM 图示"></a>前端 MVVM 图示</h4><p><img src="https://raw.githubusercontent.com/X-Jray/blog/master/assets/mvvm.png" alt="mvvm"></p>
+<p>如图所示，在前端 MVVM 框架中，往往没有清晰、独立的 Model 层。在实际业务开发中，我们通常按 <strong>Web Component</strong> 规范来组件化的开发应用，Model 层的域模型往往分散在在一个或几个 Component 的 ViewModel 层，而 ViewModel 层也会引入一些 View 层相关的中间状态，目的就是为了更好的为 View 层服务。</p>
+<p>开发者在 View 层的视图模板中声明 <strong>数据绑定</strong>、 <strong>事件绑定</strong> 后，在 ViewModel 中进行业务逻辑的 <strong>数据</strong> 处理。事件触发后，ViewModel 中 <strong>数据</strong> 变更， View 层自动更新。因为 MVVM 框架的引入，开发者只需关注业务逻辑、完成数据抽象、聚焦数据，MVVM 的视图引擎会帮你搞定 View。因为数据驱动，一切变得更加简单。</p>
+<h3 id="MVVM框架的工作-优势"><a href="#MVVM框架的工作-优势" class="headerlink" title="MVVM框架的工作(优势)"></a>MVVM框架的工作(优势)</h3><p>不可置否，MVVM 框架极大的提升了应用的开发效率。It’s amazing！But，MVVM 框架到底做了什么？</p>
+<ul>
+<li>视图引擎</li>
+</ul>
+<p>视图引擎：我是视图引擎，我为 View 层作为视图模板提供强力支持，开发者，你们不需要操作 DOM ，丢给我来做！</p>
+<ul>
+<li>数据存取器</li>
+</ul>
+<p>数据存取器：我是数据存取器，我可以通过 <code>Object.defineProperty()</code> API 轻松定义，或通过自行封装存取函数的方式曲线完成。我的内部往往封装了 <strong>发布/订阅模式</strong>，以此来完成对数据的监听、数据变更时通知更新。我是 <strong>数据绑定</strong> 实现的基础。</p>
+<ul>
+<li>组件机制</li>
+</ul>
+<p>组件机制：我是组件机制。有追求的开发者往往希望按照面向未来的组件标准 － <strong>Web Components</strong> 的方式开发，我是为了满足你的追求而生。MVVM 框架提供组件的定义、继承、生命周期、组件间通信机制，为开发者面向未来开发点亮明灯。</p>
+<ul>
+<li>more…</li>
+</ul>
+<h3 id="劣势"><a href="#劣势" class="headerlink" title="劣势"></a>劣势</h3><p>MVVM架构型模式的兴起，实现了前后端真正的职责分离，在提高开发效率的同时，也存在一些不足之处。</p>
+<ol>
+<li>比如说SEO：网站的前后分离架构越来越得到开发者们的喜爱与认可， 后端只提供数据接口、业务逻辑与持久化服务，而视图、控制与渲染则交给前端。 因此，越来越多的网站从后端渲染变成了前端渲染，而由此带来的直接问题就是各大搜索引擎爬虫对于前端渲染的页面（ 动态内容 ）还无法比较完善的爬取，这就导致了网站的内容无法被搜索引擎收录，直接影响网站流量与曝光度。但是，在如今的Vue中可以使用服务端渲染或者预渲染（SSR or Prerendering）来解决seo的问题，更有SSR开源框架Nuxt的支持。所以，MVVM是应时代产物，在逐步变得更加完善。</li>
+<li>在兼容性方面，Vue由于数据操作API方法的选择的原因，所以并没有做到兼容IE8及其以下版本。</li>
+</ol>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>可以说前后端分离随着趋势已经形成一种标准，MVVM设计模式的开发框架（Vue）适用任何场景的开发（低版本IE除外）。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>jQuery是直接来操作DOM的，凭借简化后的API直接和DOM对话（优异的兼容性）；<br>Vue是直接来操作数据的，拿数据说话。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/11/22/null&undefined/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1934,183 +2132,6 @@ typeof alert === &apos;object&apos;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/05/22/some_js_skills/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joseph">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joe's Website">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/22/some_js_skills/" itemprop="url">10个提升JavaScript性能的技巧</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T12:53:21+08:00">
-                2017-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-定义局部变量"><a href="#1-定义局部变量" class="headerlink" title="1. 定义局部变量"></a>1. 定义局部变量</h3><p>当一个变量被引用的时候，JavaScript将在作用域链中的不同成员中查找这个变量。作用域链指的是当前作用于下可用变量的集合，它在各种主流浏览器中至少包含两个部分：局部变量的集合和全局变量的集合。</p>
-<p>简单地说，如果JavaScript引擎在作用域链中搜索的深度越大，那么操作也就会消耗更多的时间。引擎首先从 this 开始查找局部变量，然后是函数参数、本地定义的变量，最后遍历所有的全局变量。</p>
-<p>因为局部变量在这条链的起端，所以查找局部变量总是比查找全局变量要块。所以当你想要不止一次地使用一个全局变量的时候，你应该将它定义成局部变量，就像这样：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> blah = <span class="built_in">document</span>.getElementById(<span class="string">'myID'</span>)，</span><br><span class="line">blah2 = <span class="built_in">document</span>.getElementById(<span class="string">'myID2'</span>);</span><br></pre></td></tr></table></figure></p>
-<p>改写成<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> doc = <span class="built_in">document</span>，</span><br><span class="line">blah = doc.getElementById(<span class="string">'myID'</span>)，</span><br><span class="line">blah2 = doc.getElementById(<span class="string">'myID2'</span>);</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-不要使用-with-语句"><a href="#2-不要使用-with-语句" class="headerlink" title="2. 不要使用 with() 语句"></a>2. 不要使用 with() 语句</h3><p>这是因为 <code>with()</code> 语句将会在作用域链的开始添加额外的变量。额外的变量意味着，当任何变量需要被访问的时候，JavaScript引擎都需要先扫描<code>with()</code>语句产生的变量，然后才是局部变量，最后是全局变量。 So with() essentially gives local variables all the performance drawbacks of global ones, and in turn derails Javascript optimization. 因此with()语句同时给局部变量和全局变量的性能带来负面影响，最终使我们优化JavaScript性能的计划破产。</p>
-<h3 id="3-小心使用闭包"><a href="#3-小心使用闭包" class="headerlink" title="3. 小心使用闭包"></a>3. 小心使用闭包</h3><p>虽然你可能还不知道“闭包”，但你可能在不经意间经常使用这项技术。闭包基本上被认为是JavaScript中的new，当我们定义一个即时函数的时候，我们就使用了闭包，比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'foo'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>) </span>&#123; &#125;;</span><br></pre></td></tr></table></figure></p>
-<p>闭包的问题在于：根据定义，在它们的作用域链中至少有三个对象：闭包变量、局部变量和全局变量。这些额外的对象将会导致第1和第2个建议中提到的性能问题。</p>
-<p>但是我认为Nicholas并不是要我们因噎废食，闭包对于提高代码可读性等方面还是非常有用的，只是不要滥用它们（尤其在循环中）。</p>
-<h3 id="4-对象属性和数组元素的速度都比变量慢"><a href="#4-对象属性和数组元素的速度都比变量慢" class="headerlink" title="4. 对象属性和数组元素的速度都比变量慢"></a>4. 对象属性和数组元素的速度都比变量慢</h3><p>谈到JavaScript的数据，一般来说有4种访问方式：数值、变量、对象属性和数组元素。在考虑优化时，数值和变量的性能差不多，并且速度显著优于对象属性和数组元素。</p>
-<p>因此当你多次引用一个对象属性或者数组元素的时候，你可以通过定义一个变量来获得性能提升。（这一条在读、写数据时都有效）</p>
-<p>虽然这条规则在绝大多数情况下是正确的，但是Firefox在优化数组索引上做了一些有意思的工作，能够让它的实际性能优于变量。但是考虑到数组元素在其他浏览器上的性能弊端，还是应该尽量避免数组查找，除非你真的只针对于火狐浏览器的性能而进行开发。</p>
-<h3 id="5-不要在数组中挖得太深"><a href="#5-不要在数组中挖得太深" class="headerlink" title="5. 不要在数组中挖得太深"></a>5. 不要在数组中挖得太深</h3><p>另外，程序员应该避免在数组中挖得太深，因为进入的层数越多，操作速度就越慢。</p>
-<p>简单地说，在嵌套很多层的数组中操作很慢是因为数组元素的查找速度很慢。试想如果操作嵌套三层的数组元素，就要执行三次数组元素查找，而不是一次。</p>
-<p>因此如果你不断地引用 foo.bar， 你可以通过定义 var bar = foo.bar 来提高性能。</p>
-<h3 id="6-避免-for-in-循环（和基于函数的迭代）"><a href="#6-避免-for-in-循环（和基于函数的迭代）" class="headerlink" title="6. 避免 for-in 循环（和基于函数的迭代）"></a>6. 避免 for-in 循环（和基于函数的迭代）</h3><p>这是另一条非常教条的建议：不要使用for-in循环。</p>
-<p>这背后的逻辑非常直接：要遍历一个集合内的元素，你可以使用诸如for循环、或者do-while循环来替代for-in循环，for-in循环不仅仅可能需要遍历额外的数组项，还需要更多的时间。</p>
-<p>为了遍历这些元素，JavaScript需要为每一个元素建立一个函数，这种基于函数的迭代带来了一系列性能问题：额外的函数引入了函数对象被创建和销毁的上下文，将会在作用域链的顶端增加额外的元素。</p>
-<h3 id="7-在循环时将控制条件和控制变量合并起来"><a href="#7-在循环时将控制条件和控制变量合并起来" class="headerlink" title="7. 在循环时将控制条件和控制变量合并起来"></a>7. 在循环时将控制条件和控制变量合并起来</h3><p>提到性能，在循环中需要避免的工作一直是个热门话题，因为循环会被重复执行很多次。所以如果有性能优化的需求，先对循环开刀有可能会获得最明显的性能提升。</p>
-<p>一种优化循环的方法是在定义循环的时候，将控制条件和控制变量合并起来，下面是一个没有将他们合并起来的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> x = <span class="number">0</span>; x &lt; <span class="number">10</span>; x++ ) &#123;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>当我们要添加什么东西到这个循环之前，我们发现有几个操作在每次迭代都会出现。JavaScript引擎需要：</p>
-<h6 id="1：检查-x-是否存在"><a href="#1：检查-x-是否存在" class="headerlink" title="1：检查 x 是否存在"></a>1：检查 x 是否存在</h6><h6 id="2：检查-x-是否小于-0-（译者注：我猜这里是作者的笔误）"><a href="#2：检查-x-是否小于-0-（译者注：我猜这里是作者的笔误）" class="headerlink" title="2：检查 x 是否小于 0 （译者注：我猜这里是作者的笔误）"></a>2：检查 x 是否小于 0 <span style="color: #888888;">（译者注：我猜这里是作者的笔误）</span></h6><h6 id="3：使-x-增加-1"><a href="#3：使-x-增加-1" class="headerlink" title="3：使 x 增加 1"></a>3：使 x 增加 1</h6><p>然而如果你只是迭代元素中的一些元素，那么你可以使用while循环进行轮转来替代上面这种操作：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">do</span> &#123; &#125; <span class="keyword">while</span>( x-- );</span><br></pre></td></tr></table></figure></p>
-<p>如果你想更深入地了解循环的性能，Zakas提供了一种高级的循环优化技巧，使用异步进行循环（相当可以！）</p>
-<h3 id="8-为HTML集合对象定义数组"><a href="#8-为HTML集合对象定义数组" class="headerlink" title="8. 为HTML集合对象定义数组"></a>8. 为HTML集合对象定义数组</h3><p>JavaScript使用了大量的HTML集合对象，比如 document.forms，document.images 等等。通常他们被诸如 getElementsByTagName、getElementByClassName 等方法调用。</p>
-<p>由于大量的DOM selection操作，HTML集合对象相当的慢，而且还会带来很多额外的问题。正如DOM标准中所定义的那样：“HTML集合是一个虚拟存在，意味着当底层文档被改变时，它们将自动更新。”这太可怕了！</p>
-<p>尽管集合对象看起来跟数组很像，他们在某些地方却区别很大，比如对于特定查询的结果。当对象被访问进行读写时，查询需要重新执行来更新所有与对象相关的组分，比如 length。</p>
-<p>HTML集合对象也非常的慢，Nicholas说好像在看球的时候对一个小动作进行60倍速慢放。另外，集合对象也有可能造成死循环，比如下面的例子：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> divs = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; divs.length; i++ ) &#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>); </span><br><span class="line">    <span class="built_in">document</span>.appendChild(div);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p> 这段代码造成了死循环，因为 divs 表示一个实时的HTML集合，并不是你所期望的数组。这种实时的集合在添加 <div> 标签时被更新，所以i &lt; div.length 永远都不会结束。</div></p>
-<p>解决这个问题的方法是将这些元素定义成数组，相比只设置 var divs = document.getElementsByTagName(‘div’) 稍微有点麻烦，下面是Zakas提供的强制使用数组的代码：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">array</span>(<span class="params">items</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Array</span>.prototype.concat.call(items);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> i = <span class="number">0</span>,</span><br><span class="line">            len = items.length,</span><br><span class="line">            result = <span class="built_in">Array</span>(len);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (i &lt; len) &#123;</span><br><span class="line">            result[i] = items[i];</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> divs = array( <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>) );</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>l i &lt; divs.length; i++ ) &#123;</span><br><span class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>); </span><br><span class="line">    <span class="built_in">document</span>.appendChild(div);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="9-不要碰DOM！"><a href="#9-不要碰DOM！" class="headerlink" title="9. 不要碰DOM！"></a>9. 不要碰DOM！</h3><p>不使用DOM是JavaScript优化中另一个很大的话题。经典的例子是添加一系列的列表项：如果你把每个列表项分别加到DOM中，肯定会比一次性加入所有列表项到DOM中要慢。这是因为DOM操作开销很大。</p>
-<p>Zakas对这个进行了细致的讲解，解释了由于回流（reflow）的存在，DOM操作是非常消耗资源的。回流通常被理解为浏览器重新选渲染DOM树的处理过程。比如说，如果你用JavaScript语句改变了一个div的宽度，浏览器需要重绘页面来适应变化。</p>
-<p>任何时候只要有元素被添加到DOM树或者从DOM树移除，都会引发回流。使用一个非常方便的JavaScript对象可以解决这个问题——documentFragment，我并没有使用过，但是在Steve Souders也表示同意这种做法之后我感觉更加肯定了。 </p>
-<p>DocumentFragment 基本上是一种浏览器以非可视方式实现的类似文档的片段，非可视化的表现形式带来了很多优点，最主要的是你可以在 documentFragment 中添加任何结点而不会引起浏览器回流。</p>
-<h3 id="10-修改CSS类，而不是样式"><a href="#10-修改CSS类，而不是样式" class="headerlink" title="10. 修改CSS类，而不是样式"></a>10. 修改CSS类，而不是样式</h3><p>你也许听说过：修改CSS类必直接修改样式会更高效。这归结于回流带来的另一个问题：当布局样式发生改变时，会引发回流。</p>
-<p>布局样式意味着任何影响改变布局的变化都会强制引起浏览器回流。比如宽度、高度、字号、浮动等。</p>
-<p>但是别误会我的意思，CSS类并不会避免回流，但是可以将它的影响最小化。相比每次修改样式都会引起回流，使用CSS类一次修改多个样式，只需要承担一次回流带来的消耗。</p>
-<p>因此在修改多个布局样式的时候，使用CSS类来优化性能是明智的选择。另外如果你需要在运行时定义很多歌CSS类，在DOM上添加样式结点也是不错的选择。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2165,7 +2186,7 @@ typeof alert === &apos;object&apos;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2240,7 +2261,7 @@ typeof alert === &apos;object&apos;
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
