@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="JavaScript,跨域," />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="一、反向代理服务器基础思想很简单，将你的服务器配置成 需要跨域获取的资源的 反向代理服务器。也就是说，将其他域名的资源映射到你自己的域名之下，这样浏览器就认为他们是同源的。用大家钟爱的 Apache2 来举个例子：首先启用两个模块 proxy 和 proxy_http 来开启代理功能：  sudo a2enmod proxysudo a2enmod proxy_http  然后在配置文件里面写入：">
-<meta name="keywords" content="JavaScript,跨域">
+<meta name="description" content="浏览器缓存类型有两种，强缓存和协商缓存  强缓存：不会向服务器发送请求，直接从缓存中读取资源，在chrome控制台的network选项中可以看到该请求返回200的状态码，并且size显示from disk cache或from memory cache；  协商缓存：向服务器发送请求，服务器会根据这个请求的request header的一些参数来判断是否命中协商缓存，如果命中，则返回304状态码并">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="服务端跨域">
-<meta property="og:url" content="http://www.iwashere.cn/2017/08/24/cross-origin-at-server/index.html">
+<meta property="og:title" content="浏览器的缓存机制总结">
+<meta property="og:url" content="http://www.iwashere.cn/2018/04/16/browser-cache/index.html">
 <meta property="og:site_name" content="Joe&#39;s Website">
-<meta property="og:description" content="一、反向代理服务器基础思想很简单，将你的服务器配置成 需要跨域获取的资源的 反向代理服务器。也就是说，将其他域名的资源映射到你自己的域名之下，这样浏览器就认为他们是同源的。用大家钟爱的 Apache2 来举个例子：首先启用两个模块 proxy 和 proxy_http 来开启代理功能：  sudo a2enmod proxysudo a2enmod proxy_http  然后在配置文件里面写入：">
+<meta property="og:description" content="浏览器缓存类型有两种，强缓存和协商缓存  强缓存：不会向服务器发送请求，直接从缓存中读取资源，在chrome控制台的network选项中可以看到该请求返回200的状态码，并且size显示from disk cache或from memory cache；  协商缓存：向服务器发送请求，服务器会根据这个请求的request header的一些参数来判断是否命中协商缓存，如果命中，则返回304状态码并">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T09:36:04.000Z">
+<meta property="og:updated_time" content="2018-11-06T12:53:59.031Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="服务端跨域">
-<meta name="twitter:description" content="一、反向代理服务器基础思想很简单，将你的服务器配置成 需要跨域获取的资源的 反向代理服务器。也就是说，将其他域名的资源映射到你自己的域名之下，这样浏览器就认为他们是同源的。用大家钟爱的 Apache2 来举个例子：首先启用两个模块 proxy 和 proxy_http 来开启代理功能：  sudo a2enmod proxysudo a2enmod proxy_http  然后在配置文件里面写入：">
+<meta name="twitter:title" content="浏览器的缓存机制总结">
+<meta name="twitter:description" content="浏览器缓存类型有两种，强缓存和协商缓存  强缓存：不会向服务器发送请求，直接从缓存中读取资源，在chrome控制台的network选项中可以看到该请求返回200的状态码，并且size显示from disk cache或from memory cache；  协商缓存：向服务器发送请求，服务器会根据这个请求的request header的一些参数来判断是否命中协商缓存，如果命中，则返回304状态码并">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.iwashere.cn/2017/08/24/cross-origin-at-server/"/>
+  <link rel="canonical" href="http://www.iwashere.cn/2018/04/16/browser-cache/"/>
 
 
 
 
 
-  <title>服务端跨域 | Joe's Website</title>
+  <title>浏览器的缓存机制总结 | Joe's Website</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/08/24/cross-origin-at-server/">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2018/04/16/browser-cache/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Joseph">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">服务端跨域</h1>
+          <h1 class="post-title" itemprop="name headline">浏览器的缓存机制总结</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-24T18:49:30+08:00">
-                2017-08-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T20:51:02+08:00">
+                2018-04-16
               </time>
             
 
@@ -352,58 +352,44 @@
       
 
       
-        <h2 id="一、反向代理服务器"><a href="#一、反向代理服务器" class="headerlink" title="一、反向代理服务器"></a>一、反向代理服务器</h2><p>基础思想很简单，将你的服务器配置成 <strong>需要跨域获取的资源的</strong> 反向代理服务器。<br>也就是说，将其他域名的资源映射到你自己的域名之下，这样浏览器就认为他们是同源的。<br>用大家钟爱的 Apache2 来举个例子：<br>首先启用两个模块 proxy 和 proxy_http 来开启代理功能：</p>
-<blockquote>
-<p>sudo a2enmod proxysudo a2enmod proxy_http</p>
-</blockquote>
-<p>然后在配置文件里面写入：</p>
-<blockquote>
-<p>ProxyPass “/foo” “<a href="http://foo.example.com/bar&quot;ProxyPassReverse" target="_blank" rel="external">http://foo.example.com/bar&quot;ProxyPassReverse</a> “/foo” “<a href="http://foo.example.com/bar" target="_blank" rel="external">http://foo.example.com/bar</a>“</p>
-</blockquote>
-<p>ProxyPass: 远程服务器在本地服务器的映射。（上面的例子将 <a href="http://foo.example.com/bar映射为" target="_blank" rel="external">http://foo.example.com/bar映射为</a> /foo）</p>
-<p>ProxyPassReverse: 配置 Apache2 在 HTTP 跳转时调整 Location, Content-Location 和 URI headers的值，防止反向代理被绕开。</p>
-<p>重启 Apache2：</p>
-<blockquote>
-<p>sudo service apache2 restart</p>
-</blockquote>
-<p>大功告成，这样我们请求 /foo就会得到 <a href="http://foo.example.com/bar的内容了。" target="_blank" rel="external">http://foo.example.com/bar的内容了。</a><br>这种方法其实不太常用，机智的读者就会发现，每一个资源都要到自己的服务器配置，每次配置都还要重启。</p>
-<h2 id="二、CORS"><a href="#二、CORS" class="headerlink" title="二、CORS"></a>二、CORS</h2><p>Cross-Origin Resource Sharing 是 W3C 推出的一种跨站资源获取的机制。</p>
-<h6 id="首先我们来看一下浏览器的支持情况："><a href="#首先我们来看一下浏览器的支持情况：" class="headerlink" title="首先我们来看一下浏览器的支持情况："></a>首先我们来看一下浏览器的支持情况：</h6><table>
-<thead>
-<tr>
-<th>Chrome</th>
-<th>Firefox (Gecko)</th>
-<th>Internet Explorer</th>
-<th>Opera</th>
-<th>Safari</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>4</td>
-<td>3.5</td>
-<td>8 &amp; 9, 10</td>
-<td>12</td>
-<td>4</td>
-</tr>
-</tbody>
-</table>
-<p>移动端的浏览器对这种方法的支持比较完善。现在我们看到了，如果不需要兼容 IE6、7的话，就可以使用这种方法。<br>这种跨域方案主要的思想是：服务器 <strong>在响应头中设置相应的选项</strong>，浏览器如果支持这种方法的话就会将这种跨站资源请求视为合法，进而获取资源。<br>可以设置的响应头信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin</span><br><span class="line">Access-Control-Allow-Origin: &lt;origin&gt; | *</span><br></pre></td></tr></table></figure></p>
-<p>origin: 被允许跨域访问这个资源的网站，* 代表全部网站。浏览器会检测这个参数，如果符合要求，才会去获取资源。<br>举个例子，允许 <a href="http://qiaohongshen.github.io/foo来跨域访问这个资源：" target="_blank" rel="external">http://qiaohongshen.github.io/foo来跨域访问这个资源：</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Origin: http://jasonkid.github.io/fezone</span><br><span class="line">Access-Control-Allow-Credentials</span><br><span class="line">Access-Control-Allow-Credentials: true | false</span><br></pre></td></tr></table></figure></p>
-<p>表示是否允许浏览器携带 Cookie 来访问这个资源。这个属性要和 XMLHttpRequest 的 withCredentials属性来配合使用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://foo.other/resources/credentialed-content/'</span>;</span><br><span class="line"><span class="keyword">if</span>(xhr) &#123;</span><br><span class="line">  xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">  xhr.withCredentials = <span class="literal">true</span>; <span class="comment">// 设置带有 Cookie 的资源请求</span></span><br><span class="line">  xhr.onreadystatechange = handler;</span><br><span class="line">  xhr.send();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>能够成功使用带有 Cookie 的资源请求需要满足以下几个条件：</p>
+        <h4 id="浏览器缓存类型"><a href="#浏览器缓存类型" class="headerlink" title="浏览器缓存类型"></a>浏览器缓存类型</h4><p>有两种，强缓存和协商缓存</p>
 <ol>
-<li>XMLHttpRequest</li>
-<li>对象中指定了 withCredentials = true</li>
-<li>服务器响应头中 Access-Control-Allow-Credentials: true</li>
-<li>服务器响应头中 Access-Control-Allow-Origin不能为 *</li>
+<li><p><strong>强缓存</strong>：不会向服务器发送请求，直接从缓存中读取资源，在chrome控制台的network选项中可以看到该请求返回200的状态码，并且size显示from disk cache或from memory cache；</p>
+</li>
+<li><p><strong>协商缓存</strong>：向服务器发送请求，服务器会根据这个请求的request header的一些参数来判断是否命中协商缓存，如果命中，则返回304状态码并带上新的response header通知浏览器从缓存中读取资源；</p>
+</li>
+<li><p>两者的共同点是：都是从客户端缓存中读取资源；区别是：强缓存不会发请求，协商缓存会发请求。</p>
+</li>
 </ol>
-<p>以下选项主要是安全性配置的问题，主要是服务器的配置问题了，就不展开介绍了：</p>
-<ul>
-<li>Access-Control-Expose-Headers</li>
-<li>Access-Control-Allow-Methods</li>
-<li>Access-Control-Allow-Headers</li>
-</ul>
+<h4 id="缓存有关的-header"><a href="#缓存有关的-header" class="headerlink" title="缓存有关的 header"></a>缓存有关的 <strong>header</strong></h4><h5 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h5><ol>
+<li><p><code>Expires</code>：response header里的过期时间，浏览器再次加载资源时，如果在这个过期时间内，则命中强缓存。</p>
+</li>
+<li><p><code>Cache-Control</code>：当值设为max-age=300时，则代表在这个请求正确返回时间（浏览器也会记录下来）的5分钟内再次加载资源，就会命中强缓存。</p>
+</li>
+</ol>
+<p><code>Expires</code>和<code>Cache-Control:max-age=***</code> 的作用是差不多的，区别就在于 <code>Expires</code> 是http1.0的产物，<code>Cache-Control</code>是http1.1的产物，两者同时存在的话，<code>Cache-Control</code>优先级高于<code>Expires</code>；在某些不支持HTTP1.1的环境下，<code>Expires</code>就会发挥用处。所以<code>Expires</code>其实是过时的产物，现阶段它的存在只是一种兼容性的写法。</p>
+<h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><p><code>ETag</code>和<code>If-None-Match</code>：这两个要一起说。<code>Etag</code>是上一次加载资源时，服务器返回的response header，是对该资源的一种唯一标识，只要资源有变化，<code>Etag</code>就会重新生成。浏览器在下一次加载资源向服务器发送请求时，会将上一次返回的<code>Etag</code>值放到request header里的If-None-Match里，服务器接受到If-None-Match的值后，会拿来跟该资源文件的Etag值做比较，如果相同，则表示资源文件没有发生改变，命中协商缓存。</p>
+<p><code>Last-Modified</code>和<code>If-Modified-Since</code>：这两个也要一起说。<code>Last-Modified</code>是该资源文件最后一次更改时间，服务器会在response header里返回，同时浏览器会将这个值保存起来，在下一次发送请求时，放到request header里的<code>If-Modified-Since</code>里，服务器在接收到后也会做比对，如果相同则命中协商缓存。</p>
+<p><code>ETag</code>和<code>Last-Modified</code>的作用和用法也是差不多，说一说他们的区别。</p>
+<ol>
+<li><p>首先在精确度上，<code>Etag</code>要优于<code>Last-Modified</code>。<code>Last-Modified</code>的时间单位是秒，如果某个文件在1秒内改变了多次，那么他们的<code>Last-Modified</code>其实并没有体现出来修改，但是<code>Etag</code>每次都会改变确保了精度；如果是负载均衡的服务器，各个服务器生成的<code>Last-Modified</code>也有可能不一致。</p>
+</li>
+<li><p>第二在性能上，<code>Etag</code>要逊于<code>Last-Modified</code>，毕竟<code>Last-Modified</code>只需要记录时间，而<code>Etag</code>需要服务器通过算法来计算出一个hash值。</p>
+</li>
+<li><p>第三在优先级上，服务器校验优先考虑<code>Etag</code>。</p>
+</li>
+</ol>
+<h4 id="浏览器缓存过程"><a href="#浏览器缓存过程" class="headerlink" title="浏览器缓存过程"></a>浏览器缓存过程</h4><ol>
+<li>浏览器第一次加载资源，服务器返回200，浏览器将资源文件从服务器上请求下载下来，并把response header及该请求的返回时间一并缓存；</li>
+<li>下一次加载资源时，先比较当前时间和上一次返回200时的时间差，如果没有超过<code>cache-control</code>设置的<code>max-age</code>，则没有过期，命中强缓存，不发请求直接从本地缓存读取该文件（如果浏览器不支持HTTP1.1，则用<code>expires</code>判断是否过期）；如果时间过期，则向服务器发送header带有<code>If-None-Match</code>和<code>If-Modified-Since</code>的请求；</li>
+<li>服务器收到请求后，优先根据<code>Etag</code>的值判断被请求的文件有没有做修改，<code>Etag</code>值一致则没有修改，命中协商缓存，返回304；如果不一致则有改动，直接返回新的资源文件带上新的<code>Etag</code>值并返回200；</li>
+<li>如果服务器收到的请求没有<code>Etag</code>值，则将<code>If-Modified-Since</code>和被请求文件的最后修改时间做比对，一致则命中协商缓存，返回304；不一致则返回新的<code>last-modified</code>和文件并返回200。</li>
+</ol>
+<h4 id="用户行为对浏览器缓存的控制"><a href="#用户行为对浏览器缓存的控制" class="headerlink" title="用户行为对浏览器缓存的控制"></a>用户行为对浏览器缓存的控制</h4><ol>
+<li>地址栏访问，链接跳转是正常用户行为，将会触发浏览器缓存机制；</li>
+<li>F5刷新，浏览器会设置max-age=0，跳过强缓存判断，会进行协商缓存判断；</li>
+<li>ctrl+F5刷新，跳过强缓存和协商缓存，直接从服务器拉取资源。</li>
+</ol>
 
       
     </div>
@@ -423,8 +409,6 @@
           
             <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-            <a href="/tags/跨域/" rel="tag"># 跨域</a>
-          
         </div>
       
 
@@ -436,8 +420,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/01/cross-origin-at-front-end/" rel="next" title="再谈前端跨域">
-                <i class="fa fa-chevron-left"></i> 再谈前端跨域
+              <a href="/2018/01/19/jQuery&Vue/" rel="next" title="关于jQuery和Vue两者技术架构的比较分析报告">
+                <i class="fa fa-chevron-left"></i> 关于jQuery和Vue两者技术架构的比较分析报告
               </a>
             
           </div>
@@ -446,8 +430,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/25/caller&callee/" rel="prev" title="还有人在问你caller和callee的区别?">
-                还有人在问你caller和callee的区别? <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/30/GC/" rel="prev" title="JS的内存管理机制（垃圾回收机制）">
+                JS的内存管理机制（垃圾回收机制） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -600,7 +584,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、反向代理服务器"><span class="nav-number">1.</span> <span class="nav-text">一、反向代理服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、CORS"><span class="nav-number">2.</span> <span class="nav-text">二、CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#首先我们来看一下浏览器的支持情况："><span class="nav-number">2.0.0.0.1.</span> <span class="nav-text">首先我们来看一下浏览器的支持情况：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器缓存类型"><span class="nav-number">1.</span> <span class="nav-text">浏览器缓存类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存有关的-header"><span class="nav-number">2.</span> <span class="nav-text">缓存有关的 header</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#强缓存"><span class="nav-number">2.1.</span> <span class="nav-text">强缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#协商缓存"><span class="nav-number">2.2.</span> <span class="nav-text">协商缓存</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器缓存过程"><span class="nav-number">3.</span> <span class="nav-text">浏览器缓存过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户行为对浏览器缓存的控制"><span class="nav-number">4.</span> <span class="nav-text">用户行为对浏览器缓存的控制</span></a></li></ol></div>
             
 
           </div>

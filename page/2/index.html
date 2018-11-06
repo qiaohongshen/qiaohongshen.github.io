@@ -262,6 +262,443 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/18/typeof/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/18/typeof/" itemprop="url">你真的懂 typeof 吗？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T09:42:21+08:00">
+                2017-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先要说的，<em>typeof</em> 并不是一个方法，所以没必要写成 <em>typeof()</em> 的形式。<br><em>typeof</em> 是一个操作符，<em>typeof</em> 操作符返回一个字符串,指示未经计算的操作数的类型。</p>
+<h2 id="接下来我要问的是，你知道-typeof-可能的返回值有哪些？"><a href="#接下来我要问的是，你知道-typeof-可能的返回值有哪些？" class="headerlink" title="接下来我要问的是，你知道 typeof 可能的返回值有哪些？"></a>接下来我要问的是，你知道 <em>typeof</em> 可能的返回值有哪些？</h2><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><h5 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h5><pre><code>// Numbers
+typeof 37 === &apos;number&apos;;
+typeof 3.14 === &apos;number&apos;;
+typeof Math.LN2 === &apos;number&apos;;
+typeof Infinity === &apos;number&apos;;
+typeof NaN === &apos;number&apos;; // 尽管NaN是&quot;Not-A-Number&quot;的缩写
+typeof Number(1) === &apos;number&apos;; // 但不要使用这种形式!
+
+// Strings
+typeof &quot;&quot; === &apos;string&apos;;
+typeof &quot;bla&quot; === &apos;string&apos;;
+typeof (typeof 1) === &apos;string&apos;; // typeof总是返回一个字符串
+typeof String(&quot;abc&quot;) === &apos;string&apos;; // 但不要使用这种形式!
+
+// Booleans
+typeof true === &apos;boolean&apos;;
+typeof false === &apos;boolean&apos;;
+typeof Boolean(true) === &apos;boolean&apos;; // 但不要使用这种形式!
+
+// Symbols
+typeof Symbol() === &apos;symbol&apos;;
+typeof Symbol(&apos;foo&apos;) === &apos;symbol&apos;;
+typeof Symbol.iterator === &apos;symbol&apos;;
+
+// Undefined
+typeof undefined === &apos;undefined&apos;;
+typeof declaredButUndefinedVariable === &apos;undefined&apos;;
+typeof undeclaredVariable === &apos;undefined&apos;; 
+
+// Objects
+typeof {a:1} === &apos;object&apos;;
+
+// 使用Array.isArray 或者 Object.prototype.toString.call
+// 区分数组,普通对象
+typeof [1, 2, 4] === &apos;object&apos;;
+
+typeof new Date() === &apos;object&apos;;
+
+// 下面的容易令人迷惑，不要使用！
+typeof new Boolean(true) === &apos;object&apos;;
+typeof new Number(1) ==== &apos;object&apos;;
+typeof new String(&quot;abc&quot;) === &apos;object&apos;;
+
+// 函数
+typeof function(){} === &apos;function&apos;;
+typeof Math.sin === &apos;function&apos;;
+</code></pre><h5 id="null"><a href="#null" class="headerlink" title="null"></a>null</h5><pre><code>// 从一开始出现JavaScript就是这样的
+typeof null === &apos;object&apos;;
+</code></pre><p>哈哈，我们都知道 typeof null 返回 ‘object’，但是为什么呢？原来，在 JavaScript 最初的实现中，JavaScript 中的值是由一个表示类型的标签和实际数据值表示的。对象的类型标签是0。由于 null 代表的是空指针(大多数平台下值为0x00)，因此，null的类型标签也成为了0，typeof null就错误的返回了’object’.</p>
+<h5 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h5><pre><code>//对正则表达式字面量的类型判断在某些浏览器中不符合标准：
+typeof /s/ === &apos;function&apos;; // Chrome 1-12 , 不符合 ECMAScript 5.1
+typeof /s/ === &apos;object&apos;; // Firefox 5+ , 符合 ECMAScript 5.1
+
+//我目前版本的Chrome(60.0.3112.90)
+typeof /s/ === &apos;object&apos;;
+</code></pre><h4 id="番外：IE-宿主对象是对象而不是函数"><a href="#番外：IE-宿主对象是对象而不是函数" class="headerlink" title="番外：IE 宿主对象是对象而不是函数"></a>番外：IE 宿主对象是对象而不是函数</h4><pre><code>//在 IE 6, 7 和 8 中，大多数的宿主对象是对象，而不是函数
+typeof alert === &apos;object&apos;
+</code></pre><hr>
+<h3 id="总结-如下表-（-from-MDN-）"><a href="#总结-如下表-（-from-MDN-）" class="headerlink" title="总结 如下表 （ from MDN ）"></a>总结 如下表 （ <em>from MDN</em> ）</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Undefined</td>
+<td>“undefined”</td>
+</tr>
+<tr>
+<td>Null</td>
+<td>“object”</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>“boolean”</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>“number”</td>
+</tr>
+<tr>
+<td>String</td>
+<td>“string”</td>
+</tr>
+<tr>
+<td>Symbol（ECMAScript 6 新增）</td>
+<td>“symbol”</td>
+</tr>
+<tr>
+<td>宿主对象（由JS环境提供）</td>
+<td>Implementation-dependent</td>
+</tr>
+<tr>
+<td>函数对象</td>
+<td>“function”</td>
+</tr>
+<tr>
+<td>任何其他对象</td>
+<td>“object”</td>
+</tr>
+</tbody>
+</table>
+<h6 id="over"><a href="#over" class="headerlink" title="over"></a>over</h6>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/06/19/this/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/19/this/" itemprop="url">理解Javascript中的this</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T15:18:21+08:00">
+                2017-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先必须要说的是，this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象（这句话有些问题，后面会解释为什么会有问题，虽然网上大部分的文章都是这样说的，虽然在很多情况下那样去理解不会出什么问题，但是实际上那样理解是不准确的，所以在你理解this的时候会有种琢磨不透的感觉），那么接下来我会深入的探讨这个问题。</p>
+<p>为什么要学习this？如果你学过函数式编程，面向对象编程，那你肯定知道干什么用的，如果你没有学过，那么暂时可以不用看这篇文章，当然如果你有兴趣也可以看看，毕竟这是js中必须要掌握的东西。</p>
+<p>例子1：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> user = <span class="string">"马里奥"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">//undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+<p>按照我们上面说的this最终指向的是调用它的对象，这里的函数a实际是被Window对象所点出来的，下面的代码就可以证明。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> user = <span class="string">"马里奥"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">//undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);      <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.a();</span><br></pre></td></tr></table></figure>
+<p>和上面代码一样吧，其实alert也是window的一个属性，也是window点出来的。</p>
+<p>例子2：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  user: <span class="string">"马里奥"</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">// 马里奥</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.fn();</span><br></pre></td></tr></table></figure>
+<p>这里的this指向的是对象o，因为你调用这个fn是通过o.fn()执行的，那自然指向就是对象o，这里再次强调一点，this的指向在函数创建的时候是决定不了的，在调用的时候才能决定，谁调用的就指向谁，一定要搞清楚这个。</p>
+<p>其实例子1和例子2说的并不够准确，下面这个例子就可以推翻上面的理论。</p>
+<p>如果要彻底的搞懂this必须看接下来的几个例子</p>
+<p>例子3：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  user: <span class="string">"马里奥"</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">// 马里奥</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.o.fn();</span><br></pre></td></tr></table></figure>
+<p>这段代码和上面的那段代码几乎是一样的，但是这里的this为什么不是指向window，如果按照上面的理论，最终this指向的是调用它的对象，这里先说个题外话，window是js中的全局对象，我们创建的变量实际上是给window添加属性，所以这里可以用window点o对象。</p>
+<p>这里先不解释为什么上面的那段代码this为什么没有指向window，我们再来看一段代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">// 12</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn();</span><br></pre></td></tr></table></figure>
+<p>这里同样也是对象o点出来的，但是同样this并没有执行它，那你肯定会说我一开始说的那些不就都是错误的吗？其实也不是，只是一开始说的不准确，接下来我将补充一句话，我相信你就可以彻底的理解this的指向的问题。</p>
+<p>情况1：如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window，这里需要说明的是在js的严格版中this指向的不是window，但是我们这里不探讨严格版的问题，你想了解可以自行上网查找。</p>
+<p>情况2：如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
+<p>情况3：如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象，例子3可以证明，如果不相信，那么接下来我们继续看几个例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    <span class="comment">// a: 12,</span></span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">//undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn();</span><br></pre></td></tr></table></figure>
+<p>尽管对象b中没有属性a，这个this指向的也是对象b，因为this只会指向它的上一级对象，不管这个对象中有没有this要的东西。</p>
+<p>还有一种比较特殊的情况，例子4：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">// undefined</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">// window</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> j = o.b.fn;</span><br><span class="line">j();</span><br></pre></td></tr></table></figure>
+<p>这里this指向的是window，是不是有些蒙了？其实是因为你没有理解一句话，这句话同样至关重要。</p>
+<p>this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的，例子4中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window，这和例子3是不一样的，例子3是直接执行了fn。</p>
+<p>this讲来讲去其实就是那么一回事，只不过在不同的情况下指向的会有些不同，上面的总结每个地方都有些小错误，也不能说是错误，而是在不同环境下情况就会有不同，所以我也没有办法一次解释清楚，只能你慢慢地的去体会。</p>
+<p>构造函数版this：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">"马里奥"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">// 马里奥</span></span><br></pre></td></tr></table></figure>
+<p>这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a，为什么我说a是对象，因为用了new关键字就是创建一个对象实例，理解这句话可以想想我们的例子3，我们这里用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象Fn中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
+<p>除了上面的这些以外，我们还可以自行改变this的指向，关于自行改变this的指向请参考JavaScript中的call,apply,bind方法。</p>
+<p>更新一个小问题当this碰到return时</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>再看一个</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>再来</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//马里奥</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//马里奥</span></span><br></pre></td></tr></table></figure>
+<p>什么意思呢？</p>
+<p>如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// fn &#123;user: "马里奥"&#125;</span></span><br></pre></td></tr></table></figure>
+<p>还有一点就是虽然null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">// 马里奥</span></span><br></pre></td></tr></table></figure>
+<p>知识点补充：</p>
+<ol>
+<li>在严格版中的默认的this不再是window，而是undefined。</li>
+<li>new操作符会改变函数this的指向问题，虽然我们上面讲解过了，但是并没有深入的讨论这个问题，网上也很少说，所以在这里有必要说一下。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.num = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.num);  <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
+<p>为什么this会指向a？首先new关键字会创建一个空的对象，然后会自动调用一个函数apply方法，将this指向这个空对象，这样的话函数内部的this就会被这个空的对象替代。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/05/22/some_js_skills/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1080,7 +1517,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

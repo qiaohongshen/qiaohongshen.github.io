@@ -262,6 +262,360 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2018/09/30/GC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/30/GC/" itemprop="url">JS的内存管理机制（垃圾回收机制）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-30T21:33:32+08:00">
+                2018-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>像C语言这样的高级语言一般都有底层的内存管理接口，比如 malloc()和free()。另一方面，JavaScript创建变量（对象，字符串等）时分配内存，并且在不再使用它们时“自动”释放。 后一个过程称为垃圾回收。这个“自动”是混乱的根源，并让JavaScript（和其他高级语言）开发者感觉他们可以不关心内存管理。 这是错误的。</p>
+</blockquote>
+<h3 id="内存生命周期"><a href="#内存生命周期" class="headerlink" title="内存生命周期"></a>内存生命周期</h3><p>不管什么程序语言，内存生命周期基本是一致的：   </p>
+<ol>
+<li>分配你所需要的内存</li>
+<li>使用分配到的内存（读、写）</li>
+<li>不需要时将其释放\归还<br>所有语言第二部分都是明确的。第一和第三部分在底层语言中是明确的，但在像<code>JavaScript</code>这些高级语言中，大部分都是隐含的。</li>
+</ol>
+<h4 id="JS的内存分配"><a href="#JS的内存分配" class="headerlink" title="JS的内存分配"></a>JS的内存分配</h4><ol>
+<li><p>值的初始化<br>为了不让程序员费心分配内存，JavaScript 在定义变量时就完成了内存分配。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> n = <span class="number">123</span> <span class="comment">// 给数值变量分配内存</span></span><br><span class="line"><span class="keyword">var</span> s = <span class="string">"azerty"</span> <span class="comment">// 给字符串分配内存</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">1</span>,</span><br><span class="line">  b: <span class="literal">null</span></span><br><span class="line">&#125; <span class="comment">// 给对象及其包含的值分配内存</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 给数组及其包含的值分配内存（就像对象一样）</span></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>, <span class="literal">null</span>, <span class="string">"abra"</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + <span class="number">2</span></span><br><span class="line">&#125; <span class="comment">// 给函数（可调用的对象）分配内存</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数表达式也能分配一个对象</span></span><br><span class="line">someElement.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  someElement.style.backgroundColor = <span class="string">'blue'</span></span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过函数调用分配内存<br>有些函数调用结果是分配对象内存：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> d = <span class="keyword">new</span> <span class="built_in">Date</span>() <span class="comment">// 分配一个 Date 对象</span></span><br><span class="line"><span class="keyword">var</span> e = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>) <span class="comment">// 分配一个 DOM 元素</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>有些方法分配新变量或者新对象：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">"azerty"</span></span><br><span class="line"><span class="keyword">var</span> s2 = s.substr(<span class="number">0</span>, <span class="number">3</span>) <span class="comment">// s2 是一个新的字符串</span></span><br><span class="line"><span class="comment">// 因为字符串是不变量，</span></span><br><span class="line"><span class="comment">// JavaScript 可能决定不分配内存，</span></span><br><span class="line"><span class="comment">// 只是存储了 [0-3] 的范围。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="string">"ouais ouais"</span>, <span class="string">"nan nan"</span>]</span><br><span class="line"><span class="keyword">var</span> a2 = [<span class="string">"generation"</span>, <span class="string">"nan nan"</span>]</span><br><span class="line"><span class="keyword">var</span> a3 = a.concat(a2)</span><br><span class="line"><span class="comment">// 新数组有四个元素，是 a 连接 a2 的结果</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="使用值"><a href="#使用值" class="headerlink" title="使用值"></a>使用值</h4><blockquote>
+<p>使用值的过程实际上是对分配内存进行读取与写入的操作。读取与写入可能是写入一个变量或者一个对象的属性值，甚至传递函数的参数。</p>
+</blockquote>
+<h4 id="当内存不再需要使用时释放"><a href="#当内存不再需要使用时释放" class="headerlink" title="当内存不再需要使用时释放"></a>当内存不再需要使用时释放</h4><blockquote>
+<p>大多数内存管理的问题都在这个阶段。在这里最艰难的任务是找到“所分配的内存确实已经不再需要了”。它往往要求开发人员来确定在程序中哪一块内存不再需要并且释放它。高级语言解释器嵌入了“垃圾回收器”，它的主要工作是跟踪内存的分配和使用，以便当分配的内存不再使用时，自动释放它。这只能是一个近似的过程，因为要知道是否仍然需要某块内存是无法判定的（无法通过某种算法解决）。</p>
+</blockquote>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>如上文所述自动寻找是否一些内存“不再需要”的问题是无法判定的。因此，垃圾回收实现只能有限制的解决一般问题。</p>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>垃圾回收算法主要依赖于引用的概念。在内存管理的环境中，一个对象如果有访问另一个对象的权限（隐式或者显式），叫做一个对象引用另一个对象。例如，一个Javascript对象具有对它原型的引用（隐式引用）和对它属性的引用（显式引用）。<br>在这里，“对象”的概念不仅特指 JavaScript 对象，还包括函数作用域（或者全局词法作用域）。</p>
+<h4 id="引用计数垃圾收集"><a href="#引用计数垃圾收集" class="headerlink" title="引用计数垃圾收集"></a>引用计数垃圾收集</h4><p>这是最初级的垃圾收集算法。此算法把“对象是否不再需要”简化定义为“对象有没有其他对象引用到它”。如果没有引用指向该对象（零引用），对象将被垃圾回收机制回收。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123; </span><br><span class="line">  a: &#123;</span><br><span class="line">    b:<span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// 两个对象被创建，一个作为另一个的属性被引用，另一个被分配给变量o</span></span><br><span class="line"><span class="comment">// 很显然，没有一个可以被垃圾收集</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o2 = o <span class="comment">// o2变量是第二个对“这个对象”的引用</span></span><br><span class="line">o = <span class="number">1</span>;     <span class="comment">// 现在，“这个对象”的原始引用o被o2替换了</span></span><br><span class="line"><span class="keyword">var</span> oa = o2.a <span class="comment">// 引用“这个对象”的a属性</span></span><br><span class="line"><span class="comment">// 现在，“这个对象”有两个引用了，一个是o2，一个是oa</span></span><br><span class="line">o2 = <span class="string">"yo"</span> <span class="comment">// 最初的对象现在已经是零引用了</span></span><br><span class="line">           <span class="comment">// 他可以被垃圾回收了</span></span><br><span class="line">           <span class="comment">// 然而它的属性a的对象还在被oa引用，所以还不能回收</span></span><br><span class="line">oa = <span class="literal">null</span> <span class="comment">// a属性的那个对象现在也是零引用了</span></span><br><span class="line">           <span class="comment">// 它可以被垃圾回收了</span></span><br></pre></td></tr></table></figure>
+<h5 id="限制：循环引用"><a href="#限制：循环引用" class="headerlink" title="限制：循环引用"></a>限制：循环引用</h5><p>该算法有个限制：无法处理循环引用。在下面的例子中，两个对象被创建，并互相引用，形成了一个循环。它们被调用之后会离开函数作用域，所以它们已经没有用了，可以被回收了。然而，引用计数算法考虑到它们互相都有至少一次引用，所以它们不会被回收。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> o = &#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> o2 = &#123;&#125;</span><br><span class="line">  o.a = o2 <span class="comment">// o 引用 o2</span></span><br><span class="line">  o2.a = o <span class="comment">// o2 引用 o</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="string">"azerty"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">f()</span><br></pre></td></tr></table></figure></p>
+<p>例子：<br>IE 6, 7 使用引用计数方式对 DOM 对象进行垃圾回收。该方式常常造成对象被循环引用时内存发生泄漏：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div</span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  div = <span class="built_in">document</span>.getElementById(<span class="string">"myDivElement"</span>)</span><br><span class="line">  div.circularReference = div</span><br><span class="line">  div.lotsOfData = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">10000</span>).join(<span class="string">"*"</span>)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在上面的例子里，<code>myDivElement</code> 这个 DOM 元素里的 <code>circularReference</code> 属性引用了 <code>myDivElement</code>，造成了循环引用。如果该属性没有显示移除或者设为 null，引用计数式垃圾收集器将总是且至少有一个引用，并将一直保持在内存里的 DOM 元素，即使其从DOM 树中删去了。如果这个 DOM 元素拥有大量的数据 (如上的 <code>lotsOfData</code> 属性)，而这个数据占用的内存将永远不会被释放。</p>
+<h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h4><p>这个算法把“对象是否不再需要”简化定义为“对象是否可以获得”。<br>这个算法假定设置一个叫做根（root）的对象（在Javascript里，根是全局对象）。垃圾回收器将定期从根开始，找所有从根开始引用的对象，然后找这些对象引用的对象……从根开始，垃圾回收器将找到所有可以获得的对象和收集所有不能获得的对象。<br>这个算法比前一个要好，因为“有零引用的对象”总是不可获得的，但是相反却不一定，参考“循环引用”。<br>从2012年起，所有现代浏览器都使用了标记-清除垃圾回收算法。所有对JavaScript垃圾回收算法的改进都是基于标记-清除算法的改进，并没有改进标记-清除算法本身和它对“对象是否不再需要”的简化定义。</p>
+<h6 id="循环引用不再是问题了"><a href="#循环引用不再是问题了" class="headerlink" title="循环引用不再是问题了"></a>循环引用不再是问题了</h6><p>在上面的示例中，函数调用返回之后，两个对象从全局对象出发无法获取。因此，他们将会被垃圾回收器回收。第二个示例同样，一旦 div 和其事件处理无法从根获取到，他们将会被垃圾回收器回收。</p>
+<h6 id="限制-那些无法从根对象查询到的对象都将被清除"><a href="#限制-那些无法从根对象查询到的对象都将被清除" class="headerlink" title="限制: 那些无法从根对象查询到的对象都将被清除"></a>限制: 那些无法从根对象查询到的对象都将被清除</h6><p>尽管这是一个限制，但实践中我们很少会碰到类似的情况，所以开发者不太会去关心垃圾回收机制。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2018/04/16/browser-cache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/16/browser-cache/" itemprop="url">浏览器的缓存机制总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-16T20:51:02+08:00">
+                2018-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="浏览器缓存类型"><a href="#浏览器缓存类型" class="headerlink" title="浏览器缓存类型"></a>浏览器缓存类型</h4><p>有两种，强缓存和协商缓存</p>
+<ol>
+<li><p><strong>强缓存</strong>：不会向服务器发送请求，直接从缓存中读取资源，在chrome控制台的network选项中可以看到该请求返回200的状态码，并且size显示from disk cache或from memory cache；</p>
+</li>
+<li><p><strong>协商缓存</strong>：向服务器发送请求，服务器会根据这个请求的request header的一些参数来判断是否命中协商缓存，如果命中，则返回304状态码并带上新的response header通知浏览器从缓存中读取资源；</p>
+</li>
+<li><p>两者的共同点是：都是从客户端缓存中读取资源；区别是：强缓存不会发请求，协商缓存会发请求。</p>
+</li>
+</ol>
+<h4 id="缓存有关的-header"><a href="#缓存有关的-header" class="headerlink" title="缓存有关的 header"></a>缓存有关的 <strong>header</strong></h4><h5 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h5><ol>
+<li><p><code>Expires</code>：response header里的过期时间，浏览器再次加载资源时，如果在这个过期时间内，则命中强缓存。</p>
+</li>
+<li><p><code>Cache-Control</code>：当值设为max-age=300时，则代表在这个请求正确返回时间（浏览器也会记录下来）的5分钟内再次加载资源，就会命中强缓存。</p>
+</li>
+</ol>
+<p><code>Expires</code>和<code>Cache-Control:max-age=***</code> 的作用是差不多的，区别就在于 <code>Expires</code> 是http1.0的产物，<code>Cache-Control</code>是http1.1的产物，两者同时存在的话，<code>Cache-Control</code>优先级高于<code>Expires</code>；在某些不支持HTTP1.1的环境下，<code>Expires</code>就会发挥用处。所以<code>Expires</code>其实是过时的产物，现阶段它的存在只是一种兼容性的写法。</p>
+<h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><p><code>ETag</code>和<code>If-None-Match</code>：这两个要一起说。<code>Etag</code>是上一次加载资源时，服务器返回的response header，是对该资源的一种唯一标识，只要资源有变化，<code>Etag</code>就会重新生成。浏览器在下一次加载资源向服务器发送请求时，会将上一次返回的<code>Etag</code>值放到request header里的If-None-Match里，服务器接受到If-None-Match的值后，会拿来跟该资源文件的Etag值做比较，如果相同，则表示资源文件没有发生改变，命中协商缓存。</p>
+<p><code>Last-Modified</code>和<code>If-Modified-Since</code>：这两个也要一起说。<code>Last-Modified</code>是该资源文件最后一次更改时间，服务器会在response header里返回，同时浏览器会将这个值保存起来，在下一次发送请求时，放到request header里的<code>If-Modified-Since</code>里，服务器在接收到后也会做比对，如果相同则命中协商缓存。</p>
+<p><code>ETag</code>和<code>Last-Modified</code>的作用和用法也是差不多，说一说他们的区别。</p>
+<ol>
+<li><p>首先在精确度上，<code>Etag</code>要优于<code>Last-Modified</code>。<code>Last-Modified</code>的时间单位是秒，如果某个文件在1秒内改变了多次，那么他们的<code>Last-Modified</code>其实并没有体现出来修改，但是<code>Etag</code>每次都会改变确保了精度；如果是负载均衡的服务器，各个服务器生成的<code>Last-Modified</code>也有可能不一致。</p>
+</li>
+<li><p>第二在性能上，<code>Etag</code>要逊于<code>Last-Modified</code>，毕竟<code>Last-Modified</code>只需要记录时间，而<code>Etag</code>需要服务器通过算法来计算出一个hash值。</p>
+</li>
+<li><p>第三在优先级上，服务器校验优先考虑<code>Etag</code>。</p>
+</li>
+</ol>
+<h4 id="浏览器缓存过程"><a href="#浏览器缓存过程" class="headerlink" title="浏览器缓存过程"></a>浏览器缓存过程</h4><ol>
+<li>浏览器第一次加载资源，服务器返回200，浏览器将资源文件从服务器上请求下载下来，并把response header及该请求的返回时间一并缓存；</li>
+<li>下一次加载资源时，先比较当前时间和上一次返回200时的时间差，如果没有超过<code>cache-control</code>设置的<code>max-age</code>，则没有过期，命中强缓存，不发请求直接从本地缓存读取该文件（如果浏览器不支持HTTP1.1，则用<code>expires</code>判断是否过期）；如果时间过期，则向服务器发送header带有<code>If-None-Match</code>和<code>If-Modified-Since</code>的请求；</li>
+<li>服务器收到请求后，优先根据<code>Etag</code>的值判断被请求的文件有没有做修改，<code>Etag</code>值一致则没有修改，命中协商缓存，返回304；如果不一致则有改动，直接返回新的资源文件带上新的<code>Etag</code>值并返回200；</li>
+<li>如果服务器收到的请求没有<code>Etag</code>值，则将<code>If-Modified-Since</code>和被请求文件的最后修改时间做比对，一致则命中协商缓存，返回304；不一致则返回新的<code>last-modified</code>和文件并返回200。</li>
+</ol>
+<h4 id="用户行为对浏览器缓存的控制"><a href="#用户行为对浏览器缓存的控制" class="headerlink" title="用户行为对浏览器缓存的控制"></a>用户行为对浏览器缓存的控制</h4><ol>
+<li>地址栏访问，链接跳转是正常用户行为，将会触发浏览器缓存机制；</li>
+<li>F5刷新，浏览器会设置max-age=0，跳过强缓存判断，会进行协商缓存判断；</li>
+<li>ctrl+F5刷新，跳过强缓存和协商缓存，直接从服务器拉取资源。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2018/01/19/jQuery&Vue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1233,7 +1587,7 @@
 <blockquote>
 <p>XMLHttpRequest cannot load <a href="http://x.com/main.dat" target="_blank" rel="external">http://x.com/main.dat</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="http://y.com" target="_blank" rel="external">http://y.com</a>‘ is therefore not allowed access.</p>
 </blockquote>
-<p>你心里肯定会想，我难道要用后台做个爬虫来获取这个数据吗？！为了避免这种事情发生，JSONP 就派上用场了。<br><code>&lt;script&gt;</code>标签是不受同源策略的限制的，它可以载入任意地方的 JavaScript 文件，而并不要求同源。所以 JSONP 的理念就是，我和服务端约定好一个函数名，当我请求文件的时候，服务端返回一段 JavaScript。这段 JavaScript 调用了我们约定好的函数，并且将数据当做参数传入。非常巧合的一点（其实并不是），JSON 的数据格式和JavaScript 语言里对象的格式正好相同。所以在我们约定的函数里面可以直接使用这个对象。光说不练假把式，让我们来看一个例子：<br>你需要获取数据的页面 index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">   </span></span><br><span class="line"><span class="undefined">  function getWeather(data) &#123;       </span></span><br><span class="line"><span class="undefined">    console.log(data);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://x.y.com/xx.js"</span>&gt;</span><span class="undefined"></span></span><br></pre></td></tr></table></figure></p>
+<p>你心里肯定会想，我难道要用后台做个爬虫来获取这个数据吗？！为了避免这种事情发生，JSONP 就派上用场了。<br><code>&lt;script&gt;</code>标签是不受同源策略的限制的，它可以载入任意地方的 JavaScript 文件，而并不要求同源。所以 JSONP 的理念就是，我和服务端约定好一个函数名，当我请求文件的时候，服务端返回一段 JavaScript。这段 JavaScript 调用了我们约定好的函数，并且将数据当做参数传入。非常巧合的一点（其实并不是），JSON 的数据格式和JavaScript 语言里对象的格式正好相同。所以在我们约定的函数里面可以直接使用这个对象。光说不练假把式，让我们来看一个例子：<br>你需要获取数据的页面 index.html:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">   </span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">getWeather</span>(<span class="params">data</span>) </span>&#123;       </span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(data);</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://x.y.com/xx.js"</span>&gt;</span><span class="undefined"></span></span><br></pre></td></tr></table></figure></p>
 <p><a href="http://x.y.com/xx.js" target="_blank" rel="external">http://x.y.com/xx.js</a> 文件内容：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getWeather(&#123;</span><br><span class="line">  <span class="string">"城市"</span>: <span class="string">"北京"</span>,</span><br><span class="line">  <span class="string">"天气"</span>: <span class="string">"大雾"</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>我们可以看到，在我们定义了 getWeather(data)这个函数后，直接载入了 xx.js。在这个脚本中，执行了 getWeather函数，并传入了一个对象。然后我们在这个函数中将这个对象输出到 console 中。</p>
@@ -1695,443 +2049,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/18/typeof/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joseph">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joe's Website">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/18/typeof/" itemprop="url">你真的懂 typeof 吗？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-18T09:42:21+08:00">
-                2017-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先要说的，<em>typeof</em> 并不是一个方法，所以没必要写成 <em>typeof()</em> 的形式。<br><em>typeof</em> 是一个操作符，<em>typeof</em> 操作符返回一个字符串,指示未经计算的操作数的类型。</p>
-<h2 id="接下来我要问的是，你知道-typeof-可能的返回值有哪些？"><a href="#接下来我要问的是，你知道-typeof-可能的返回值有哪些？" class="headerlink" title="接下来我要问的是，你知道 typeof 可能的返回值有哪些？"></a>接下来我要问的是，你知道 <em>typeof</em> 可能的返回值有哪些？</h2><h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><h5 id="常规用法"><a href="#常规用法" class="headerlink" title="常规用法"></a>常规用法</h5><pre><code>// Numbers
-typeof 37 === &apos;number&apos;;
-typeof 3.14 === &apos;number&apos;;
-typeof Math.LN2 === &apos;number&apos;;
-typeof Infinity === &apos;number&apos;;
-typeof NaN === &apos;number&apos;; // 尽管NaN是&quot;Not-A-Number&quot;的缩写
-typeof Number(1) === &apos;number&apos;; // 但不要使用这种形式!
-
-// Strings
-typeof &quot;&quot; === &apos;string&apos;;
-typeof &quot;bla&quot; === &apos;string&apos;;
-typeof (typeof 1) === &apos;string&apos;; // typeof总是返回一个字符串
-typeof String(&quot;abc&quot;) === &apos;string&apos;; // 但不要使用这种形式!
-
-// Booleans
-typeof true === &apos;boolean&apos;;
-typeof false === &apos;boolean&apos;;
-typeof Boolean(true) === &apos;boolean&apos;; // 但不要使用这种形式!
-
-// Symbols
-typeof Symbol() === &apos;symbol&apos;;
-typeof Symbol(&apos;foo&apos;) === &apos;symbol&apos;;
-typeof Symbol.iterator === &apos;symbol&apos;;
-
-// Undefined
-typeof undefined === &apos;undefined&apos;;
-typeof declaredButUndefinedVariable === &apos;undefined&apos;;
-typeof undeclaredVariable === &apos;undefined&apos;; 
-
-// Objects
-typeof {a:1} === &apos;object&apos;;
-
-// 使用Array.isArray 或者 Object.prototype.toString.call
-// 区分数组,普通对象
-typeof [1, 2, 4] === &apos;object&apos;;
-
-typeof new Date() === &apos;object&apos;;
-
-// 下面的容易令人迷惑，不要使用！
-typeof new Boolean(true) === &apos;object&apos;;
-typeof new Number(1) ==== &apos;object&apos;;
-typeof new String(&quot;abc&quot;) === &apos;object&apos;;
-
-// 函数
-typeof function(){} === &apos;function&apos;;
-typeof Math.sin === &apos;function&apos;;
-</code></pre><h5 id="null"><a href="#null" class="headerlink" title="null"></a>null</h5><pre><code>// 从一开始出现JavaScript就是这样的
-typeof null === &apos;object&apos;;
-</code></pre><p>哈哈，我们都知道 typeof null 返回 ‘object’，但是为什么呢？原来，在 JavaScript 最初的实现中，JavaScript 中的值是由一个表示类型的标签和实际数据值表示的。对象的类型标签是0。由于 null 代表的是空指针(大多数平台下值为0x00)，因此，null的类型标签也成为了0，typeof null就错误的返回了’object’.</p>
-<h5 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h5><pre><code>//对正则表达式字面量的类型判断在某些浏览器中不符合标准：
-typeof /s/ === &apos;function&apos;; // Chrome 1-12 , 不符合 ECMAScript 5.1
-typeof /s/ === &apos;object&apos;; // Firefox 5+ , 符合 ECMAScript 5.1
-
-//我目前版本的Chrome(60.0.3112.90)
-typeof /s/ === &apos;object&apos;;
-</code></pre><h4 id="番外：IE-宿主对象是对象而不是函数"><a href="#番外：IE-宿主对象是对象而不是函数" class="headerlink" title="番外：IE 宿主对象是对象而不是函数"></a>番外：IE 宿主对象是对象而不是函数</h4><pre><code>//在 IE 6, 7 和 8 中，大多数的宿主对象是对象，而不是函数
-typeof alert === &apos;object&apos;
-</code></pre><hr>
-<h3 id="总结-如下表-（-from-MDN-）"><a href="#总结-如下表-（-from-MDN-）" class="headerlink" title="总结 如下表 （ from MDN ）"></a>总结 如下表 （ <em>from MDN</em> ）</h3><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Undefined</td>
-<td>“undefined”</td>
-</tr>
-<tr>
-<td>Null</td>
-<td>“object”</td>
-</tr>
-<tr>
-<td>Boolean</td>
-<td>“boolean”</td>
-</tr>
-<tr>
-<td>Number</td>
-<td>“number”</td>
-</tr>
-<tr>
-<td>String</td>
-<td>“string”</td>
-</tr>
-<tr>
-<td>Symbol（ECMAScript 6 新增）</td>
-<td>“symbol”</td>
-</tr>
-<tr>
-<td>宿主对象（由JS环境提供）</td>
-<td>Implementation-dependent</td>
-</tr>
-<tr>
-<td>函数对象</td>
-<td>“function”</td>
-</tr>
-<tr>
-<td>任何其他对象</td>
-<td>“object”</td>
-</tr>
-</tbody>
-</table>
-<h6 id="over"><a href="#over" class="headerlink" title="over"></a>over</h6>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/06/19/this/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Joseph">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Joe's Website">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/19/this/" itemprop="url">理解Javascript中的this</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T15:18:21+08:00">
-                2017-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>首先必须要说的是，this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象（这句话有些问题，后面会解释为什么会有问题，虽然网上大部分的文章都是这样说的，虽然在很多情况下那样去理解不会出什么问题，但是实际上那样理解是不准确的，所以在你理解this的时候会有种琢磨不透的感觉），那么接下来我会深入的探讨这个问题。</p>
-<p>为什么要学习this？如果你学过函数式编程，面向对象编程，那你肯定知道干什么用的，如果你没有学过，那么暂时可以不用看这篇文章，当然如果你有兴趣也可以看看，毕竟这是js中必须要掌握的东西。</p>
-<p>例子1：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> user = <span class="string">"马里奥"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">//undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
-<p>按照我们上面说的this最终指向的是调用它的对象，这里的函数a实际是被Window对象所点出来的，下面的代码就可以证明。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> user = <span class="string">"马里奥"</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">//undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);      <span class="comment">//Window</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.a();</span><br></pre></td></tr></table></figure>
-<p>和上面代码一样吧，其实alert也是window的一个属性，也是window点出来的。</p>
-<p>例子2：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  user: <span class="string">"马里奥"</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">// 马里奥</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.fn();</span><br></pre></td></tr></table></figure>
-<p>这里的this指向的是对象o，因为你调用这个fn是通过o.fn()执行的，那自然指向就是对象o，这里再次强调一点，this的指向在函数创建的时候是决定不了的，在调用的时候才能决定，谁调用的就指向谁，一定要搞清楚这个。</p>
-<p>其实例子1和例子2说的并不够准确，下面这个例子就可以推翻上面的理论。</p>
-<p>如果要彻底的搞懂this必须看接下来的几个例子</p>
-<p>例子3：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  user: <span class="string">"马里奥"</span>,</span><br><span class="line">  fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.user);  <span class="comment">// 马里奥</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.o.fn();</span><br></pre></td></tr></table></figure>
-<p>这段代码和上面的那段代码几乎是一样的，但是这里的this为什么不是指向window，如果按照上面的理论，最终this指向的是调用它的对象，这里先说个题外话，window是js中的全局对象，我们创建的变量实际上是给window添加属性，所以这里可以用window点o对象。</p>
-<p>这里先不解释为什么上面的那段代码this为什么没有指向window，我们再来看一段代码。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">// 12</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn();</span><br></pre></td></tr></table></figure>
-<p>这里同样也是对象o点出来的，但是同样this并没有执行它，那你肯定会说我一开始说的那些不就都是错误的吗？其实也不是，只是一开始说的不准确，接下来我将补充一句话，我相信你就可以彻底的理解this的指向的问题。</p>
-<p>情况1：如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window，这里需要说明的是在js的严格版中this指向的不是window，但是我们这里不探讨严格版的问题，你想了解可以自行上网查找。</p>
-<p>情况2：如果一个函数中有this，这个函数有被上一级的对象所调用，那么this指向的就是上一级的对象。</p>
-<p>情况3：如果一个函数中有this，这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象，例子3可以证明，如果不相信，那么接下来我们继续看几个例子。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    <span class="comment">// a: 12,</span></span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">//undefined</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">o.b.fn();</span><br></pre></td></tr></table></figure>
-<p>尽管对象b中没有属性a，这个this指向的也是对象b，因为this只会指向它的上一级对象，不管这个对象中有没有this要的东西。</p>
-<p>还有一种比较特殊的情况，例子4：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  a: <span class="number">10</span>,</span><br><span class="line">  b: &#123;</span><br><span class="line">    a: <span class="number">12</span>,</span><br><span class="line">    fn: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);  <span class="comment">// undefined</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">// window</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> j = o.b.fn;</span><br><span class="line">j();</span><br></pre></td></tr></table></figure>
-<p>这里this指向的是window，是不是有些蒙了？其实是因为你没有理解一句话，这句话同样至关重要。</p>
-<p>this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的，例子4中虽然函数fn是被对象b所引用，但是在将fn赋值给变量j的时候并没有执行所以最终指向的是window，这和例子3是不一样的，例子3是直接执行了fn。</p>
-<p>this讲来讲去其实就是那么一回事，只不过在不同的情况下指向的会有些不同，上面的总结每个地方都有些小错误，也不能说是错误，而是在不同环境下情况就会有不同，所以我也没有办法一次解释清楚，只能你慢慢地的去体会。</p>
-<p>构造函数版this：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">"马里奥"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.user); <span class="comment">// 马里奥</span></span><br></pre></td></tr></table></figure>
-<p>这里之所以对象a可以点出函数Fn里面的user是因为new关键字可以改变this的指向，将这个this指向对象a，为什么我说a是对象，因为用了new关键字就是创建一个对象实例，理解这句话可以想想我们的例子3，我们这里用变量a创建了一个Fn的实例（相当于复制了一份Fn到对象a里面），此时仅仅只是创建，并没有执行，而调用这个函数Fn的是对象a，那么this指向的自然是对象a，那么为什么对象Fn中会有user，因为你已经复制了一份Fn函数到对象a中，用了new关键字就等同于复制了一份。</p>
-<p>除了上面的这些以外，我们还可以自行改变this的指向，关于自行改变this的指向请参考JavaScript中的call,apply,bind方法。</p>
-<p>更新一个小问题当this碰到return时</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
-<p>再看一个</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
-<p>再来</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//马里奥</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">//马里奥</span></span><br></pre></td></tr></table></figure>
-<p>什么意思呢？</p>
-<p>如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// fn &#123;user: "马里奥"&#125;</span></span><br></pre></td></tr></table></figure>
-<p>还有一点就是虽然null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.user = <span class="string">'马里奥'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn;</span><br><span class="line"><span class="built_in">console</span>.log(a.user);  <span class="comment">// 马里奥</span></span><br></pre></td></tr></table></figure>
-<p>知识点补充：</p>
-<ol>
-<li>在严格版中的默认的this不再是window，而是undefined。</li>
-<li>new操作符会改变函数this的指向问题，虽然我们上面讲解过了，但是并没有深入的讨论这个问题，网上也很少说，所以在这里有必要说一下。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.num = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> fn();</span><br><span class="line"><span class="built_in">console</span>.log(a.num);  <span class="comment">//1</span></span><br></pre></td></tr></table></figure>
-<p>为什么this会指向a？首先new关键字会创建一个空的对象，然后会自动调用一个函数apply方法，将this指向这个空对象，这样的话函数内部的this就会被这个空的对象替代。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2186,7 +2103,7 @@ typeof alert === &apos;object&apos;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
