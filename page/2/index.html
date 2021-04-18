@@ -262,6 +262,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/27/vue1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Joseph">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Joe's Website">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/27/vue1/" itemprop="url">《Vue随笔》 （一）使用vue-cli搭建项目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-27T16:50:11+08:00">
+                2017-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>vue-cli 是一个官方发布 vue.js 项目脚手架，使用 vue-cli 可以快速创建 vue 项目，GitHub地址是: <a href="https://github.com/vuejs/vue-cli" target="_blank" rel="external">https://github.com/vuejs/vue-cli</a></p>
+<h3 id="一、-安装-node"><a href="#一、-安装-node" class="headerlink" title="一、 安装 node"></a>一、 安装 node</h3><p>首先需要安装node环境，可以直接到官网<a href="https://nodejs.org/en/" target="_blank" rel="external">https://nodejs.org/en/</a>下载安装包。</p>
+<p>（中文官网<a href="http://nodejs.cn/" target="_blank" rel="external">http://nodejs.cn/</a>）</p>
+<p>安装完成后，可以命令行工具中输入<code>node -v</code>和<code>npm -v</code>，如果能显示出版本号，就说明安装成功。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/2048384-4df0ecfffc293186.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="install node"></p>
+<h3 id="二、安装-vue-cli"><a href="#二、安装-vue-cli" class="headerlink" title="二、安装 vue-cli"></a>二、安装 vue-cli</h3><p>安装好了 node，我们可以直接全局安装 vue-cli：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g vue-cli</span><br></pre></td></tr></table></figure></p>
+<p>但是这种安装方式比较慢，推荐使用国内镜像来安装，所以我们先设置 cnpm：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure></p>
+<p>如果安装失败，可以使用<code>npm cache clean</code>清理缓存，然后再重新安装。后面的安装过程中，如有安装失败的情况，也需要先清理缓存</p>
+<p>同样可以使用<code>cnpm -v</code>查看是否安装成功</p>
+<p>然后使用 cnpm 安装 vue-cli 和 webpack<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g vue-cli</span><br></pre></td></tr></table></figure></p>
+<p>最新的 vue 项目模板中，都带有 webpack 插件，所以这里可以不安装 webpack</p>
+<p>安装完成后，可以使用<code>vue -V</code>（注意 V 大写）查看是否安装成功。</p>
+<p>如果提示“无法识别 ‘vue’ ” ，有可能是 npm 版本过低，可以使用 <code>npm install -g npm</code> 来更新版本</p>
+<h3 id="三、生成项目"><a href="#三、生成项目" class="headerlink" title="三、生成项目"></a>三、生成项目</h3><p>首先需要在命令行中进入到项目目录，然后输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack vue_project</span><br></pre></td></tr></table></figure></p>
+<p>其中 webpack 是模板名称，可以到 vue.js 的 GitHub 上查看更多的模板<a href="https://github.com/vuejs-templates" target="_blank" rel="external">https://github.com/vuejs-templates</a></p>
+<p>vue_project是自定义的项目名称，命令执行之后，会在当前目录生成一个以该名称命名的项目文件夹<br><img src="http://upload-images.jianshu.io/upload_images/2048384-9713fb1cdcc1595a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="generate project"></p>
+<p>配置完成后，可以看到目录下多出了一个项目文件夹，里面就是 vue-cli 创建的一个基于 webpack 的 vue.js 项目</p>
+<p>然后进入项目目录（cd vue_project），使用 cnpm 安装依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install</span><br></pre></td></tr></table></figure></p>
+<p>然后启动项目<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure></p>
+<p>如果浏览器打开之后，没有加载出页面，有可能是本地的 8080 端口被占用，需要修改一下配置文件<code>config&gt;index.js</code><br><img src="http://upload-images.jianshu.io/upload_images/2048384-fce2e05adee67495.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="config"></p>
+<p>建议将端口号改为不常用的端口。另外我还将 <code>build</code> 的路径前缀修改为 ‘ ./ ‘（原本为 ‘ / ‘），是因为打包之后，外部引入 js 和 css 文件时，如果路径以 ‘ / ‘ 开头，在本地是无法找到对应文件的（服务器上没问题）。所以如果需要在本地打开打包后的文件，就得修改文件路径。</p>
+<h3 id="四、打包上线"><a href="#四、打包上线" class="headerlink" title="四、打包上线"></a>四、打包上线</h3><p>自己的项目文件都需要放到 <code>src</code> 文件夹下</p>
+<p>项目开发完成之后，可以输入 <code>npm run build</code> 来进行打包工作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure></p>
+<p>打包完成后，会生成 <code>dist</code> 文件夹，如果已经修改了文件路径，可以直接打开本地文件查看</p>
+<p>项目上线时，只需要将 <code>dist</code> 文件夹放到服务器就行了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.iwashere.cn/2017/07/18/typeof/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1374,7 +1540,7 @@ typeof alert === &apos;object&apos;
 <h4 id="15．推荐使用异步-JavaScript-资源"><a href="#15．推荐使用异步-JavaScript-资源" class="headerlink" title="15．推荐使用异步 JavaScript 资源"></a>15．推荐使用异步 <code>JavaScript</code> 资源</h4><p>异步的 <code>JavaScript</code> 资源不会阻塞文档解析，所以允许在浏览器中优先渲染页面，延后加载脚本执行。例如 <code>JavaScript</code> 的引用可以如下设置，也可以使用模块化加载机制来实现。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"main.js"</span> <span class="attr">defer</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"main.js"</span> <span class="attr">async</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>使用 <code>async</code> 时，加载和渲染后续文档元素的过程和 <code>main.js</code> 的加载与执行是并行的。使用 <code>defer</code> 时，加载后续文档元素的过程和 <code>main.js</code> 的加载是并行的，但是 <code>main.js</code> 的执行要在页面所有元素解析完成之后才开始执行。</p>
 <h4 id="16．消除阻塞渲染的-CSS-及-JavaScript"><a href="#16．消除阻塞渲染的-CSS-及-JavaScript" class="headerlink" title="16．消除阻塞渲染的 CSS 及 JavaScript"></a>16．消除阻塞渲染的 <code>CSS</code> 及 <code>JavaScript</code></h4><p>对于页面中加载时间过长的 <code>CSS</code> 或 <code>JavaScript</code> 文件，需要进行合理拆分或延后加载，保证关键路径的资源能快速加载完成。</p>
-<h4 id="17．避免使用-CSS-import-引用加载-CSS"><a href="#17．避免使用-CSS-import-引用加载-CSS" class="headerlink" title="17．避免使用 CSS import 引用加载 CSS"></a>17．避免使用 <code>CSS import</code> 引用加载 <code>CSS</code></h4><p>CSS 中的 <code>＠import</code> 可以从另一个样式文件中引入样式，但应该避免这种用法，因为这样会增加 <code>CSS</code> 资源加载的关键路径长度，带有 <code>＠import</code> 的 <code>CSS</code> 样式需要在 <code>CSS</code> 文件串行解析到 <code>@import</code> 时才会加载另外的 <code>CSS</code> 文件，大大延后 <code>CSS</code> 渲染完成的时间。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--不推荐--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    @import "path/main.css";</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--推荐--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//cdn1.domain.com/path/main.css"</span> &gt;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="17．避免使用-CSS-import-引用加载-CSS"><a href="#17．避免使用-CSS-import-引用加载-CSS" class="headerlink" title="17．避免使用 CSS import 引用加载 CSS"></a>17．避免使用 <code>CSS import</code> 引用加载 <code>CSS</code></h4><p>CSS 中的 <code>＠import</code> 可以从另一个样式文件中引入样式，但应该避免这种用法，因为这样会增加 <code>CSS</code> 资源加载的关键路径长度，带有 <code>＠import</code> 的 <code>CSS</code> 样式需要在 <code>CSS</code> 文件串行解析到 <code>@import</code> 时才会加载另外的 <code>CSS</code> 文件，大大延后 <code>CSS</code> 渲染完成的时间。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--不推荐--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">    @<span class="keyword">import</span> <span class="string">"path/main.css"</span>;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--推荐--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"//cdn1.domain.com/path/main.css"</span> &gt;</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="页面渲染类"><a href="#页面渲染类" class="headerlink" title="页面渲染类"></a>页面渲染类</h3><h4 id="1．把-CSS-资源引用放到-HTML-文件顶部"><a href="#1．把-CSS-资源引用放到-HTML-文件顶部" class="headerlink" title="1．把 CSS 资源引用放到 HTML 文件顶部"></a>1．把 <code>CSS</code> 资源引用放到 <code>HTML</code> 文件顶部</h4><p>一般推荐将所有 <code>CSS</code> 资源尽早指定在 <code>HTML</code> 文档 <code>&lt;head&gt;</code> 中，这样浏览器可以优先下载 <code>CSS</code> 并尽早完成页面渲染。</p>
 <h4 id="2．JavaScript-资源引用放到-HTML-文件底部"><a href="#2．JavaScript-资源引用放到-HTML-文件底部" class="headerlink" title="2．JavaScript 资源引用放到 HTML 文件底部"></a><code>2．JavaScript</code> 资源引用放到 <code>HTML</code> 文件底部</h4><p><code>JavaScript</code> 资源放到 <code>HTML</code> 文档底部可以防止 <code>JavaScript</code> 的加载和解析执行对页面渲染造成阻塞。由于 <code>JavaScript</code> 资源默认是解析阻塞的，除非被标记为异步或者通过其他的异步方式加载，否则会阻塞 <code>HTML DOM</code> 解析和 <code>CSS</code> 渲染的过程。</p>
 <h4 id="3．尽量预先设定图片等大小"><a href="#3．尽量预先设定图片等大小" class="headerlink" title="3．尽量预先设定图片等大小"></a>3．尽量预先设定图片等大小</h4><p>在加载大量的图片元素时，尽量预先限定图片的尺寸大小，否则在图片加载过程中会更新图片的排版信息，产生大量的重排</p>
@@ -1517,7 +1683,7 @@ typeof alert === &apos;object&apos;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1592,7 +1758,7 @@ typeof alert === &apos;object&apos;
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
